@@ -22,7 +22,7 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="footer-link-style">Quem somos</a>
+                            <a href="/mama/quem-somos.php" class="footer-link-style">Quem somos</a>
                         </li>
                         <li>
                             <a href="#!" class="footer-link-style">Contactos</a>

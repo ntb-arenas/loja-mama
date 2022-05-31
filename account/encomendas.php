@@ -57,14 +57,14 @@ if ($usersResult->num_rows > 0) {
     <?php include_once '../components/header.php'; ?>
     <?php include_once '../components/navbar.php'; ?>
     <main>
-        <div class="container py-5">
+        <div class="container py-3">
             <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>
             <h5><a href="../login/userSair.php">Logout</a></h5>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-md-3 mb-3">
                     <div class="list-group list-group-light d-none d-md-block">
                         <a href="./profile-account" class="list-group-item list-group-item-action px-3 border-0">INFORMAÇÕES DA CONTA</a>
                         <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0 active" id="account-style" aria-current="true">AS MINHAS ENCOMENDAS</a>

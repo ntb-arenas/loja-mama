@@ -12,6 +12,27 @@
   border: 0px !important;
 }
 /* Theme */
+.custom-letter-m {
+  background: rgb(245, 94, 21);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(245, 94, 21, 1) 42%,
+    rgba(0, 177, 249, 1) 69%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(245, 94, 21, 1) 42%,
+    rgba(0, 177, 249, 1) 69%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(245, 94, 21, 1) 42%,
+    rgba(0, 177, 249, 1) 69%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f55e15",endColorstr="#00b1f9",GradientType=1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .modo-utilizacao-bg {
   background: rgb(223, 223, 223);

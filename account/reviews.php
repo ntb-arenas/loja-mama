@@ -196,7 +196,7 @@ if (isset($_POST['btn-save-changes'])) {
             <h5><a href="../login/userSair.php">Logout</a></h5>
         </div>
 
-        <div class="container-md">
+        <div class="container-md mb-3">
             <div class="row">
                 <div class="col-12 col-md-3">
                     <div class="list-group list-group-light d-none d-md-block">
