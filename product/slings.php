@@ -116,7 +116,7 @@ if (isset($_POST['add'])) {
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <form action='slings.php' method='post'>
+                    <form action='slings' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Slings</h3>
                         <hr class="mt-2">
                         <p style="font-size: 0.9rem;">Composto por uma faixa de tecido 100% algodão e sem qualquer estrutura rígida ou semi-rígida, o Sling MA-MA® poderá ser utilizado a partir do momento que o bebé se senta.</p>

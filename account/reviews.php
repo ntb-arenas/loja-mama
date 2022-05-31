@@ -13,7 +13,7 @@ $message = "";
 if (!isset($_SESSION["USER"])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: ../home.php");
+    header("Location: ../home");
 } else {
     // ler informações de conta 
     $username = $_SESSION["USER"];
@@ -147,7 +147,7 @@ if (isset($_POST['btn-save-changes'])) {
             // encaminhar com timer 3 segundos
             header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
             header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-            header("Refresh: 3; URL=./reviews.php");
+            header("Refresh: 3; URL=./reviews");
         } else {
             // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
             echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
@@ -201,11 +201,11 @@ if (isset($_POST['btn-save-changes'])) {
                 <div class="col-12 col-md-3">
                     <div class="list-group list-group-light d-none d-md-block">
                         <div class="list-group list-group-light">
-                            <a href="./profile-account.php" class="list-group-item list-group-item-action px-3 border-0">INFORMAÇÕES DA CONTA</a>
-                            <a href="./encomendas.php" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
-                            <a href="./edit-account.php" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
-                            <a href="./favorite.php" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                            <a href="./reviews.php" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">REVIEWS</a>
+                            <a href="./profile-account" class="list-group-item list-group-item-action px-3 border-0">INFORMAÇÕES DA CONTA</a>
+                            <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
+                            <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
+                            <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
+                            <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">REVIEWS</a>
                         </div>
                     </div>
                     <div class="container-fluid d-md-none p-0">
@@ -220,11 +220,11 @@ if (isset($_POST['btn-save-changes'])) {
                                     <div class="accordion-body">
                                         <div class="col-12 col-md-6">
                                             <div class="list-group list-group-light">
-                                                <a href="./profile-account.php" class="list-group-item list-group-item-action px-3 border-0">INFORMAÇÕES DA CONTA</a>
-                                                <a href="./encomendas.php" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
-                                                <a href="./edit-account.php" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
-                                                <a href="./favorite.php" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                                                <a href="./reviews.php" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">REVIEWS</a>
+                                                <a href="./profile-account" class="list-group-item list-group-item-action px-3 border-0">INFORMAÇÕES DA CONTA</a>
+                                                <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
+                                                <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
+                                                <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
+                                                <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">REVIEWS</a>
                                             </div>
                                         </div>
                                     </div>

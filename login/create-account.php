@@ -32,7 +32,7 @@ if (isset($_POST['button-cancel-account'])) {
 
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: ../home.php");
+    header("Location: ../home");
 }
 
 
@@ -330,9 +330,9 @@ if (isset($_POST['submit-create-account'])) {
 
         <nav class="mx-3 mt-3" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="../home.php">Início</a></li>
+                <li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="../home">Início</a></li>
                 <li class="breadcrumb-item active text-warning" aria-current="page">
-                    <a class="text-decoration-none text-warning" href="./login.php">Inicie sessão na sua conta</a>
+                    <a class="text-decoration-none text-warning" href="./login">Inicie sessão na sua conta</a>
                 </li>
             </ol>
         </nav>
@@ -402,7 +402,7 @@ if (isset($_POST['submit-create-account'])) {
                             </svg> Conta criada com sucesso!</h4>
                         <p><b><?php echo $temporaryMsg; ?></b></p>
                         <hr>
-                        <form action="../home.php" method="POST">
+                        <form action="../home" method="POST">
                             <button class="btn btn-success" type="submit">VOLTAR</button>
                         </form>
                     </div>

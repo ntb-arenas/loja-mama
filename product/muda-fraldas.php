@@ -114,7 +114,7 @@ if (isset($_POST['add'])) {
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form action='muda-fraldas.php' method='post'>
+                    <form action='muda-fraldas' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Muda Fraldas</h3>
                         <hr class="mt-2">
                         <p class="m-0"><small>Preço:</small><span class="fs-3" style="font-weight: 500;"> 15€</span></p>

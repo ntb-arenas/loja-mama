@@ -8,7 +8,7 @@ $errorMessageUsername = "";
 $errorMessagePassword = "";
 
 if (isset($_SESSION["USER"])) {
-    header("Location: ../home.php");
+    header("Location: ../home");
     exit;
 }
 
@@ -48,7 +48,7 @@ if (isset($_POST['button-login'])) {
 
                 header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
                 header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-                header("Location: ../home.php");
+                header("Location: ../home");
             } else {
                 $errorMessagePassword = "password incorreta!";
             }
@@ -94,9 +94,9 @@ if (isset($_POST['button-login'])) {
 
         <nav class="mx-3 mt-3" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="../home.php">Início</a></li>
+                <li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="../home">Início</a></li>
                 <li class="breadcrumb-item active text-warning" aria-current="page">
-                    <a class="text-decoration-none text-warning" href="./login.php">Inicie sessão na sua conta</a>
+                    <a class="text-decoration-none text-warning" href="./login">Inicie sessão na sua conta</a>
                 </li>
             </ol>
         </nav>
@@ -128,7 +128,7 @@ if (isset($_POST['button-login'])) {
                 <div class="col-12 col-md-6 mt-5" id="login-page-divider1">
                     <h2 class="text-center pt-3" id="login-page-divider2">Criar Conta</h3>
                         <div class="container-fluid text-center">
-                            <a href="./userCreateAccount.php" class="btn" id="btn-customized" role="button">
+                            <a href="./create-account" class="btn" id="btn-customized" role="button">
                                 CRIAR CONTA <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                 </svg>

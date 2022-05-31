@@ -113,7 +113,7 @@ if (isset($_POST['add'])) {
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form action='almofadas-anticolicas.php' method='post'>
+                    <form action='almofadas-anticolicas' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Almofadas Anti-cólicas</h3>
                         <hr class="mt-2">
                         <p class="m-0"><small>Preço:</small><span class="fs-3" style="font-weight: 500;"> 9,50€</span></p>

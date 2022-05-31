@@ -9,7 +9,7 @@ include_once  './connect_DB.php';
 if (isset($_POST['btn-cancel-changes'])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: ../home.php");
+    header("Location: ../home");
 }
 
 if (isset($_POST['btn-forgot-pass'])) {
@@ -36,7 +36,7 @@ $geraFormulario = "Sim";
 if (!isset($_SESSION["USER"])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: home.php");
+    header("Location: home");
 } else {
     // ler informações de conta 
     $username = $_SESSION["USER"];
@@ -143,7 +143,7 @@ if (isset($_POST['btn-save-changes'])) {
             // encaminhar com timer 3 segundos
             header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
             header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-            header("Refresh: 3; URL=../profile-account.php");
+            header("Refresh: 3; URL=../profile-account");
         } else {
             // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
             echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
@@ -200,7 +200,7 @@ if (isset($_POST['btn-save-changes'])) {
                 <div class="account-panel">
                     <h3>PAINEL DE CONTA</h3>
                     <div class="account-panel-wrapper">
-                        <p><a href="../profile-account.php">A MINHA CONTA</a></p>
+                        <p><a href="../profile-account">A MINHA CONTA</a></p>
                         <p><a href="#">AS MINHAS ENCOMENDAS</a></p>
                         <p><a href="#">SUBSCRIÇÃO MARKETING</a></p>
                     </div>

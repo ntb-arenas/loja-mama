@@ -34,13 +34,13 @@ CREATE TABLE `CATEGORY` (
 --
 
 INSERT INTO `CATEGORY` (`CODE`, `TITLE`, `SEQUENCE`, `VISIBLE`, `LINK`) VALUES
-('AAC', 'ALMOFADAS ANTI-CÓLICAS', 7, 1, 'almofadas-anticolicas.php'),
+('AAC', 'ALMOFADAS ANTI-CÓLICAS', 7, 1, 'almofadas-anticolicas'),
 ('AAM', 'ALMOFADAS DE AMAMENTAÇÃO', 2, 2, '#'),
-('CS', 'CUNHAS', 3, 1, 'cunhas.php'),
-('KM', 'KIT MATERNIDADE', 5, 1, 'kit-maternidade.php'),
-('MF', 'MUDA FRALDAS', 6, 1, 'muda-fraldas.php'),
+('CS', 'CUNHAS', 3, 1, 'cunhas'),
+('KM', 'KIT MATERNIDADE', 5, 1, 'kit-maternidade'),
+('MF', 'MUDA FRALDAS', 6, 1, 'muda-fraldas'),
 ('PROM', 'PROMOÇÕES', 1, 0, '#'),
-('SL', 'SLINGS', 4, 1, 'slings.php');
+('SL', 'SLINGS', 4, 1, 'slings');
 
 -- --------------------------------------------------------
 

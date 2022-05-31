@@ -4,7 +4,7 @@ session_start();
 include_once  './login/connect_DB.php';
 
 // if (!isset($_SESSION['USER'])) {
-//     header("Location: ./home.php");
+//     header("Location: ./home");
 //     exit;
 // }
 
@@ -13,11 +13,11 @@ if (isset($_POST['remove'])) {
         foreach ($_SESSION['cart'] as $key => $value) {
             if ($value["product_id1"] == $_GET['id']) {
                 unset($_SESSION['cart'][$key]);
-                echo "<script>window.location = 'cart.php'</script>";
+                echo "<script>window.location = 'cart'</script>";
             }
             if ($value["product_id"] == $_GET['id']) {
                 unset($_SESSION['cart'][$key]);
-                echo "<script>window.location = 'cart.php'</script>";
+                echo "<script>window.location = 'cart'</script>";
             }
         }
     }
@@ -90,7 +90,7 @@ if (isset($_POST['remove'])) {
                                             <div class='container mb-3 gx-0'>
                                                 <div class="row gx-0">
                                                     <div class="col-3 text-center">
-                                                        <form action='cart.php?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
+                                                        <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
                                                             <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
                                                             <h5 class='pt-2 cover-message-fs'>(Frente): <?php echo $row['NAME'] ?></h5>
                                                     </div>
@@ -124,7 +124,7 @@ if (isset($_POST['remove'])) {
                                             if ($row['CODE'] == $value['product_id']) {
                                         ?>
                                             <div class="container mb-3 gx-0">
-                                                <form action='cart.php?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
+                                                <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
                                                     <?php
                                                     $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
                                                     $total = $total + $totalQuantity;

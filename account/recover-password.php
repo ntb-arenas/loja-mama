@@ -165,7 +165,7 @@ if (isset($_POST['botao-recuperar-senha'])) {
                 <div class="alert alert-success" role="alert">
                     <p><b>Verifique por favor a sua caixa de correio para recuperar a senha! Por vezes estas mensagens são consideradas correio não solicitado. Se não vir a mensagem de ativação verifique o seu correio não solicitado (SPAM).</p>
                     <hr>
-                    <form action="../home.php" method="POST">
+                    <form action="../home" method="POST">
                         <button class="btn btn-success" type="submit">VOLTAR</button>
                     </form>
                 </div>

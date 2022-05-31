@@ -178,7 +178,7 @@ if (isset($_POST['add'])) {
 
 
                 <div class="col-12 col-md-4">
-                    <form action='almofadas-de-amamentacao.php' method='post'>
+                    <form action='almofadas-de-amamentacao' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Almofadas de Amamentação</h3>
                         <hr class="mt-2">
                         <p style="font-size: 0.9rem;">A Almofada de Amamentação MA-MA® Original serve como um apoio fundamental para a futura mamã, proporcionando noites de sono tranquilas e sem os habituais desconfortos que costumam ocorrer durante a gravidez. Chegada a altura de amamentar a almofada MA-MA® será igualmente uma fiel aliada, permitindo que a mamã adopte uma posição confortável e que o bebé fique bem apoiado.</p>

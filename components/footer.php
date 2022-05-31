@@ -7,7 +7,7 @@
             <div class="row">
                 <!--Grid column-->
                 <div class="col-lg-5 col-md-12 mb-4 mb-md-0">
-                    <a href="/home.php">
+                    <a href="/home">
                         <img class="img-fluid" src="/gallery/logo.png" alt="Ma-ma logo" class="logo">
                     </a>
                     <h4 style="color: #ff7b46;">Apoio Comercial</h4>

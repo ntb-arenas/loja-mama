@@ -114,7 +114,7 @@ if (isset($_POST['add'])) {
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form action='cunhas.php' method='post'>
+                    <form action='cunhas' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Cunhas</h3>
                         <hr class="mt-2">
                         <p style="font-size: 0.9rem;">Durante a gravidez ocorrem alguns desconfortos que, com algumas soluções alternativas, poderão ser minorados. Nesse sentido a MA-MA® acaba de lançar um produto que poderá servir de grande apoio, devolvendo à futura mamã uma boa qualidade de vida.</p>

@@ -115,7 +115,7 @@ if (isset($_POST['add'])) {
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form action='kit-maternidade.php' method='post'>
+                    <form action='kit-maternidade' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Kit Maternidade</h3>
                         <hr class="mt-2">
                         <p style="font-size: 0.9rem;">O Kit maternidade é composto por: porta de documentos + bolsa para a primeira roupa do bebé.</p>
