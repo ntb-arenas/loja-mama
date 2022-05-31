@@ -9,7 +9,7 @@ include_once  './connect_DB.php';
 if (isset($_POST['btn-cancel-changes'])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: ../index.php");
+    header("Location: ../home.php");
 }
 
 if (isset($_POST['btn-forgot-pass'])) {
@@ -36,7 +36,7 @@ $geraFormulario = "Sim";
 if (!isset($_SESSION["USER"])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: index.php");
+    header("Location: home.php");
 } else {
     // ler informações de conta 
     $username = $_SESSION["USER"];

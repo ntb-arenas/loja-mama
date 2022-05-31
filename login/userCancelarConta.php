@@ -19,7 +19,7 @@ $email = "";
 if ( !isset($_SESSION["UTILIZADOR"])) {
      header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
      header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-     header("Location: index.php");
+     header("Location: home.php");
 } else {
     // ler definições de conta 
     
@@ -164,7 +164,7 @@ if ( isset($_POST['botao-apagar-conta']) ) {
                 // encaminhar com timer 5 segundos
                 header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
                 header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-                header("Refresh: 5; URL=index.php"); 
+                header("Refresh: 5; URL=home.php"); 
              
                 
         }
@@ -242,7 +242,7 @@ function deleteDirectory($dir) {
   
   <br>
     
-  <form action="./index.php" method="POST">
+  <form action="./home.php" method="POST">
         
          <button class="w3-button w3-black" name="botao-desistir-apagar" type="submit"> Não pretendo cancelar a minha conta</button>
        

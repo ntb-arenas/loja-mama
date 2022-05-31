@@ -69,7 +69,7 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
     // // encaminhar para página principal
     // header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     // header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    // header("Location: ../index.php"); // encaminhar de imediato
+    // header("Location: ../home.php"); // encaminhar de imediato
 
 
 
@@ -111,7 +111,7 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
 
         <nav class="mx-3 mt-3" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="../index.php">Início</a></li>
+                <li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="../home.php">Início</a></li>
                 <li class="breadcrumb-item active text-warning" aria-current="page">
                     <a class="text-decoration-none text-warning" href="./login.php">Verificar a conta</a>
                 </li>
@@ -128,7 +128,7 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
                 <h4 class="alert-heading"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
                         <use xlink:href="#check-circle-fill" />
                     </svg> <b><?php echo $message; ?></b></h4>
-                <form action="../index.php" method="POST">
+                <form action="../home.php" method="POST">
                     <button class="btn btn-success" type="submit">PÁGINA PRINCIPAL</button>
                 </form>
             </div>

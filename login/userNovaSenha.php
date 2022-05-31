@@ -10,7 +10,7 @@ include_once  './conexaobasedados.php';
 if (empty($_GET['id']) || empty($_GET['code'])) {
      header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
      header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-     header("Location: index.php");
+     header("Location: home.php");
      
 }
 
@@ -157,7 +157,7 @@ if (isset($_POST['botao-guardar-nova-senha'])) {
           <?php } else { ?>
           
           <?php 
-          $destino = "./index.php";
+          $destino = "./home.php";
           if ( $sucesso == "Nao" ) { 
           		$destino = "./userRecuperarSenha.php";
           }
@@ -186,7 +186,7 @@ if (isset($_POST['botao-guardar-nova-senha'])) {
           ?>
   
  
-  <form action="./index.php" method="POST">
+  <form action="./home.php" method="POST">
    		<p><button class="w3-button w3-black" type="submit">PÁGINA PRINCIPAL</button></p>
   </form>
   

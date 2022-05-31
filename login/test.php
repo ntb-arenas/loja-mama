@@ -3,7 +3,7 @@ $mensagem  = "<table width=100% border=0><tr>";
 $mensagem .= '<td class="flex-out">
 <div style="display: block; text-align: center; margin: 0 auto">
   <a
-    href="https://ntbarenas.000webhostapp.com/index.php"
+    href="https://ntbarenas.000webhostapp.com/home.php"
     style="display: block; border: none"
     ><img src="https://i.ibb.co/8751HZh/AMMHeader.png" alt="Ma-Ma Header" border="0"></a>
 </div>

@@ -4,7 +4,7 @@ session_start();
 include_once  './login/connect_DB.php';
 
 // if (!isset($_SESSION['USER'])) {
-//     header("Location: ./index.php");
+//     header("Location: ./home.php");
 //     exit;
 // }
 

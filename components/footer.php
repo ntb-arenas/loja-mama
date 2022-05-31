@@ -7,8 +7,8 @@
             <div class="row">
                 <!--Grid column-->
                 <div class="col-lg-5 col-md-12 mb-4 mb-md-0">
-                    <a href="/lojaMaMa/PROJETOALMOFADAS/index.php">
-                        <img class="img-fluid" src="/lojaMaMa/PROJETOALMOFADAS/gallery/logo.png" alt="Ma-ma logo" class="logo">
+                    <a href="/home.php">
+                        <img class="img-fluid" src="/gallery/logo.png" alt="Ma-ma logo" class="logo">
                     </a>
                     <h4 style="color: #ff7b46;">Apoio Comercial</h4>
                     <h2 style="color: rgb(93, 93, 93);"><strong>916 532 480</strong></h2>
