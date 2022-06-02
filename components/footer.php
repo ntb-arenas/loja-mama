@@ -1,4 +1,4 @@
-<section class="my-5">
+<section class="mt-5">
     <!-- Footer -->
     <footer class=" text-center text-md-start" style="background-color: rgb(224, 224, 224);">
         <!-- Grid container -->
@@ -74,9 +74,11 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3 text-dark" style="background-color: rgba(69, 69, 69, 0.2)">
-            © 2022 Ma-Ma:
-            <a class="text-decoration-none text-dark" href="#https://ntbarenas.000webhostapp.com/">Todos os direitos reservados.</a>
+        <div class="text-center p-3 text-dark" style="background-color: #ffc88a;">
+            <strong>
+                © 2022 Ma-Ma:
+                <a class="text-decoration-none text-dark" href="#https://ntbarenas.000webhostapp.com/">Todos os direitos reservados.</a>
+            </strong>
         </div>
         <!-- Copyright -->
     </footer>

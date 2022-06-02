@@ -82,7 +82,7 @@ if (isset($_POST['add'])) {
                                     <?php
                                     $num = 0;
                                     $slideNum = 1;
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP1'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAP1'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'F1') {
                                             echo '
@@ -98,7 +98,7 @@ if (isset($_POST['add'])) {
                                 </div>
                                 <div class="carousel-inner">
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP1'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAP1'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'F1') {
                                             echo '
@@ -133,7 +133,7 @@ if (isset($_POST['add'])) {
                                     <?php
                                     $num = 0;
                                     $slideNum = 1;
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP2'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAP2'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'V1') {
                                             echo '
@@ -149,7 +149,7 @@ if (isset($_POST['add'])) {
                                 </div>
                                 <div class="carousel-inner">
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP2'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAP2'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'V1') {
                                             echo '
@@ -185,9 +185,12 @@ if (isset($_POST['add'])) {
                     <form action='almofadas-de-amamentacao' method='post'>
                         <h3 class="m-0" style="font-weight: 700;">Almofadas de Amamentação</h3>
                         <hr class="mt-2">
-                        <p style="font-size: 0.9rem;">A Almofada de Amamentação MA-MA® Original serve como um apoio fundamental para a futura mamã, proporcionando noites de sono tranquilas e sem os habituais desconfortos que costumam ocorrer durante a gravidez. Chegada a altura de amamentar a almofada MA-MA® será igualmente uma fiel aliada, permitindo que a mamã adopte uma posição confortável e que o bebé fique bem apoiado.</p>
-                        <p class="m-0"><small>Tamanho:</small><span class="fs-3" style="font-weight: 500;"> Grande</span></p>
-                        <p class="m-0"><small>Preço:</small><span class="fs-3" style="font-weight: 500;"> 45€</span></p>
+                        <p style="font-size: 0.9rem;">A Almofada de Amamentação MA-MA® pequena foi feita a pensar na mobilidade. As suas dimensões mais reduzidas (face à almofada original) permitem à mamã levá-la para todo o lado e amamentar em qualquer local com total conforto e comodidade.
+                            <br><br>
+                            As Almofada de Amamentação MA-MA® pequenas ajudam a mamã num conjunto de situações para que ela se possa focar no que é mais importante: o seu bebé. Foram concebidas especialmente para acompanhar a mamã para todo o lado, permitindo que a mamã adopte uma posição confortável a amamentar e que o bebé fique bem apoiado.
+                        </p>
+                        <p class="m-0"><small>Tamanho:</small><span class="fs-3" style="font-weight: 500;"> Pequena</span></p>
+                        <p class="m-0"><small>Preço:</small><span class="fs-3" style="font-weight: 500;"> 35€</span></p>
                         <p class="m-0">
                             <small>
                                 Qty:
@@ -204,7 +207,7 @@ if (isset($_POST['add'])) {
                                 Frente
                                 <select class="form-select" name='product_id1'>
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP1'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAP1'");
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
                                         <option value='<?php echo $productid = $row['CODE'] ?>'><?php echo $productname = $row['NAME'] ?></option>
                                     <?php
@@ -216,7 +219,7 @@ if (isset($_POST['add'])) {
                                 Verso
                                 <select class="form-select" name='product_id2'>
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP2'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAP2'");
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
                                         <option value='<?php echo $productid = $row['CODE'] ?>'><?php echo $productname = $row['NAME'] ?></option>
                                     <?php
@@ -236,115 +239,6 @@ if (isset($_POST['add'])) {
         </div>
         <!-- Carousel wrapper -->
 
-        <div class="container mt-5">
-            <h1 class="text-center m-0" style="font-weight: 500;">Modo de Utilização</h1>
-        </div>
-        <hr>
-
-        <!-- Mobile device -->
-        <div class="container-fluid d-sm-none p-0">
-            <div class="accordion modo-utilizacao-bg" id="accordion1">
-                <div class="accordion-item transparent-background-color no-border">
-                    <h2 class="accordion-header" id="headingOne">
-                        <div class="col-12 col-md-6">
-                            <img src="../gallery/productimg/amamentar.png" class="img-fluid" alt="">
-                        </div>
-                        <button class="accordion-button collapsed transparent-background-color no-border" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            <p class="fs-3 m-0" style="font-weight: 400; color: #000;">Para Amamentar</p>
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse no-border" aria-labelledby="headingOne" data-mdb-parent="#accordion1">
-                        <div class="accordion-body">
-                            <div class="col-12 col-md-6">
-                                <p class="fs-custom" style="font-weight: 400; color: #414042;">A Almofada de Amamentação MA-MA®️ ajuda a mãe a amamentar numa posição confortável, apoiando o bebé e evitando a colocação de stress desnecessário na coluna e costas da mãe. O fecho nas extremidades da almofada permitem que fique presa e apoiada, pelo que a mãe poderá focar-se totalmente no bebé e aproveitar o momento de vínculo.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion modo-utilizacao-bg" id="accordion2">
-                <div class="accordion-item transparent-background-color no-border">
-                    <h2 class="accordion-header" id="headingOne">
-                        <div class="col-12 col-md-6">
-                            <img src="../gallery/productimg/dormir.png" class="img-fluid" alt="">
-                        </div>
-                        <button class="accordion-button collapsed transparent-background-color no-border" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <p class="fs-3 m-0" style="font-weight: 400; color: #000;">Para Dormir</p>
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse no-border" aria-labelledby="headingOne" data-mdb-parent="#accordion2">
-                        <div class="accordion-body">
-                            <div class="col-12 col-md-6">
-                                <p class="fs-custom" style="font-weight: 400; color: #414042;">A Almofada de Amamentação MA-MA é a aliada perfeita da mãe mesmo antes do nascimento do bebé. Com o seu tamanho e a sua forma em U, esta almofada ajuda a mãe a encontrar uma posição de repouso confortável tanto para ela como para o seu bebé.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion modo-utilizacao-bg" id="accordion3">
-                <div class="accordion-item transparent-background-color no-border">
-                    <h2 class="accordion-header" id="headingOne">
-                        <div class="col-12 col-md-6">
-                            <img src="../gallery/productimg/bebeDescansar.png" class="img-fluid" alt="">
-                        </div>
-                        <button class="accordion-button collapsed transparent-background-color no-border" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <p class="fs-3 m-0" style="font-weight: 400; color: #000;">Para o bebé descansar</p>
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse no-border" aria-labelledby="headingOne" data-mdb-parent="#accordion3">
-                        <div class="accordion-body">
-                            <div class="col-12 col-md-6">
-                                <p class="fs-custom" style="font-weight: 400; color: #414042;">A Almofada de Amamentação MA-MA®️ permite que os bebés façam sestas em perfeita segurança sem o risco de se virarem. Além disso, também servem de redutor em cama de grades ou de ninho, aconchegando o bebé. Quando o bebé se começa a sentar, apoia-o, evitando desequilíbrios para os lados ou para trás.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile device -->
-
-        <!-- large screens -->
-        <div class="container-fluid modo-utilizacao-bg d-none d-sm-block">
-            <div class="container-lg">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-6">
-                        <img src="../gallery/productimg/amamentar.png" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p class="fs-3 m-0" style="font-weight: 400; color: #000;">Para Amamentar</p>
-                        <p class="fs-custom" style="font-weight: 400; color: #414042;">A Almofada de Amamentação MA-MA®️ ajuda a mãe a amamentar numa posição confortável, apoiando o bebé e evitando a colocação de stress desnecessário na coluna e costas da mãe. O fecho nas extremidades da almofada permitem que fique presa e apoiada, pelo que a mãe poderá focar-se totalmente no bebé e aproveitar o momento de vínculo.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid modo-utilizacao-bg d-none d-sm-block">
-            <div class="container-lg">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-6 order-2 order-md-1">
-                        <p class="fs-3 m-0" style="font-weight: 400; color: #000;">Para Dormir</p>
-                        <p class="fs-custom" style="font-weight: 400; color: #414042;">A Almofada de Amamentação MA-MA é a aliada perfeita da mãe mesmo antes do nascimento do bebé. Com o seu tamanho e a sua forma em U, esta almofada ajuda a mãe a encontrar uma posição de repouso confortável tanto para ela como para o seu bebé.</p>
-                    </div>
-                    <div class="col-12 col-md-6 order-1 order-md-2">
-                        <img src="../gallery/productimg/dormir.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid modo-utilizacao-bg d-none d-sm-block">
-            <div class="container-lg">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-6 d-flex justify-content-center">
-                        <img src="../gallery/productimg/bebeDescansar.png" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p class="fs-3 m-0" style="font-weight: 400; color: #000;">Para o bebé descansar</p>
-                        <p class="fs-custom" style="font-weight: 400; color: #414042;">A Almofada de Amamentação MA-MA®️ permite que os bebés façam sestas em perfeita segurança sem o risco de se virarem. Além disso, também servem de redutor em cama de grades ou de ninho, aconchegando o bebé. Quando o bebé se começa a sentar, apoia-o, evitando desequilíbrios para os lados ou para trás.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- large screens -->
-
         <!-- Acabamentos -->
         <div class="container mt-5">
             <h1 class="text-center m-0" style="font-weight: 500;">Acabamentos</h1>
@@ -357,10 +251,8 @@ if (isset($_POST['add'])) {
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-3 mb-1"><img src="../gallery/productimg/1.jpg" class="img-fluid" alt=""></div>
-                <div class="col-12 col-sm-3 mb-1"><img src="../gallery/productimg/2.jpg" class="img-fluid" alt=""></div>
-                <div class="col-12 col-sm-3 mb-1"><img src="../gallery/productimg/3.jpg" class="img-fluid" alt=""></div>
-                <div class="col-12 col-sm-3 mb-1"><img src="../gallery/productimg/4.jpg" class="img-fluid" alt=""></div>
+                <div class="col-12 col-sm-3 mb-1"><img src="../gallery/almofadaPequena/1.jpg" class="img-fluid" alt=""></div>
+                <div class="col-12 col-sm-3 mb-1"><img src="../gallery/almofadaPequena/2.jpg" class="img-fluid" alt=""></div>
             </div>
         </div>
         <!-- Acabamentos -->

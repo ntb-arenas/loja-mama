@@ -107,10 +107,10 @@
                             <?php echo $rowTablecategoryDropdown['TITLE'] ?>
                         </a>
                         <?php
-                        if ($rowTablecategoryDropdown['TITLE'] == 'ALMOFADAS DE AMAMENTAÇÃO') { ?>
+                        if ($rowTablecategoryDropdown['CODE'] == 'AAM') { ?>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="/product/almofadas-de-amamentacao">GRANDE</a></li>
-                                <li><a class="dropdown-item" href="#">PEQUENO</a></li>
+                                <li><a class="dropdown-item" href="/product/<?php echo $rowTablecategoryDropdown['LINK'] ?>">GRANDE</a></li>
+                                <li><a class="dropdown-item" href="/product/almofadas-de-amamentacao-pequeno">PEQUENO</a></li>
                             </ul>
                         <?php
                         }

@@ -24,6 +24,8 @@ include_once  '../login/connect_DB.php';
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -58,7 +60,7 @@ include_once  '../login/connect_DB.php';
                 </div>
                 <div class="row">
                     <div class="col-12 text-center lh-sm" style="font-weight: 300; font-size: 1.3rem;">
-                        <p class="text-white">A MA-MA® foi criada em 2006 com o intuito de apoiar as mamãs na gravidez e após o nascimento do bebé, disponibilizando uma vasta gama de produtos pensados especificamente para responder às necessidades de pais e bebé.</p>
+                        <p class="text-white copy1">A MA-MA® foi criada em 2006 com o intuito de apoiar as mamãs na gravidez e após o nascimento do bebé, disponibilizando uma vasta gama de produtos pensados especificamente para responder às necessidades de pais e bebé.</p>
                     </div>
                 </div>
             </div>
