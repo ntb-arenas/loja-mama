@@ -126,13 +126,14 @@ if (isset($_POST['btn-save-changes'])) {
         $lName = strip_tags($lName); // demonstração da remoção de caracteres especiais html por exemplo..
         $fullName = $fName . ' ' . $lName;
         $img_url = "gallery/reviews/" . $pastaPublicacao . "/" . $nomeSemEspacos;
+        $pack = base64_encode($username);
 
         $sql = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-        $sql = "INSERT INTO REVIEWS (NAME, DESCRIPTION, IMAGE_URL) VALUES (?,?,?)";
+        $sql = "INSERT INTO REVIEWS (PACK, NAME, DESCRIPTION, IMAGE_URL) VALUES (?,?,?,?)";
 
         if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-            mysqli_stmt_bind_param($stmt, "sss", $fullName, $message, $img_url);
+            mysqli_stmt_bind_param($stmt, "ssss", $pack, $fullName, $message, $img_url);
 
             mysqli_stmt_execute($stmt);
 
@@ -147,7 +148,20 @@ if (isset($_POST['btn-save-changes'])) {
             // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
             echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
         }
+        mysqli_stmt_close($stmt);
 
+
+        // Update user review ID
+        $sql = mysqli_query($_conn, "SELECT * FROM USERS");
+        $sql = "UPDATE USERS SET REVIEW_ID=? WHERE USERNAME=?";
+
+        if ($stmt = mysqli_prepare($_conn, $sql)) {
+
+            mysqli_stmt_bind_param($stmt, "ss", $pack, $username);
+            mysqli_stmt_execute($stmt);
+        } else {
+            echo "STATUS ADMIN: " . mysqli_error($_conn);
+        }
         mysqli_stmt_close($stmt);
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2022 at 05:12 PM
+-- Generation Time: Jun 03, 2022 at 08:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -18,50 +18,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CATEGORY`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `CATEGORY` (
-  `CODE` varchar(10) NOT NULL,
-  `TITLE` varchar(100) NOT NULL,
-  `SEQUENCE` int(10) NOT NULL,
-  `VISIBLE` int(2) NOT NULL,
-  `LINK` varchar(200) NOT NULL
+CREATE TABLE `category` (
+  `code` varchar(10) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `sequence` int(10) NOT NULL,
+  `visible` int(2) NOT NULL,
+  `link` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `CATEGORY`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `CATEGORY` (`CODE`, `TITLE`, `SEQUENCE`, `VISIBLE`, `LINK`) VALUES
+INSERT INTO `category` (`code`, `title`, `sequence`, `visible`, `link`) VALUES
 ('AAC', 'ALMOFADAS ANTI-CÓLICAS', 7, 1, 'almofadas-anticolicas'),
-('AAM', 'ALMOFADAS DE AMAMENTAÇÃO', 2, 2, '#'),
+('AAM', 'ALMOFADAS DE AMAMENTAÇÃO', 2, 1, 'almofadas-de-amamentacao'),
 ('CS', 'CUNHAS', 3, 1, 'cunhas'),
 ('KM', 'KIT MATERNIDADE', 5, 1, 'kit-maternidade'),
 ('MF', 'MUDA FRALDAS', 6, 1, 'muda-fraldas'),
-('PROM', 'PROMOÇÕES', 1, 0, '#'),
+('PROM', 'PROMOÇÕES', 8, 0, '#'),
 ('SL', 'SLINGS', 4, 1, 'slings');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `OPTION_GROUP`
+-- Table structure for table `option_group`
 --
 
-CREATE TABLE `OPTION_GROUP` (
-  `PACK` varchar(5) NOT NULL,
-  `CODE` varchar(5) NOT NULL,
-  `NAME` varchar(50) NOT NULL,
-  `DESCRIPTION` varchar(200) DEFAULT NULL,
-  `PRICE` float DEFAULT NULL,
-  `IMAGE_URL` varchar(200) NOT NULL
+CREATE TABLE `option_group` (
+  `pack` varchar(5) NOT NULL,
+  `code` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `image_url` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `OPTION_GROUP`
+-- Dumping data for table `option_group`
 --
 
-INSERT INTO `OPTION_GROUP` (`PACK`, `CODE`, `NAME`, `DESCRIPTION`, `PRICE`, `IMAGE_URL`) VALUES
+INSERT INTO `option_group` (`pack`, `code`, `name`, `description`, `price`, `image_url`) VALUES
 ('OP1', 'F1', 'LARANJA', 'Almofadas de Amamentação', 45, './gallery/productimg/laranja.jpg'),
 ('OP1', 'F2', 'CASTANHO', 'Almofadas de Amamentação', 45, './gallery/productimg/castanho.jpg'),
 ('OP1', 'F3', 'AZUL', 'Almofadas de Amamentação', 45, './gallery/productimg/azul.jpg'),
@@ -73,6 +73,12 @@ INSERT INTO `OPTION_GROUP` (`PACK`, `CODE`, `NAME`, `DESCRIPTION`, `PRICE`, `IMA
 ('OPAC', 'AC3', 'FANTASIA BONECOS', 'Almofadas Anti-cólicas', 9.5, './gallery/antiColicas/fantasia_bonecos.jpg'),
 ('OPAC', 'AC4', 'ELEFANTE', 'Almofadas Anti-cólicas', 9.5, './gallery/antiColicas/1.jpg'),
 ('OPAC', 'AC5', 'SELVA', 'Almofadas Anti-cólicas', 9.5, './gallery/antiColicas/selva.jpg'),
+('OPAP1', 'F1', 'VERDE', 'Almofadas de Amamentação', 35, './gallery/almofadaPequena/verde.jpg'),
+('OPAP1', 'F2', 'AZUL', 'Almofadas de Amamentação', 35, './gallery/almofadaPequena/azul.jpg'),
+('OPAP1', 'F3', 'LARANJA', 'Almofadas de Amamentação', 35, './gallery/almofadaPequena/laranja.jpg'),
+('OPAP2', 'V1', 'BHEN', 'Almofadas de Amamentação', 35, './gallery/almofadaPequena/bhen.jpg'),
+('OPAP2', 'V2', 'CARROS', 'Almofadas de Amamentação', 35, './gallery/almofadaPequena/carros.jpg'),
+('OPAP2', 'V3', 'SELVA', 'Almofadas de Amamentação', 35, './gallery/almofadaPequena/selva.jpg'),
 ('OPC', 'C1', 'AZUL', 'Cunhas', 45, './gallery/cunhaProduct/azul_bebe.jpg'),
 ('OPC', 'C2', 'AZUL ESCURO', 'Cunhas', 45, './gallery/cunhaProduct/azul_escuro.jpg'),
 ('OPC', 'C3', 'LARANJA', 'Cunhas', 45, './gallery/cunhaProduct/laranja.jpg'),
@@ -95,81 +101,73 @@ INSERT INTO `OPTION_GROUP` (`PACK`, `CODE`, `NAME`, `DESCRIPTION`, `PRICE`, `IMA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `OPTION_PACK`
+-- Table structure for table `option_pack`
 --
 
-CREATE TABLE `OPTION_PACK` (
-  `CODE` varchar(5) NOT NULL,
-  `NAME` varchar(50) NOT NULL
+CREATE TABLE `option_pack` (
+  `code` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `OPTION_PACK`
+-- Dumping data for table `option_pack`
 --
 
-INSERT INTO `OPTION_PACK` (`CODE`, `NAME`) VALUES
+INSERT INTO `option_pack` (`code`, `name`) VALUES
 ('OP1', 'FRENTE'),
 ('OP2', 'VERSO');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PRODUCT`
+-- Table structure for table `product`
 --
 
-CREATE TABLE `PRODUCT` (
+CREATE TABLE `product` (
   `PRODUCT_CODE` varchar(5) NOT NULL,
   `OPTION_PACK` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `PRODUCT`
+-- Dumping data for table `product`
 --
 
-INSERT INTO `PRODUCT` (`PRODUCT_CODE`, `OPTION_PACK`) VALUES
+INSERT INTO `product` (`PRODUCT_CODE`, `OPTION_PACK`) VALUES
 ('P1', 'OP1'),
 ('P1', 'OP2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `REVIEWS`
+-- Table structure for table `reviews`
 --
 
-CREATE TABLE `REVIEWS` (
-  `CODE` int(10) NOT NULL,
-  `NAME` varchar(200) NOT NULL,
-  `DESCRIPTION` varchar(200) NOT NULL,
-  `IMAGE_URL` varchar(200) NOT NULL
+CREATE TABLE `reviews` (
+  `pack` varchar(10) NOT NULL,
+  `code` int(5) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `image_url` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `REVIEWS`
---
-
-INSERT INTO `REVIEWS` (`CODE`, `NAME`, `DESCRIPTION`, `IMAGE_URL`) VALUES
-(1, 'Mafalda Teixeira', 'Recebi este presente personalizado para mim e Mimikas &#128515 Vamos ver se será a salvação para as noites mal dormidas!!!', 'gallery/reviews/mafaldat/1901905_290796084402925_1569932787_n.jpg'),
-(4, 'Carolina Patrocínio', 'Hoje passeámos em Narbonne assim. A bebé em kit mãos livres o que dá muito jeito para a caminhada &#128523', 'gallery/reviews/carolinap/10170969_626128334130776_1748500768364158520_n.jpg'),
-(5, 'Sandra Gabriel', 'Eu acho muito prático. Eu comprei um sling e a minha filha adora estar lá dentro, adormece logo.', 'gallery/reviews/sandrag/245045074_10221146591829479_765770891105073748_n.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TEST_ORDER`
+-- Table structure for table `test_order`
 --
 
-CREATE TABLE `TEST_ORDER` (
-  `CODE` varchar(10) NOT NULL,
-  `NAME` varchar(100) NOT NULL,
+CREATE TABLE `test_order` (
+  `code` varchar(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `IMAGE` varchar(100) NOT NULL,
-  `PRICE` float NOT NULL
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `TEST_ORDER`
+-- Dumping data for table `test_order`
 --
 
-INSERT INTO `TEST_ORDER` (`CODE`, `NAME`, `IMAGE`, `PRICE`) VALUES
+INSERT INTO `test_order` (`code`, `name`, `IMAGE`, `price`) VALUES
 ('C1', 'LARANJA', '', 40),
 ('C2', 'CASTANHO', '', 40),
 ('C3', 'AZUL', '', 40);
@@ -177,10 +175,10 @@ INSERT INTO `TEST_ORDER` (`CODE`, `NAME`, `IMAGE`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `USERS`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `USERS` (
+CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
   `USERNAME` varchar(100) NOT NULL,
   `EMAIL` varchar(100) NOT NULL,
@@ -196,93 +194,102 @@ CREATE TABLE `USERS` (
   `USER_STATUS` int(11) NOT NULL DEFAULT 0,
   `TOKEN_CODE` varchar(200) DEFAULT NULL,
   `MSGS_MARKETING` int(11) NOT NULL DEFAULT 0,
+  `REVIEW_ID` varchar(10) DEFAULT NULL,
   `DATE_HOUR` varchar(100) NOT NULL DEFAULT '2022-05-20 01:10:38'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `USERS`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `USERS` (`ID`, `USERNAME`, `EMAIL`, `PASSWORD`, `fNAME`, `lNAME`, `MORADA`, `COD_POSTAL`, `CIDADE`, `PAIS`, `TELEMOVEL`, `USER_LEVEL`, `USER_STATUS`, `TOKEN_CODE`, `MSGS_MARKETING`, `DATE_HOUR`) VALUES
-(103, 'mafaldat', 'mafaldateixeira@gmail.com', '$2y$10$AnWE6dgR033IdPR9b5IYLuscEOZtdEMOQ19EEuQmhPf1FV/9fS/8S', 'Mafalda', 'Teixeira', 'Praça José Fontana', '1653-589', 'Lisboa', 'Portugal', '999888777', 1, 1, NULL, 1, '2022-05-29 15:22:55'),
-(105, 'carolinap', 'carolina@gmail.com', '$2y$10$No5b.JlzYh6R3X.5ncdI.u2A82RQNlcAkWR/4dxxHeBF.iNB0joQC', 'Carolina', 'Patrocínio', 'Praça José Fontana', '1653-589', 'Lisboa', 'Portugal', '999888777', 1, 1, NULL, 1, '2022-05-29 15:34:15'),
-(106, 'sandrag', 'sandra@gmail.com', '$2y$10$hg.RBJtufPWU4DTOyW74e.fpKo/OoncU.ovWJrb.uTxxyrb3XfDtm', 'Sandra', 'Gabriel', 'Praça José Fontana', '1653-589', 'Lisboa', 'Portugal', '999888777', 1, 1, NULL, 1, '2022-05-29 15:39:40');
+INSERT INTO `users` (`ID`, `USERNAME`, `EMAIL`, `PASSWORD`, `fNAME`, `lNAME`, `MORADA`, `COD_POSTAL`, `CIDADE`, `PAIS`, `TELEMOVEL`, `USER_LEVEL`, `USER_STATUS`, `TOKEN_CODE`, `MSGS_MARKETING`, `REVIEW_ID`, `DATE_HOUR`) VALUES
+(105, 'carolinap', 'carolina@gmail.com', '$2y$10$No5b.JlzYh6R3X.5ncdI.u2A82RQNlcAkWR/4dxxHeBF.iNB0joQC', 'Carolina', 'Patrocínio', 'Praça José Fontana', '1653-589', 'Lisboa', 'Portugal', '999888777', 1, 1, NULL, 1, 'Y2Fyb2xpbm', '2022-05-29 15:34:15'),
+(107, 'ninoarenas', 'ntbarenas@gmail.com', '$2y$10$PWewh3JBMeZlHXR5R1KOu.uFoFmUJ5xBLyT4G/NY.cPT7tySlhJKe', 'Niño', 'Arenas', NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, 1, NULL, '2022-06-02 22:37:02'),
+(110, 'mafaldat', 'mafaldat@gmail.com', '$2y$10$1yntICJ6ObsnWISzKPrk8uX0QsZuFpWnNzPHHYyLWurL/28veAaS2', 'Mafalda', 'Teixeira', NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, 1, 'bWFmYWxkYX', '2022-06-03 17:00:19');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `CATEGORY`
+-- Indexes for table `category`
 --
-ALTER TABLE `CATEGORY`
-  ADD PRIMARY KEY (`CODE`);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`code`);
 
 --
--- Indexes for table `OPTION_GROUP`
+-- Indexes for table `option_group`
 --
-ALTER TABLE `OPTION_GROUP`
-  ADD PRIMARY KEY (`PACK`,`CODE`);
+ALTER TABLE `option_group`
+  ADD PRIMARY KEY (`pack`,`code`);
 
 --
--- Indexes for table `OPTION_PACK`
+-- Indexes for table `option_pack`
 --
-ALTER TABLE `OPTION_PACK`
-  ADD PRIMARY KEY (`CODE`);
+ALTER TABLE `option_pack`
+  ADD PRIMARY KEY (`code`);
 
 --
--- Indexes for table `PRODUCT`
+-- Indexes for table `product`
 --
-ALTER TABLE `PRODUCT`
+ALTER TABLE `product`
   ADD KEY `PROD_OPT-PA_FK` (`OPTION_PACK`);
 
 --
--- Indexes for table `REVIEWS`
+-- Indexes for table `reviews`
 --
-ALTER TABLE `REVIEWS`
-  ADD PRIMARY KEY (`CODE`);
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`code`,`pack`),
+  ADD KEY `pack` (`pack`);
 
 --
--- Indexes for table `TEST_ORDER`
+-- Indexes for table `test_order`
 --
-ALTER TABLE `TEST_ORDER`
-  ADD PRIMARY KEY (`CODE`);
+ALTER TABLE `test_order`
+  ADD PRIMARY KEY (`code`);
 
 --
--- Indexes for table `USERS`
+-- Indexes for table `users`
 --
-ALTER TABLE `USERS`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `REVIEW_ID` (`REVIEW_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `REVIEWS`
+-- AUTO_INCREMENT for table `reviews`
 --
-ALTER TABLE `REVIEWS`
-  MODIFY `CODE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `reviews`
+  MODIFY `code` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `USERS`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `USERS`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `OPTION_PACK`
+-- Constraints for table `option_pack`
 --
-ALTER TABLE `OPTION_PACK`
-  ADD CONSTRAINT `OPT_PAGR_FK` FOREIGN KEY (`CODE`) REFERENCES `OPTION_GROUP` (`PACK`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `option_pack`
+  ADD CONSTRAINT `OPT_PAGR_FK` FOREIGN KEY (`code`) REFERENCES `option_group` (`pack`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `PRODUCT`
+-- Constraints for table `product`
 --
-ALTER TABLE `PRODUCT`
-  ADD CONSTRAINT `PROD_OPT-PA_FK` FOREIGN KEY (`OPTION_PACK`) REFERENCES `OPTION_PACK` (`CODE`);
+ALTER TABLE `product`
+  ADD CONSTRAINT `PROD_OPT-PA_FK` FOREIGN KEY (`OPTION_PACK`) REFERENCES `option_pack` (`code`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`REVIEW_ID`) REFERENCES `reviews` (`pack`);
 COMMIT;

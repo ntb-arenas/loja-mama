@@ -44,11 +44,12 @@ if (isset($_POST['button-login'])) {
                 $_SESSION["FIRSTNAME_USER"] = $rowUsers["fNAME"];
                 $_SESSION["LASTNAME_USER"] = $rowUsers["lNAME"];
                 $_SESSION["EMAIL_USER"] = $rowUsers["EMAIL"];
-
+                
                 if ($rowUsers["USER_LEVEL"] == 1) {
                     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
                     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
                     header("Location: ../account/profile-account");
+                    $_SESSION['ADMIN'] = $rowUsers["USER_LEVEL"];
                 } else {
                     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
                     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately

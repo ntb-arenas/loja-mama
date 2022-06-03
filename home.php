@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 include_once  './login/connect_DB.php';
 ?>

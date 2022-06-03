@@ -1,19 +1,19 @@
 <?php
 session_start();
+
 include_once  '../login/connect_DB.php';
 
 if (!isset($_SESSION["USER"])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: ../home");
+    header("Location: /error-pages/403-proibido");
 }
-
-
-if ($_SESSION["ADMIN"] != 2) {
+if ($_SESSION['ADMIN'] == 1) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-    header("Location: ../home");
+    header("Location: /error-pages/403-proibido");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
