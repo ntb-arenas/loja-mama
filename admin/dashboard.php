@@ -2,14 +2,14 @@
 session_start();
 include_once  '../login/connect_DB.php';
 
-if (!isset($_SESSION["USER"]) ) { 
+if (!isset($_SESSION["USER"])) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
     header("Location: ../home");
 }
 
 
-if ($_SESSION["ADMIN"]!=2 ) {
+if ($_SESSION["ADMIN"] != 2) {
     header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
     header("Location: ../home");
@@ -125,30 +125,35 @@ if ($_SESSION["ADMIN"]!=2 ) {
     <main class="main-admin" style="margin-top: 58px">
         <div class="container-fluid p-3">
             <div class="row">
-                <div class="col-12 col-md-4 p-3">
-                    <div class="container-fluid text-center">
-                        <img src="../gallery/admin/me.jpg" class="rounded-circle" width="200" height="200" alt="">
-                    </div>
-                    <div class="container-fluid d-flex flex-column text-center pt-3 border-bottom">
-                        <h3 class="m-0">Niño Arenas</h3>
-                        <p>Admin</p>
-                    </div>
-                    <div class="container-fluid d-flex flex-column pt-3">
-                        <p class="m-0" style="color: #acacac;">Correio eletrônico</p>
-                        <p>ntbarenas@gmail.com</p>
-                        <p class="m-0" style="color: #acacac;">Telemóvel</p>
-                        <p>+351 999 999 999</p>
-                    </div>
-                    <div class="container-fluid">
-                        <p class="m-0" style="color: #acacac;">Social</p>
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-floating m-1 gradient-insta" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+                <div class="col-12 col-md-4">
+                    <div class="container-fluid border p-3 h-100">
+                        <div class="container-fluid text-center">
+                            <img src="../gallery/admin/me.jpg" class="rounded-circle img-fluid" width="200" alt="">
+                        </div>
+                        <div class="container-fluid text-center pt-3 border-bottom">
+                            <h3 class="m-0">Niño Arenas</h3>
+                            <p>Admin</p>
+                        </div>
+                        <div class="container-fluid pt-3 px-0 px-xl-3">
+                            <p class="m-0" style="color: #acacac;">Correio eletrônico</p>
+                            <p>ntbarenas@gmail.com</p>
+                            <p class="m-0" style="color: #acacac;">Telemóvel</p>
+                            <p>+351 999 999 999</p>
+                        </div>
+                        <div class="container-fluid px-0 px-lg-3">
+                            <p class="m-0" style="color: #acacac;">Social</p>
+                            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-primary btn-floating m-1 gradient-insta" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
 
 
-                <div class="col-12 col-md-6">Statistics</div>
+                <div class="col-12 col-md-8 mt-3 mt-md-0">
+                    <div class="container-fluid border p-3 h-100">
+                    </div>
+                </div>
             </div>
         </div>
     </main>

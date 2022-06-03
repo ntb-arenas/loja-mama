@@ -138,11 +138,6 @@ if (isset($_POST['btn-save-changes'])) {
 
             $temporaryMsg = "Sucesso!";
 
-            // atualizar variável de sessão, a questão de receber mensagens de marketing não
-            // é uma variável de sessão, não é necessário guardar em sessão.
-
-            $_SESSION["FIRSTNAME_USER"] = $fName;
-            $_SESSION["LASTNAME_USER"] = $lName;
 
             // encaminhar com timer 3 segundos
             header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
