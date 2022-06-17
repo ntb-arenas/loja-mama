@@ -27,7 +27,7 @@
                 <div class="d-flex justify-content-evenly col-12">
                     <a href="#" id="icon-hover"><i class="far fa-heart fa-2x"></i></a>
                     <a href="/admin/dashboard" id="icon-hover"><i class="far fa-user fa-2x"></i></a>
-                    <a href="/cart" id="icon-hover">
+                    <a href="/checkout/cart" id="icon-hover">
                         <i class="fab fa-opencart fa-2x"></i>
                         <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                             <?php
@@ -51,7 +51,7 @@
                         <i class="far fa-user fa-2x"></i>
                         <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">0</span>
                     </a>
-                    <a href="/cart" id="icon-hover">
+                    <a href="/checkout/cart" id="icon-hover">
                         <i class="fab fa-opencart fa-2x"></i>
                         <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                             <?php
@@ -74,7 +74,7 @@
                     <a href="/login/login" id="icon-hover">
                         <i class="far fa-user fa-2x"></i>
                     </a>
-                    <a href="/cart" id="icon-hover">
+                    <a href="/checkout/cart" id="icon-hover">
                         <i class="fab fa-opencart fa-2x"></i>
                         <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                             <?php

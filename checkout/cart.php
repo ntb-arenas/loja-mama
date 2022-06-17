@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 session_start();
-include_once  './login/connect_DB.php';
+include_once  '../login/connect_DB.php';
 
 // if (!isset($_SESSION['USER'])) {
 //     header("Location: ./home");
@@ -32,10 +32,10 @@ if (isset($_POST['remove'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ma-Ma</title>
     <!-- stylesheet ---------------------------->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
     <!-- page icon --------------------------------->
-    <link rel="shortcut icon" href="gallery/logo.png">
+    <link rel="shortcut icon" href="../gallery/logo.png">
     <!-- fonts ------------------------------------------>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,8 +50,8 @@ if (isset($_POST['remove'])) {
 
 <body>
     <main>
-        <?php include_once './components/header.php'; ?>
-        <?php include_once './components/navbar.php'; ?>
+        <?php include_once '../components/header.php'; ?>
+        <?php include_once '../components/navbar.php'; ?>
 
         <div class="container-fluid mt-5">
             <div class="row px-md-5">
@@ -91,7 +91,7 @@ if (isset($_POST['remove'])) {
                                                 <div class="row gx-0">
                                                     <div class="col-3 text-center">
                                                         <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
-                                                            <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
+                                                            <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                                                             <h5 class='pt-2 cover-message-fs'>(Frente): <?php echo $row['NAME'] ?></h5>
                                                     </div>
                                                 <?php
@@ -101,7 +101,7 @@ if (isset($_POST['remove'])) {
                                             if ($row['CODE'] == $value['product_id2']) {
                                                 ?>
                                                     <div class="col-3 text-center">
-                                                        <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
+                                                        <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                                                         <h5 class='pt-2 cover-message-fs'>(Verso): <?php echo $row['NAME'] ?></h5>
                                                     </div>
                                                     <div class="col-2 text-center">
@@ -131,7 +131,7 @@ if (isset($_POST['remove'])) {
                                                     ?>
                                                     <div class="row gx-0">
                                                         <div class="col-3 text-center">
-                                                            <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
+                                                            <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                                                             <h5 class='pt-2 cover-message-fs'><?php echo $row['DESCRIPTION'] . '/' . $row['NAME'] ?></h5>
                                                         </div>
                                                         <div class="col-3">
@@ -202,7 +202,7 @@ if (isset($_POST['remove'])) {
             </div>
         </div>
 
-        <?php include_once './components/footer.php'; ?>
+        <?php include_once '../components/footer.php'; ?>
     </main>
 </body>
 <!-- <script src="./bootstrap/js/bootstrap.bundle.min.js"></script> -->

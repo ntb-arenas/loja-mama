@@ -93,13 +93,13 @@ if (isset($_POST['add'])) {
                                 if ($row['CODE'] == 'AC1') {
                                     echo '
                                             <div class="carousel-item active">
-                                                <img src="../' . $row["IMAGE_URL"] . '" class="d-block w-100" alt="Wild Landscape" />
+                                                <img src=".' . $row["IMAGE_URL"] . '" class="d-block w-100" alt="Wild Landscape" />
                                             </div>
                                             ';
                                 } else {
                                     echo '
                                             <div class="carousel-item">
-                                                <img src="../' . $row["IMAGE_URL"] . '" class="d-block w-100" alt="..." />
+                                                <img src=".' . $row["IMAGE_URL"] . '" class="d-block w-100" alt="..." />
                                             </div>
                                             ';
                                 }
