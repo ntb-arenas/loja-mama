@@ -198,7 +198,7 @@ include_once  './login/connect_DB.php';
                                                                     <img src="' . $row['IMAGE_URL'] . '" class="rounded-8 shadow-1 mb-4 mb-lg-0" width="200"
                                                                     height="200"/>
                                                                 </div>
-                                                                <div class="col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                                                <div class="  overflow-auto col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
                                                                     <h4 class="mb-4">' . $row['NAME'] . '</h4>
                                                                     <p class="mb-0 pb-3">
                                                                     ' . $row['DESCRIPTION'] . '

@@ -127,6 +127,7 @@ if (isset($_POST['btn-save-changes'])) {
         $fullName = $fName . ' ' . $lName;
         $img_url = "gallery/reviews/" . $pastaPublicacao . "/" . $nomeSemEspacos;
         $pack = base64_encode($username);
+        $code = 20;
 
         $sql = mysqli_query($_conn, "SELECT * FROM REVIEWS");
         $sql = "INSERT INTO REVIEWS (PACK, NAME, DESCRIPTION, IMAGE_URL) VALUES (?,?,?,?)";
@@ -134,11 +135,15 @@ if (isset($_POST['btn-save-changes'])) {
         if ($stmt = mysqli_prepare($_conn, $sql)) {
 
             mysqli_stmt_bind_param($stmt, "ssss", $pack, $fullName, $message, $img_url);
-
             mysqli_stmt_execute($stmt);
 
             $temporaryMsg = "Sucesso!";
 
+            // atualizar variável de sessão, a questão de receber mensagens de marketing não
+            // é uma variável de sessão, não é necessário guardar em sessão.
+
+            $_SESSION["FIRSTNAME_USER"] = $fName;
+            $_SESSION["LASTNAME_USER"] = $lName;
 
             // encaminhar com timer 3 segundos
             header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -148,9 +153,9 @@ if (isset($_POST['btn-save-changes'])) {
             // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
             echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
         }
+
         mysqli_stmt_close($stmt);
-
-
+        
         // Update user review ID
         $sql = mysqli_query($_conn, "SELECT * FROM USERS");
         $sql = "UPDATE USERS SET REVIEW_ID=? WHERE USERNAME=?";
@@ -309,4 +314,3 @@ if (isset($_POST['btn-save-changes'])) {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
 
 </html>
-
