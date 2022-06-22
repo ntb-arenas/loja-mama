@@ -30,6 +30,7 @@ if (!isset($_SESSION["USER"])) {
             if (!isset($_POST["fName"], $_POST["lName"])) {
                 $fName = $rowUsers['fNAME'];
                 $lName = $rowUsers['lNAME'];
+                $userId = $rowUsers['ID'];
             } else {
                 $podeRegistar = "Sim";
                 $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
@@ -124,16 +125,15 @@ if (isset($_POST['btn-save-changes'])) {
 
         $fName = strip_tags($fName);
         $lName = strip_tags($lName); // demonstração da remoção de caracteres especiais html por exemplo..
-        $fullName = $fName . ' ' . $lName;
         $img_url = "gallery/reviews/" . $pastaPublicacao . "/" . $nomeSemEspacos;
         $pack = base64_encode($username);
 
         $sql = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-        $sql = "INSERT INTO REVIEWS (PACK, NAME, DESCRIPTION, IMAGE_URL) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO REVIEWS (PACK, USER_ID, DESCRIPTION, IMAGE_URL) VALUES (?,?,?,?)";
 
         if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-            mysqli_stmt_bind_param($stmt, "ssss", $pack, $fullName, $message, $img_url);
+            mysqli_stmt_bind_param($stmt, "siss", $pack, $userId, $message, $img_url);
 
             mysqli_stmt_execute($stmt);
 
@@ -309,4 +309,3 @@ if (isset($_POST['btn-save-changes'])) {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
 
 </html>
-

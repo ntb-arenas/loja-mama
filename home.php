@@ -44,7 +44,7 @@ include_once  './login/connect_DB.php';
         </div>
 
         <!-- Product Page -->
-        <div class="container-fluid px-lg-5 d-none d-sm-block">
+        <div class="container px-lg-5 d-none d-sm-block">
             <div class="row mx-lg-n5">
                 <div class="col-6 col-sm-6 col-md-4 py-3 px-lg-3">
                     <a href="./product/almofadas-de-amamentacao">
@@ -96,7 +96,7 @@ include_once  './login/connect_DB.php';
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-lg-5 d-block d-sm-none">
+        <div class="container px-lg-5 d-block d-sm-none">
             <div class="row mx-lg-n5">
                 <div class="col-6 col-sm-6 col-md-4 py-3 px-lg-3">
                     <a href="./product/almofadas-de-amamentacao" class="text-decoration-none" style="font-size: calc(0.5rem + .3vw); color: rgb(40, 40, 40);" role="button">
@@ -186,11 +186,11 @@ include_once  './login/connect_DB.php';
                                     <div class="carousel-inner pb-5">
                                         <!-- Single item -->
                                         <?php
-                                        $result = mysqli_query($_conn, "SELECT * FROM REVIEWS");
+                                        // $result = mysqli_query($_conn, "SELECT * FROM REVIEWS");
+                                        $result = mysqli_query($_conn, "SELECT USERS.fNAME, USERS.lNAME, REVIEWS.CODE, REVIEWS.DESCRIPTION, REVIEWS.IMAGE_URL FROM REVIEWS JOIN USERS ON REVIEWS.USER_ID = USERS.ID");
                                         while ($row = mysqli_fetch_array($result)) {
-                                            if ($row['CODE'] == '1') {
-                                                echo '
-                                                <div class="carousel-item active">
+                                            echo ($row['CODE'] == '1') ? '<div class="carousel-item active">' : '<div class="carousel-item">';
+                                            echo '
                                                     <div class="row d-flex justify-content-center">
                                                         <div class="col-lg-10 col-xl-8">
                                                             <div class="row">
@@ -199,7 +199,7 @@ include_once  './login/connect_DB.php';
                                                                     height="200"/>
                                                                 </div>
                                                                 <div class="  overflow-auto col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
-                                                                    <h4 class="mb-4">' . $row['NAME'] . '</h4>
+                                                                    <h4 class="mb-4">' . $row['fNAME'] . " " . $row['lNAME'] . '</h4>
                                                                     <p class="mb-0 pb-3">
                                                                     ' . $row['DESCRIPTION'] . '
                                                                     </p>
@@ -208,27 +208,6 @@ include_once  './login/connect_DB.php';
                                                         </div>
                                                     </div>
                                                 </div>';
-                                            } else {
-                                                echo '
-                                                <div class="carousel-item">
-                                                    <div class="row d-flex justify-content-center">
-                                                        <div class="col-lg-10 col-xl-8">
-                                                            <div class="row">
-                                                               <div class="col-md-4 col-lg-4 d-flex justify-content-center">
-                                                                   <img src="' . $row['IMAGE_URL'] . '" class="rounded-8 shadow-1 mb-4 mb-lg-0" width="200"
-                                                                   height="200" />
-                                                                </div>
-                                                                <div class="col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
-                                                                    <h4 class="mb-4">' . $row['NAME'] . '</h4>
-                                                                    <p class="mb-0 pb-3">
-                                                                    ' . $row['DESCRIPTION'] . '
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>';
-                                            }
                                         }
                                         ?>
                                         <!-- Single item -->

@@ -24,10 +24,10 @@
                 if ($_SESSION['ADMIN'] == 2) { ?>
                     <!-- If user an admin -->
                     <div class="d-flex justify-content-evenly col-12">
-                        <a href="#" id="icon-hover"><i class="far fa-heart fa-2x"></i></a>
-                        <a href="/admin/dashboard" id="icon-hover"><i class="far fa-user fa-2x"></i></a>
+                        <a href="#" id="icon-hover"><i class="far fa-heart fa-1x"></i></a>
+                        <a href="/admin/dashboard" id="icon-hover"><i class="far fa-user fa-1x"></i></a>
                         <a href="checkout/cart" id="icon-hover">
-                            <i class="fab fa-opencart fa-2x"></i>
+                            <i class="fab fa-opencart fa-1x"></i>
                             <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                                 <?php
                                 if (isset($_SESSION['cart'])) {
@@ -44,14 +44,14 @@
                     <!-- If user a customer -->
                     <div class="d-flex justify-content-evenly col-12">
                         <a href="#" id="icon-hover">
-                            <i class="far fa-heart fa-2x"></i>
+                            <i class="far fa-heart fa-1x"></i>
                         </a>
                         <a href="/account/profile-account.php" id="icon-hover">
-                            <i class="far fa-user fa-2x"></i>
+                            <i class="far fa-user fa-1x"></i>
                             <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">0</span>
                         </a>
                         <a href="checkout/cart" id="icon-hover">
-                            <i class="fab fa-opencart fa-2x"></i>
+                            <i class="fab fa-opencart fa-1x"></i>
                             <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                                 <?php
                                 if (isset($_SESSION['cart'])) {
@@ -68,13 +68,13 @@
                     <!-- If no user is logged in -->
                     <div class="d-flex justify-content-evenly col-12">
                         <a href="#" id="icon-hover">
-                            <i class="far fa-heart fa-2x"></i>
+                            <i class="far fa-heart fa-1x"></i>
                         </a>
                         <a href="/login/login" id="icon-hover">
-                            <i class="far fa-user fa-2x"></i>
+                            <i class="far fa-user fa-1x"></i>
                         </a>
                         <a href="checkout/cart" id="icon-hover">
-                            <i class="fab fa-opencart fa-2x"></i>
+                            <i class="fab fa-opencart fa-1x"></i>
                             <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                                 <?php
                                 if (isset($_SESSION['cart'])) {
@@ -130,7 +130,6 @@
             <?php
                 }
             }
-            //MENU OPTION
 
             mysqli_free_result($resultTablecategoryDropdown);
             ?>

@@ -17,11 +17,9 @@ if (isset($_POST['add'])) {
                 'product_id' => $_POST['product_id'],
                 'quantityInput' => $_POST['quantityInput']
             );
-
             $_SESSION['cart'][$count] = $item_array;
         }
     } else {
-
         $item_array = array(
             'product_id' => $_POST['product_id'],
             'quantityInput' => $_POST['quantityInput']
