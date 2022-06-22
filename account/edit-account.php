@@ -181,6 +181,18 @@ if (isset($_POST['btn-save-changes'])) {
             echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
         }
 
+        // Update user review ID
+        $sql = mysqli_query($_conn, "SELECT * FROM USERS");
+        $sql = "UPDATE USERS SET REVIEW_ID=? WHERE USERNAME=?";
+
+        if ($stmt = mysqli_prepare($_conn, $sql)) {
+
+            mysqli_stmt_bind_param($stmt, "ss", $userId, $username);
+            mysqli_stmt_execute($stmt);
+        } else {
+            echo "STATUS ADMIN: " . mysqli_error($_conn);
+        }
+
         mysqli_stmt_close($stmt);
     }
 }

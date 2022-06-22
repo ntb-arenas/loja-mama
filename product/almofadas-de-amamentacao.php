@@ -10,7 +10,7 @@ if (isset($_POST['add'])) {
         $item_array_id2 = array_column($_SESSION['cart'], "product_id2");
 
         if (in_array($_POST['product_id1'], $item_array_id1) && in_array($_POST['product_id2'], $item_array_id2)) {
-            $temporaryMsg = '<div class="alert alert-warning mt-3 p-2" role="alert">O produto já existe no carrinho!</div>';
+            $temporaryMsg = "<script>alert('O produto já existe no carrinho!');</script>";
         } else {
 
             $count = count($_SESSION['cart']);

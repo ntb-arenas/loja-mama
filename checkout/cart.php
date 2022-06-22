@@ -11,11 +11,13 @@ include_once  '../login/connect_DB.php';
 if (isset($_POST['remove'])) {
     if ($_GET['action'] == 'remove') {
         foreach ($_SESSION['cart'] as $key => $value) {
-            if ($value["product_id1"] == $_GET['id']) {
+            $value1 = $value["product_id1"] . $value["product_id2"];
+            $value2 = $value["product_id"];
+            if ($value1 == $_GET['id']) {
                 unset($_SESSION['cart'][$key]);
                 echo "<script>window.location = 'cart'</script>";
             }
-            if ($value["product_id"] == $_GET['id']) {
+            if ($value2 == $_GET['id']) {
                 unset($_SESSION['cart'][$key]);
                 echo "<script>window.location = 'cart'</script>";
             }
@@ -85,12 +87,11 @@ if (isset($_POST['remove'])) {
                                 $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP");
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_array($result)) {
-                                        if ($row['CODE'] == $value['product_id1']) {
-                            ?>
+                                        if ($row['CODE'] == $value['product_id1']) { ?>
                                             <div class='container mb-3 gx-0'>
                                                 <div class="row gx-0">
                                                     <div class="col-3 text-center">
-                                                        <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
+                                                        <form action='cart?action=remove&id=<?php echo $value['product_id1'] . $value['product_id2'] ?>' method='post' class='cart-items'>
                                                             <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                                                             <h5 class='pt-2 cover-message-fs'>(Frente): <?php echo $row['NAME'] ?></h5>
                                                     </div>
@@ -98,8 +99,7 @@ if (isset($_POST['remove'])) {
                                                 $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
                                                 $total = $total + $totalQuantity;
                                             }
-                                            if ($row['CODE'] == $value['product_id2']) {
-                                                ?>
+                                            if ($row['CODE'] == $value['product_id2']) { ?>
                                                     <div class="col-3 text-center">
                                                         <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                                                         <h5 class='pt-2 cover-message-fs'>(Verso): <?php echo $row['NAME'] ?></h5>
@@ -118,13 +118,12 @@ if (isset($_POST['remove'])) {
                                                     </div>
                                                     </form>
                                                 </div>
-                                            </div>
-                                        <?php
-                                            }
-                                            if ($row['CODE'] == $value['product_id']) {
-                                        ?>
+                                            </div> <?php
+                                                }
+
+                                                if ($row['CODE'] == $value['product_id']) { ?>
                                             <div class="container mb-3 gx-0">
-                                                <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
+                                                <form action='cart?action=remove&id=<?php echo $value['product_id'] ?>' method='post' class='cart-items'>
                                                     <?php
                                                     $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
                                                     $total = $total + $totalQuantity;
@@ -152,20 +151,16 @@ if (isset($_POST['remove'])) {
                                                     </div>
 
                                                 </form>
-                                            </div>
-                        <?php
+                                            </div> <?php
+                                                }
                                             }
                                         }
                                     }
-                                }
-                            } else {
-                                echo "<h6><strong>Carrinho está vazío!</strong></h6>";
-                            }
-                        ?>
-
+                                } else {
+                                    echo "<h6><strong>Carrinho está vazío!</strong></h6>";
+                                } ?>
                     </div>
                 </div>
-
                 <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
                     <h5 class="mt-3"><strong>Resumo</strong></h5>
                     <hr class="mt-1">
@@ -192,7 +187,9 @@ if (isset($_POST['remove'])) {
                         <div class="container">
                             <hr>
                         </div>
-                        <div class="col-7"><h6>Total da encomenda</h6></div>
+                        <div class="col-7">
+                            <h6>Total da encomenda</h6>
+                        </div>
                         <div class="col-5">
                             <h6><?php echo $total; ?>€</h6>
                         </div>

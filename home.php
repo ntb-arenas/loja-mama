@@ -187,7 +187,7 @@ include_once  './login/connect_DB.php';
                                         <!-- Single item -->
                                         <?php
                                         // $result = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-                                        $result = mysqli_query($_conn, "SELECT USERS.fNAME, USERS.lNAME, REVIEWS.CODE, REVIEWS.DESCRIPTION, REVIEWS.IMAGE_URL FROM REVIEWS JOIN USERS ON REVIEWS.USER_ID = USERS.ID");
+                                        $result = mysqli_query($_conn, "SELECT USERS.fNAME, USERS.lNAME, REVIEWS.CODE, REVIEWS.DESCRIPTION, REVIEWS.IMAGE_URL FROM REVIEWS JOIN USERS ON REVIEWS.USER_ID = USERS.ID ORDER BY `REVIEWS`.`CODE` ASC");
                                         while ($row = mysqli_fetch_array($result)) {
                                             echo ($row['CODE'] == '1') ? '<div class="carousel-item active">' : '<div class="carousel-item">';
                                             echo '
@@ -198,7 +198,7 @@ include_once  './login/connect_DB.php';
                                                                     <img src="' . $row['IMAGE_URL'] . '" class="rounded-8 shadow-1 mb-4 mb-lg-0" width="200"
                                                                     height="200"/>
                                                                 </div>
-                                                                <div class="  overflow-auto col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                                                <div class=" col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
                                                                     <h4 class="mb-4">' . $row['fNAME'] . " " . $row['lNAME'] . '</h4>
                                                                     <p class="mb-0 pb-3">
                                                                     ' . $row['DESCRIPTION'] . '

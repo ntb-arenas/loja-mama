@@ -30,7 +30,7 @@ if (!isset($_SESSION["USER"])) {
             if (!isset($_POST["fName"], $_POST["lName"])) {
                 $fName = $rowUsers['fNAME'];
                 $lName = $rowUsers['lNAME'];
-                $userId = $rowUsers['ID'];
+                $reviewId = $rowUsers['ID'];
             } else {
                 $podeRegistar = "Sim";
                 $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
@@ -123,17 +123,15 @@ if (isset($_POST['btn-save-changes'])) {
         // ALTERA/INSIRA
         //////////////////////////////////
 
-        $fName = strip_tags($fName);
-        $lName = strip_tags($lName); // demonstração da remoção de caracteres especiais html por exemplo..
         $img_url = "gallery/reviews/" . $pastaPublicacao . "/" . $nomeSemEspacos;
-        $pack = base64_encode($username);
+        $userId = $reviewId.'-review';
 
         $sql = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-        $sql = "INSERT INTO REVIEWS (PACK, USER_ID, DESCRIPTION, IMAGE_URL) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO REVIEWS (USER_ID, DESCRIPTION, IMAGE_URL) VALUES (?,?,?)";
 
         if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-            mysqli_stmt_bind_param($stmt, "siss", $pack, $userId, $message, $img_url);
+            mysqli_stmt_bind_param($stmt, "sss", $userId, $message, $img_url);
 
             mysqli_stmt_execute($stmt);
 
@@ -157,7 +155,7 @@ if (isset($_POST['btn-save-changes'])) {
 
         if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-            mysqli_stmt_bind_param($stmt, "ss", $pack, $username);
+            mysqli_stmt_bind_param($stmt, "ss", $userId, $username);
             mysqli_stmt_execute($stmt);
         } else {
             echo "STATUS ADMIN: " . mysqli_error($_conn);
