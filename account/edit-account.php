@@ -64,14 +64,11 @@ if (!isset($_SESSION["USER"])) {
             $pais = $rowUsers['PAIS'];
 
             if (!isset($_POST["fName"], $_POST["lName"])) {
-
                 $fName = $rowUsers['fNAME'];
                 $lName = $rowUsers['lNAME'];
                 $receberMsgs = $rowUsers['MSGS_MARKETING'];
             } else {
-
                 $podeRegistar = "Sim";
-
                 $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
                 $fName = trim($fName);
                 $lName = mysqli_real_escape_string($_conn, $_POST['lName']);
@@ -141,18 +138,16 @@ if (isset($_POST['btn-save-changes'])) {
 
     if ($podeRegistar == "Sim") {
 
-
         ///////////////////////////////////
         // ALTERA/INSIRA
         //////////////////////////////////
-
 
         $morada = strip_tags($morada);
         $cidade = strip_tags($cidade);
         $telemovel = strip_tags($telemovel);
         $pais = strip_tags($pais);
         $fName = strip_tags($fName);
-        $lName = strip_tags($lName); // demonstração da remoção de caracteres especiais html por exemplo..
+        $lName = strip_tags($lName);
 
         $sql = "UPDATE USERS SET fNAME = ?, lNAME = ?, MORADA = ?, COD_POSTAL = ?, CIDADE = ?, PAIS = ?, TELEMOVEL = ?, MSGS_MARKETING = ? WHERE USERNAME = ?";
 

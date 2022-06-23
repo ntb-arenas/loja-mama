@@ -244,7 +244,6 @@ if (isset($_POST['btn-save-changes'])) {
                 <div class="col-12 col-md-9 mt-3 mt-md-0 border-start">
                     <div class="container border p-3">
                         <h2>Testemunho</h3>
-
                             <?php
                             if ($podeRegistar == 'Sim') { ?>
                                 <div class="alert alert-success mt-3" role="alert">

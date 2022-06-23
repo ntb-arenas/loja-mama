@@ -149,93 +149,35 @@ include_once  './login/connect_DB.php';
             </div>
         </div>
 
-
-        <section class="gradient-custom ">
-            <div class="container ">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-12">
-                        <div class="text-center">
-                            <i class="fas fa-quote-left fa-3x text-white"></i>
-                        </div>
-                        <div class="card">
-                            <div class="card-body px-4 py-5">
-                                <!-- Carousel wrapper -->
-                                <div id="carouselDarkVariant" class="carousel slide" data-mdb-interval="false">
-                                    <!-- Indicators -->
-                                    <div class="carousel-indicators mb-0">
-                                        <?php
-                                        $num = 0;
-                                        $slideNum = 1;
-                                        $result = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            if ($row['CODE'] == '1') {
-                                                echo '
-                                            <button data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="' . $num . '" class="active theme-background-color" aria-current="true" aria-label="Slide ' . $slideNum . '"></button>
-                                            ';
-                                            } else {
-                                                $num = $num + 1;
-                                                $slideNum = $slideNum + 1;
-                                                echo '
-                                                <button class="theme-background-color" data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="' . $num . '" aria-label="Slide ' . $slideNum . '"></button>';
-                                            }
-                                        }
-                                        ?>
-                                    </div>
-
-                                    <!-- Inner -->
-                                    <div class="carousel-inner pb-5">
-                                        <!-- Single item -->
-                                        <?php
-                                        // $result = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-                                        $result = mysqli_query($_conn, "SELECT USERS.fNAME, USERS.lNAME, REVIEWS.CODE, REVIEWS.DESCRIPTION, REVIEWS.IMAGE_URL FROM REVIEWS JOIN USERS ON REVIEWS.USER_ID = USERS.ID ORDER BY `REVIEWS`.`CODE` ASC");
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            echo ($row['CODE'] == '1') ? '<div class="carousel-item active">' : '<div class="carousel-item">';
-                                            echo '
-                                                    <div class="row d-flex justify-content-center">
-                                                        <div class="col-lg-10 col-xl-8">
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-lg-4 d-flex justify-content-center">
-                                                                    <img src="' . $row['IMAGE_URL'] . '" class="rounded-8 shadow-1 mb-4 mb-lg-0" width="200"
-                                                                    height="200"/>
-                                                                </div>
-                                                                <div class=" col-9 col-md-8 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
-                                                                    <h4 class="mb-4">' . $row['fNAME'] . " " . $row['lNAME'] . '</h4>
-                                                                    <p class="mb-0 pb-3">
-                                                                    ' . $row['DESCRIPTION'] . '
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>';
-                                        }
-                                        ?>
-                                        <!-- Single item -->
-                                    </div>
-                                    <!-- Inner -->
-
-                                    <!-- Controls -->
-                                    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="prev">
-                                        <span class="carousel-control-prev-icon theme-color"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next " type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="next">
-                                        <span class="carousel-control-next-icon theme-color"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+        <!-- Carousel wrapper -->
+        <div id="carouselId" class="carousel slide text-center carousel-dark mt-5 p-3" data-mdb-ride="carousel">
+            <div class="carousel-inner" style="height: 20rem;">
+                <?php
+                $result = mysqli_query($_conn, "SELECT USERS.fNAME, USERS.lNAME, REVIEWS.CODE, REVIEWS.DESCRIPTION, REVIEWS.IMAGE_URL FROM REVIEWS JOIN USERS ON REVIEWS.USER_ID = USERS.ID ORDER BY `REVIEWS`.`CODE` ASC");
+                while ($row = mysqli_fetch_array($result)) {
+                    echo ($row['CODE'] == '1') ? '
+                    <div class="carousel-item active">' : '<div class="carousel-item">';
+                    echo '
+                        <img class="rounded-circle shadow-1-strong mb-4" id="review-img" src="' . $row['IMAGE_URL'] . '" alt="avatar" style="width: 150px; height: 150px"/>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <h5 class="mb-3">' . $row['fNAME'] . " " . $row['lNAME'] . '</h5>
+                                    <p class="text-muted"><i class="fas fa-quote-left pe-2"></i>' . $row['DESCRIPTION'] . '</p>
                                 </div>
-                                <!-- Carousel wrapper -->
                             </div>
-                        </div>
-                        <div class="text-center">
-                            <i class="fas fa-quote-right fa-3x text-white"></i>
-                        </div>
-                    </div>
-                </div>
+                    </div>';
+                } ?>
+                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselId" data-mdb-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-mdb-target="#carouselId" data-mdb-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        </section>
-        <!-- Product Page -->
-
+        </div>
+        <!-- Carousel wrapper -->
         <?php include_once './components/footer.php'; ?>
     </main>
 </body>

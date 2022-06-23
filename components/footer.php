@@ -1,4 +1,22 @@
 <section class="mt-5">
+    <div class="container-fluid p-0 d-flex align-items-center" style="background-color: #ff895a;">
+        <div class="container p-2">
+            <form action="#">
+                <div class="row">
+                    <div class="col-12 col-md-6 d-flex align-items-center">
+                        <h4 class="m-0 text-white" style="font-weight: 700">Subscreva a nossa newsletter</h4>
+                    </div>
+                    <div class="col-8 col-md-5">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Introduza o seu e-mail">
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-1"><button class="btn" id="btn-customized" type="submit">ENVIAR</button></div>
+
+                </div>
+            </form>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class=" text-center text-md-start" style="background-color: rgb(224, 224, 224);">
         <!-- Grid container -->
@@ -74,7 +92,7 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3 text-dark" style="background-color: #ffc88a;">
+        <div class="text-center p-3 text-dark" style="background-color: rgb(169, 169, 169);">
             <strong>
                 © 2022 Ma-Ma:
                 <a class="text-decoration-none text-dark" href="#https://ntbarenas.000webhostapp.com/">Todos os direitos reservados.</a>
