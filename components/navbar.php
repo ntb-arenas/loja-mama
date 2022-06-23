@@ -73,7 +73,7 @@
                         <a href="/login/login" id="icon-hover">
                             <i class="far fa-user fa-1x"></i>
                         </a>
-                        <a href="checkout/cart" id="icon-hover">
+                        <a href="/checkout/cart" id="icon-hover">
                             <i class="fab fa-opencart fa-1x"></i>
                             <span class="badge rounded-pill badge-notification bg-warning" style="position: static;">
                                 <?php

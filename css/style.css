@@ -15,7 +15,6 @@
   border: 0px !important;
 }
 /* Theme */
-
 .modo-utilizacao-bg {
   background: rgb(223, 223, 223);
   background: linear-gradient(
@@ -23,12 +22,6 @@
     rgba(223, 223, 223, 0.844) 0%,
     rgba(238, 238, 238, 0) 100%
   );
-}
-
-#account-style {
-  background-color: white;
-  border: 1px solid #ff7b46 !important;
-  color: rgb(93, 93, 93);
 }
 
 html,
@@ -40,6 +33,12 @@ body {
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif !important;
   scroll-behavior: smooth;
+}
+
+#account-style {
+  background-color: white;
+  border: 1px solid #ff7b46 !important;
+  color: rgb(93, 93, 93);
 }
 
 #btn-customized {
@@ -61,6 +60,11 @@ body {
 
 #icon-hover:hover {
   color: #ffa37f;
+}
+
+.checkout-img {
+  height: 100px;
+  width: 100px;
 }
 
 .card-message-fs {
@@ -93,6 +97,9 @@ body {
   #review-img {
     height: 100px !important;
     width: 100px !important;
+  }
+  .checkout-description {
+    font-size: 0.9rem;
   }
 }
 

@@ -61,7 +61,6 @@ if (isset($_POST['remove'])) {
                     <div class="shopping-cart">
                         <h3><strong>Carrinho de compras</strong></h3>
                         <hr>
-
                         <?php
                         $total = 0;
                         if (!empty($_SESSION['cart'])) { ?>
@@ -93,7 +92,7 @@ if (isset($_POST['remove'])) {
                                                     <div class="col-3 text-center">
                                                         <form action='cart?action=remove&id=<?php echo $value['product_id1'] . $value['product_id2'] ?>' method='post' class='cart-items'>
                                                             <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
-                                                            <h5 class='pt-2 cover-message-fs'>(Frente): <?php echo $row['NAME'] ?></h5>
+                                                            <h5 class='pt-2 checkout-description'>(Frente): <?php echo $row['NAME'] ?></h5>
                                                     </div>
                                                 <?php
                                                 $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
@@ -102,7 +101,7 @@ if (isset($_POST['remove'])) {
                                             if ($row['CODE'] == $value['product_id2']) { ?>
                                                     <div class="col-3 text-center">
                                                         <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
-                                                        <h5 class='pt-2 cover-message-fs'>(Verso): <?php echo $row['NAME'] ?></h5>
+                                                        <h5 class='pt-2 checkout-description'>(Verso): <?php echo $row['NAME'] ?></h5>
                                                     </div>
                                                     <div class="col-2 text-center">
                                                         <h5 class='pt-2'><?php echo $value['quantityInput'] ?></h5>
@@ -131,7 +130,7 @@ if (isset($_POST['remove'])) {
                                                     <div class="row gx-0">
                                                         <div class="col-3 text-center">
                                                             <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
-                                                            <h5 class='pt-2 cover-message-fs'><?php echo $row['DESCRIPTION'] . '/' . $row['NAME'] ?></h5>
+                                                            <h5 class='pt-2 checkout-description'><?php echo $row['DESCRIPTION'] . '/' . $row['NAME'] ?></h5>
                                                         </div>
                                                         <div class="col-3">
 
@@ -193,9 +192,13 @@ if (isset($_POST['remove'])) {
                         <div class="col-5">
                             <h6><?php echo $total; ?>€</h6>
                         </div>
+                        <div class="col-12 mt-3 text-center">
+                            <a href="checkout">
+                                <button class="btn" id="btn-customized" type="submit">FINALIZAR</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
