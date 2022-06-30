@@ -44,6 +44,13 @@ if (!isset($_SESSION["USER"])) {
   }
   mysqli_stmt_close($stmt);
 }
+foreach ($_SESSION['cart'] as $key => $value) {
+  echo $value['product_id1'];
+  echo $value['product_id'];
+}
+if (isset($_POST['place-order'])) {
+  # code...
+}
 
 ?>
 <!DOCTYPE html>
@@ -81,10 +88,10 @@ if (!isset($_SESSION["USER"])) {
         <!-- Billing information -->
         <div class="col-12 col-xl-8">
           <div class="container-fluid border border-bottom-0">
-            <p class="fs-5 m-0 py-3"><strong>Billing information</strong></p>
+            <p class="fs-5 m-0 py-3"><strong>Checkout</strong></p>
           </div>
           <div class="container-fluid border px-2">
-            <form class="mt-4">
+            <form class="mt-4" action="#" method="POST">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row mb-4">
                 <div class="col">
@@ -109,14 +116,20 @@ if (!isset($_SESSION["USER"])) {
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input class="form-control" id="formControlReadonly" type="email" value="<?php echo $email; ?>"/>
+                <input class="form-control" id="formControlReadonly" type="email" value="<?php echo $email; ?>" />
                 <label class="form-label" for="formControlReadonly">E-mail</label>
               </div>
 
               <!-- Number input -->
               <div class="form-outline mb-4">
-                <input class="form-control" id="formControlReadonly" type="text" value="<?php echo $telemovel; ?>"/>
+                <input class="form-control" id="formControlReadonly" type="text" value="<?php echo $telemovel; ?>" />
                 <label class="form-label" for="formControlReadonly">Telemovel</label>
+              </div>
+
+              <!-- NIF -->
+              <div class="form-outline mb-4">
+                <input class="form-control" id="formControlReadonly" type="text" name="formNIF" />
+                <label class="form-label" for="formControlReadonly">NIF</label>
               </div>
 
               <!-- Message input -->
@@ -124,7 +137,6 @@ if (!isset($_SESSION["USER"])) {
                 <textarea class="form-control" id="form6Example7" rows="4"></textarea>
                 <label class="form-label" for="form6Example7">Mensagem adicional</label>
               </div>
-            </form>
           </div>
         </div>
         <!-- Checkout cart -->
@@ -197,10 +209,6 @@ if (!isset($_SESSION["USER"])) {
             </div>
             <div class="container-fluid pt-4 px-2">
               <div class="col-12 d-flex justify-content-between">
-                <p class="m-0">Sub Total</p>
-                <p class="m-0"><?php echo $total; ?>€</p>
-              </div>
-              <div class="col-12 d-flex justify-content-between">
                 <p class="m-0">Desconto</p>
                 <p class="m-0">n/a</p>
               </div>
@@ -209,9 +217,13 @@ if (!isset($_SESSION["USER"])) {
                 <p class="m-0 text-success">Envio gratis</p>
               </div>
               <div class="col-12 d-flex justify-content-between py-2">
-                <p class="m-0" style="font-weight: 600;">Total de encomenda</p>
-                <p class="m-0" style="font-weight: 600;"><?php echo $total; ?>€</p>
+                <p class="m-0" style="font-weight: 500;"><strong>Sub Total</strong></p>
+                <p class="m-0" style="font-weight: 500;"><strong><?php echo $total; ?>€</strong></p>
               </div>
+              <div class="container-fluid p-0 text-center">
+                <button class="btn my-3" id="btn-customized" name="place-order" type="submit">CONFIRMAR</button>
+              </div>
+              </form>
             </div>
           </div>
         </div>

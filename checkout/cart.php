@@ -164,33 +164,45 @@ if (isset($_POST['remove'])) {
           <h5 class="mt-3"><strong>Resumo</strong></h5>
           <hr class="mt-1">
           <div class="row my-3">
-            <div class="col-7">
-              <?php
-              if (isset($_SESSION['cart'])) {
-                $count  = count($_SESSION['cart']);
-                echo "<h6>Preço ($count Produtos)</h6>";
-              } else {
-                echo "<h6>Preço (0 Produto)</h6>";
-              }
-              ?>
-            </div>
-            <div class="col-5">
-              <h6><?php echo $total; ?>€</h6>
-            </div>
+
             <div class="col-7">
               <h6>Custo de envio</h6>
             </div>
             <div class="col-5">
               <h6 class="text-success">Envio gratis</h6>
             </div>
+
+            <div class="col-7">
+              <h6>IVA</h6>
+            </div>
+            <div class="col-5">
+              <h6>
+                <?php
+                $totalIva = ($total * 23) / 100;
+                echo $totalIva; ?>€
+              </h6>
+            </div>
+
+            <div class="col-7">
+              <h6>Subtotal excl. IVA</h6>
+            </div>
+            <div class="col-5">
+              <h6>
+                <?php 
+                $totalNoIva = $total - $totalIva;
+                echo $totalNoIva; 
+                ?>€
+              </h6>
+            </div>
+
             <div class="container">
               <hr>
             </div>
             <div class="col-7">
-              <h6>Total da encomenda</h6>
+              <h6><strong>Subtotal</strong></h6>
             </div>
             <div class="col-5">
-              <h6><?php echo $total; ?>€</h6>
+              <h6><strong><?php echo $total; ?>€</strong></h6>
             </div>
             <div class="col-12 mt-3 text-center">
               <a href="checkout">
