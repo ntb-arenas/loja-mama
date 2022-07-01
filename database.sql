@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 01:06 PM
+-- Generation Time: Jul 01, 2022 at 04:01 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.5
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -103,15 +103,9 @@ CREATE TABLE `orders` (
   `INVOICE_ID` varchar(10) NOT NULL,
   `USER_ID` int(5) NOT NULL,
   `STATUS` int(3) NOT NULL,
-  `DATE` date NOT NULL
+  `PRICE` double NOT NULL,
+  `DATE` varchar(50) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`INVOICE_ID`, `USER_ID`, `STATUS`, `DATE`) VALUES
-('INV_1987', 105, 2, '2022-06-28');
 
 -- --------------------------------------------------------
 
@@ -121,11 +115,20 @@ INSERT INTO `orders` (`INVOICE_ID`, `USER_ID`, `STATUS`, `DATE`) VALUES
 
 CREATE TABLE `products` (
   `PRODUCT_ID` varchar(10) NOT NULL,
-  `CODE` int(11) NOT NULL,
-  `NAME` int(11) NOT NULL,
-  `PRICE` int(11) NOT NULL,
-  `TYPE` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `CODE` varchar(11) NOT NULL,
+  `TYPE` varchar(50) DEFAULT NULL,
+  `NAME` varchar(50) DEFAULT NULL,
+  `PRICE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`PRODUCT_ID`, `id`, `CODE`, `TYPE`, `NAME`, `PRICE`) VALUES
+('INV_4378', 47, 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', NULL),
+('INV_4378', 48, 'AC4', 'Almofadas Anti-cólicas', 'ELEFANTE', NULL);
 
 -- --------------------------------------------------------
 
@@ -212,7 +215,8 @@ ALTER TABLE `orders`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`PRODUCT_ID`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `PRODUCT_ID` (`PRODUCT_ID`);
 
 --
 -- Indexes for table `reviews`
@@ -231,6 +235,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -252,13 +262,8 @@ ALTER TABLE `users`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `orders` (`INVOICE_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`INVOICE_ID`) REFERENCES `products` (`PRODUCT_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

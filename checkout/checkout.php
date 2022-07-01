@@ -44,12 +44,72 @@ if (!isset($_SESSION["USER"])) {
   }
   mysqli_stmt_close($stmt);
 }
-foreach ($_SESSION['cart'] as $key => $value) {
-  echo $value['product_id1'];
-  echo $value['product_id'];
-}
+
 if (isset($_POST['place-order'])) {
-  # code...
+  $FourDigitRandomNumber = mt_rand(1111, 9999);
+  $subTotal = $_POST['total'];
+
+  foreach ($_SESSION['cart'] as $key => $value) {
+    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP");
+    if (mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_array($result)) {
+        if ($row['CODE'] == $value['product_id1']) {
+          $nameIdProduct1 = $row['NAME'];
+          $priceProduct = $row['PRICE'];
+          $typeProduct = $row['DESCRIPTION'];
+        } else if ($row['CODE'] == $value['product_id2']) {
+          $nameIdProduct2 = $row['NAME'];
+          $priceProduct = $row['PRICE'];
+          $typeProduct = $row['DESCRIPTION'];
+        } else if ($row['CODE'] == $value['product_id']) {
+          $nameIdProduct = $row['NAME'];
+          $priceProduct = $row['PRICE'];
+          $typeProduct = $row['DESCRIPTION'];
+        }
+      }
+    }
+    if (isset($value['product_id1']) && $value['product_id2']) {
+      $valueProductId = $value['product_id1'] . $value['product_id2'];
+      $nameIdProduct = $nameIdProduct1 . "+" . $nameIdProduct2;
+    } else if (isset($value['product_id'])) {
+      $valueProductId = $value['product_id'];
+      $nameIdProduct = $nameIdProduct;
+    }
+
+    $invoiceId = "INV_" . $FourDigitRandomNumber;
+    $sql = mysqli_query($_conn, "SELECT * FROM PRODUCTS");
+    $sql = "INSERT INTO PRODUCTS (PRODUCT_ID, CODE, NAME, PRICE, TYPE) VALUES (?,?,?,?,?)";
+
+    if ($stmt = mysqli_prepare($_conn, $sql)) {
+
+      mysqli_stmt_bind_param($stmt, "sssis", $invoiceId, $valueProductId, $nameIdProduct, $totalPrice, $typeProduct);
+
+      mysqli_stmt_execute($stmt);
+
+      $temporaryMsg = "Sucesso!";
+
+      // encaminhar com timer 3 segundos
+      header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+      header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
+      header("Refresh: 3; URL=checkout");
+    } else {
+      // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
+      echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
+    }
+  }
+  // Update user review ID
+  $sql = mysqli_query($_conn, "SELECT * FROM ORDERS");
+  $sql = "INSERT INTO ORDERS (INVOICE_ID, USER_ID, STATUS, PRICE, DATE) VALUES (?,?,?,?,?)";
+
+  if ($stmt = mysqli_prepare($_conn, $sql)) {
+    $status = 2;
+    $data_hora = date("Y-m-d H:i:s", time());
+    mysqli_stmt_bind_param($stmt, "ssids", $invoiceId, $username, $status, $subTotal, $data_hora);
+    mysqli_stmt_execute($stmt);
+  } else {
+    echo "STATUS ADMIN: " . mysqli_error($_conn);
+  }
+  mysqli_stmt_close($stmt);
 }
 
 ?>
@@ -180,7 +240,10 @@ if (isset($_POST['place-order'])) {
                           </div>
                         </div> <?php
                               }
-                              if ($row['CODE'] == $value['product_id']) { ?>
+                              if ($row['CODE'] == $value['product_id']) {
+                                $_POST['nameIdProduct'] = $row['NAME'];
+                                $_POST['priceProduct'] = $row['PRICE'];
+                                $_POST['typeProduct'] = $row['DESCRIPTION']; ?>
                         <div class="container-fluid mb-3 gx-0">
                           <?php
                                 $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
@@ -218,7 +281,10 @@ if (isset($_POST['place-order'])) {
               </div>
               <div class="col-12 d-flex justify-content-between py-2">
                 <p class="m-0" style="font-weight: 500;"><strong>Sub Total</strong></p>
-                <p class="m-0" style="font-weight: 500;"><strong><?php echo $total; ?>€</strong></p>
+                <p class="m-0" style="font-weight: 500;"><strong>
+                    <?php
+                    echo $total; ?>€</strong>
+                </p>
               </div>
               <div class="container-fluid p-0 text-center">
                 <button class="btn my-3" id="btn-customized" name="place-order" type="submit">CONFIRMAR</button>
