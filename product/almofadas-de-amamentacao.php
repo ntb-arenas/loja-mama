@@ -82,7 +82,7 @@ if (isset($_POST['add'])) {
                                     <?php
                                     $num = 0;
                                     $slideNum = 1;
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP1'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OP1'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'F1') {
                                             echo '
@@ -98,7 +98,7 @@ if (isset($_POST['add'])) {
                                 </div>
                                 <div class="carousel-inner">
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP1'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OP1'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'F1') {
                                             echo '
@@ -133,7 +133,7 @@ if (isset($_POST['add'])) {
                                     <?php
                                     $num = 0;
                                     $slideNum = 1;
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP2'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OP2'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'V1') {
                                             echo '
@@ -149,7 +149,7 @@ if (isset($_POST['add'])) {
                                 </div>
                                 <div class="carousel-inner">
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP2'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OP2'");
                                     while ($row = mysqli_fetch_array($result)) {
                                         if ($row['CODE'] == 'V1') {
                                             echo '
@@ -204,7 +204,7 @@ if (isset($_POST['add'])) {
                                 Frente
                                 <select class="form-select" name='product_id1'>
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP1'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OP1'");
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
                                         <option value='<?php echo $productid = $row['CODE'] ?>'><?php echo $productname = $row['NAME'] ?></option>
                                     <?php
@@ -216,7 +216,7 @@ if (isset($_POST['add'])) {
                                 Verso
                                 <select class="form-select" name='product_id2'>
                                     <?php
-                                    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OP2'");
+                                    $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OP2'");
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
                                         <option value='<?php echo $productid = $row['CODE'] ?>'><?php echo $productname = $row['NAME'] ?></option>
                                     <?php

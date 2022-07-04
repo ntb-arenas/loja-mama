@@ -32,17 +32,17 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
     $codigo = base64_decode($_GET['id']); 
     $code = $_GET['code'];
     
-    $stmt = $_conn->prepare('SELECT * FROM USERS WHERE CODIGO = ? AND TOKEN_CODE= ?');
+    $stmt = $_conn->prepare('SELECT * FROM users WHERE CODIGO = ? AND TOKEN_CODE= ?');
     $stmt->bind_param('ss', $codigo, $code); 
     $stmt->execute();
 
-    $resultadoUsers = $stmt->get_result();
+    $resultadousers = $stmt->get_result();
     
-    if ($resultadoUsers->num_rows > 0) {
-        while ($rowUsers = $resultadoUsers->fetch_assoc()) {
+    if ($resultadousers->num_rows > 0) {
+        while ($rowusers = $resultadousers->fetch_assoc()) {
              $geraForm="Sim";  
              $interfaceSenhas = "Sim";
-             $nome= $rowUsers["NOME"];
+             $nome= $rowusers["NOME"];
         }            
             
         } else {
@@ -86,7 +86,7 @@ if (isset($_POST['botao-guardar-nova-senha'])) {
         ///////////////////////////////////
         // ALTERAR SENHA
       
-        $sql= "UPDATE USERS SET PASSWORD = ?, TOKEN_CODE = ''  WHERE CODIGO = ?";
+        $sql= "UPDATE users SET PASSWORD = ?, TOKEN_CODE = ''  WHERE CODIGO = ?";
 
         if ( $stmt = mysqli_prepare($_conn, $sql)  ) {
 

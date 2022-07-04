@@ -13,29 +13,29 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
     $code = $_GET['code']; // token...
 
 
-    $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+    $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
     $stmt->bind_param('s', $username);
     $stmt->execute();
 
     $usersResult = $stmt->get_result();
 
     if ($usersResult->num_rows > 0) {
-        while ($rowUsers = $usersResult->fetch_assoc()) {
+        while ($rowusers = $usersResult->fetch_assoc()) {
 
-            $estado = $rowUsers['USER_STATUS'];
+            $estado = $rowusers['USER_STATUS'];
 
             if ($estado != 0) {
 
                 $message = "A sua conta já se encontra ativa. Pode iniciar sessão com a sua conta.";
             } else {
                 // Procedimento de segurança para ativar a conta...
-                if (($code != $rowUsers['TOKEN_CODE'] || $rowUsers['TOKEN_CODE'] == '')) {
+                if (($code != $rowusers['TOKEN_CODE'] || $rowusers['TOKEN_CODE'] == '')) {
 
                     $message = "O código de ativação não está correto ou já foi utilizado.";
                 } else {
                     // o código de ativação está correto e não foi ainda utilizado
-                    // fazer update à tabela de USERS para atualizar o estado e limpar o token
-                    $sql = "UPDATE  USERS SET USER_STATUS=1, TOKEN_CODE=? WHERE USERNAME=?";
+                    // fazer update à tabela de users para atualizar o estado e limpar o token
+                    $sql = "UPDATE  users SET USER_STATUS=1, TOKEN_CODE=? WHERE USERNAME=?";
 
                     if ($stmt = mysqli_prepare($_conn, $sql)) {
 

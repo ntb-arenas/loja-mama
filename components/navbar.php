@@ -104,8 +104,8 @@
         <ul class="navbar-nav justify-content-around col-12">
 
             <?php
-            $resultTablecategory = mysqli_query($_conn, "SELECT * FROM CATEGORY WHERE VISIBLE = 1 ORDER BY SEQUENCE ASC");
-            $resultTablecategoryDropdown = mysqli_query($_conn, "SELECT * FROM CATEGORY WHERE VISIBLE = 2 ORDER BY SEQUENCE ASC");
+            $resultTablecategory = mysqli_query($_conn, "SELECT * FROM category WHERE VISIBLE = 1 ORDER BY SEQUENCE ASC");
+            $resultTablecategoryDropdown = mysqli_query($_conn, "SELECT * FROM category WHERE VISIBLE = 2 ORDER BY SEQUENCE ASC");
 
             //MENU OPTION
             if (mysqli_num_rows($resultTablecategoryDropdown) > 0) {

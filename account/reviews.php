@@ -18,19 +18,19 @@ if (!isset($_SESSION["USER"])) {
   // ler informações de conta 
   $username = $_SESSION["USER"];
 
-  $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+  $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
   $stmt->bind_param('s', $username);
   $stmt->execute();
 
   $usersResult = $stmt->get_result();
 
   if ($usersResult->num_rows > 0) {
-    while ($rowUsers = $usersResult->fetch_assoc()) {
+    while ($rowusers = $usersResult->fetch_assoc()) {
 
       if (!isset($_POST["fName"], $_POST["lName"])) {
-        $fName = $rowUsers['fNAME'];
-        $lName = $rowUsers['lNAME'];
-        $reviewId = $rowUsers['ID'];
+        $fName = $rowusers['fNAME'];
+        $lName = $rowusers['lNAME'];
+        $reviewId = $rowusers['ID'];
       } else {
         $podeRegistar = "Sim";
         $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
@@ -126,8 +126,8 @@ if (isset($_POST['btn-save-changes'])) {
     $img_url = "gallery/reviews/" . $pastaPublicacao . "/" . $nomeSemEspacos;
     $userId = $reviewId . '-review';
 
-    $sql = mysqli_query($_conn, "SELECT * FROM REVIEWS");
-    $sql = "INSERT INTO REVIEWS (USER_ID, DESCRIPTION, IMAGE_URL) VALUES (?,?,?)";
+    $sql = mysqli_query($_conn, "SELECT * FROM reviews");
+    $sql = "INSERT INTO reviews (USER_ID, DESCRIPTION, IMAGE_URL) VALUES (?,?,?)";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
 
@@ -150,8 +150,8 @@ if (isset($_POST['btn-save-changes'])) {
 
 
     // Update user review ID
-    $sql = mysqli_query($_conn, "SELECT * FROM USERS");
-    $sql = "UPDATE USERS SET REVIEW_ID=? WHERE USERNAME=?";
+    $sql = mysqli_query($_conn, "SELECT * FROM users");
+    $sql = "UPDATE users SET REVIEW_ID=? WHERE USERNAME=?";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
 
@@ -200,7 +200,7 @@ if (isset($_POST['btn-save-changes'])) {
   <main>
     <div class="container-md py-3">
       <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>
-      <h5><a href="../login/userSair.php">Logout</a></h5>
+      <h5><a href="../login/usersair.php">Logout</a></h5>
     </div>
 
     <div class="container-md mb-3">
@@ -212,7 +212,7 @@ if (isset($_POST['btn-save-changes'])) {
               <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
               <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
               <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-              <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">REVIEWS</a>
+              <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">reviews</a>
             </div>
           </div>
           <div class="container-fluid d-md-none p-0">
@@ -231,7 +231,7 @@ if (isset($_POST['btn-save-changes'])) {
                         <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                         <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
                         <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">REVIEWS</a>
+                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">reviews</a>
                       </div>
                     </div>
                   </div>

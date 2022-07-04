@@ -70,7 +70,7 @@ if (isset($_POST['add'])) {
               <?php
               $num = 0;
               $slideNum = 1;
-              $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAC'");
+              $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OPAC'");
               while ($row = mysqli_fetch_array($result)) {
                 if ($row['CODE'] == 'AC1') {
                   echo '
@@ -86,7 +86,7 @@ if (isset($_POST['add'])) {
             </div>
             <div class="carousel-inner">
               <?php
-              $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAC'");
+              $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OPAC'");
               while ($row = mysqli_fetch_array($result)) {
                 if ($row['CODE'] == 'AC1') {
                   echo '
@@ -131,7 +131,7 @@ if (isset($_POST['add'])) {
               <div class="col">
                 <select class="form-select" name='product_id'>
                   <?php
-                  $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP WHERE PACK = 'OPAC'");
+                  $result = mysqli_query($_conn, "SELECT * FROM option_group WHERE PACK = 'OPAC'");
                   while ($row = mysqli_fetch_assoc($result)) { ?>
                     <option value='<?php echo $product_id = $row['CODE'] ?>'><?php echo $productname = $row['NAME'] ?>
                     </option>

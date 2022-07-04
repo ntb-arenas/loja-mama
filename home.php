@@ -50,7 +50,7 @@ include_once  './login/connect_DB.php';
     <div class="container px-lg-5 d-none d-sm-block">
       <div class="row mx-lg n5">
         <?php
-        $result = mysqli_query($_conn, "SELECT `TITLE`,`IMAGE_URL`,`LINK` FROM CATEGORY WHERE `VISIBLE` = 1 ORDER BY `SEQUENCE` ASC;");
+        $result = mysqli_query($_conn, "SELECT `TITLE`,`IMAGE_URL`,`LINK` FROM category WHERE `VISIBLE` = 1 ORDER BY `SEQUENCE` ASC;");
         while ($row = mysqli_fetch_array($result)) { ?>
           <div class="col-6 col-sm-6 col-md-4 py-3 px-lg-3">
             <a href="/product/<?php echo $row["LINK"]; ?>">
@@ -70,7 +70,7 @@ include_once  './login/connect_DB.php';
     <div class="container px-lg-5 d-block d-sm-none">
       <div class="row mx-lg-n5">
         <?php
-        $result = mysqli_query($_conn, "SELECT `TITLE`,`IMAGE_URL`,`LINK` FROM CATEGORY WHERE `VISIBLE` = 1 ORDER BY `SEQUENCE` ASC;");
+        $result = mysqli_query($_conn, "SELECT `TITLE`,`IMAGE_URL`,`LINK` FROM category WHERE `VISIBLE` = 1 ORDER BY `SEQUENCE` ASC;");
         while ($row = mysqli_fetch_array($result)) { ?>
           <div class="col-6 col-sm-6 col-md-4 py-3 px-lg-3">
             <a href="/product/<?php echo $row["LINK"]; ?>" class="text-decoration-none" style="font-size: calc(0.5rem + .3vw); color: rgb(40, 40, 40);" role="button">
@@ -92,7 +92,7 @@ include_once  './login/connect_DB.php';
     <div id="carouselId" class="carousel slide text-center carousel-dark mt-5 p-3" data-mdb-ride="carousel">
       <div class="carousel-inner" style="height: 20rem;">
         <?php
-        $result = mysqli_query($_conn, "SELECT USERS.fNAME, USERS.lNAME, REVIEWS.CODE, REVIEWS.DESCRIPTION, REVIEWS.IMAGE_URL FROM REVIEWS JOIN USERS ON REVIEWS.USER_ID = USERS.ID ORDER BY `REVIEWS`.`CODE` ASC");
+        $result = mysqli_query($_conn, "SELECT users.fNAME, users.lNAME, reviews.CODE, reviews.DESCRIPTION, reviews.IMAGE_URL FROM reviews JOIN users ON reviews.USER_ID = users.ID ORDER BY `reviews`.`CODE` ASC");
         while ($row = mysqli_fetch_array($result)) {
           echo ($row['CODE'] == '1') ? '
               <div class="carousel-item active">' : '<div class="carousel-item">';

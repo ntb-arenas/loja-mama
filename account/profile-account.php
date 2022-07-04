@@ -7,19 +7,19 @@ include_once  '../login/connect_DB.php';
 
 $username = $_SESSION["USER"];
 
-$stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+$stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
 $stmt->bind_param('s', $username);
 $stmt->execute();
 
 $usersResult = $stmt->get_result();
 
 if ($usersResult->num_rows > 0) {
-    while ($rowUsers = $usersResult->fetch_assoc()) {
-        $morada = $rowUsers['MORADA'];
-        $telemovel = $rowUsers['TELEMOVEL'];
-        $cidade = $rowUsers['CIDADE'];
-        $codPostal = $rowUsers['COD_POSTAL'];
-        $pais = $rowUsers['PAIS'];
+    while ($rowusers = $usersResult->fetch_assoc()) {
+        $morada = $rowusers['MORADA'];
+        $telemovel = $rowusers['TELEMOVEL'];
+        $cidade = $rowusers['CIDADE'];
+        $codPostal = $rowusers['COD_POSTAL'];
+        $pais = $rowusers['PAIS'];
     }
 }
 
@@ -59,7 +59,7 @@ if ($usersResult->num_rows > 0) {
 
         <div class="container-md py-3">
             <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>
-            <h5><a href="../login/userSair.php">Logout</a></h5>
+            <h5><a href="/login/userSair.php">Logout</a></h5>
         </div>
 
         <div class="container-md">
@@ -70,7 +70,7 @@ if ($usersResult->num_rows > 0) {
                         <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                         <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
                         <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">REVIEWS</a>
+                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
                     </div>
                     <div class="container-fluid d-md-none p-0">
                         <div class="accordion" id="menuPanel">
@@ -88,7 +88,7 @@ if ($usersResult->num_rows > 0) {
                                                 <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                                                 <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
                                                 <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                                                <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">REVIEWS</a>
+                                                <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
                                             </div>
                                         </div>
                                     </div>

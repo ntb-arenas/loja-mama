@@ -41,23 +41,23 @@ if (!isset($_SESSION["USER"])) {
     // ler informações de conta 
     $username = $_SESSION["USER"];
 
-    $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+    $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
     $stmt->bind_param('s', $username);
     $stmt->execute();
 
     $usersResult = $stmt->get_result();
 
     if ($usersResult->num_rows > 0) {
-        while ($rowUsers = $usersResult->fetch_assoc()) {
+        while ($rowusers = $usersResult->fetch_assoc()) {
 
             $password = "";
-            $encryptedPassword = $rowUsers['PASSWORD'];
+            $encryptedPassword = $rowusers['PASSWORD'];
 
             if (!isset($_POST["fName"], $_POST["lName"], $_POST["email"])) {
 
-                $fName = $rowUsers['fNAME'];
-                $lName = $rowUsers['lNAME'];
-                $email = $rowUsers['EMAIL'];
+                $fName = $rowusers['fNAME'];
+                $lName = $rowusers['lNAME'];
+                $email = $rowusers['EMAIL'];
             } else {
 
                 $podeRegistar = "Sim";
@@ -122,7 +122,7 @@ if (isset($_POST['btn-save-changes'])) {
         $fName = strip_tags($fName);
         $lName = strip_tags($lName); // demonstração da remoção de caracteres especiais html por exemplo..
 
-        $sql = "UPDATE USERS SET fNAME = ?, lNAME = ?, EMAIL = ? WHERE USERNAME = ?";
+        $sql = "UPDATE users SET fNAME = ?, lNAME = ?, EMAIL = ? WHERE USERNAME = ?";
 
         if ($stmt = mysqli_prepare($_conn, $sql)) {
 
@@ -194,7 +194,7 @@ if (isset($_POST['btn-save-changes'])) {
                     <h1>
                         Olá <?php echo $_SESSION["FIRSTNAME_USER"] ?>
                     </h1>
-                    <h3><a href="./userSair.php">Logout</a></h3>
+                    <h3><a href="./usersair.php">Logout</a></h3>
                 </div>
 
                 <div class="account-panel">

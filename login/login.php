@@ -22,30 +22,30 @@ if (isset($_POST['button-login'])) {
 
   $username = strip_tags($username);
 
-  $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+  $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
   $stmt->bind_param('s', $username);
   $stmt->execute();
 
   $usersResult = $stmt->get_result();
 
   if ($usersResult->num_rows > 0) {
-    while ($rowUsers = $usersResult->fetch_assoc()) {
+    while ($rowusers = $usersResult->fetch_assoc()) {
 
-      if ($rowUsers['USER_STATUS'] == 2) { // BLocked user
+      if ($rowusers['USER_STATUS'] == 2) { // BLocked user
 
         $errorMessagePassword = "Não é possível entrar no sistema. Contacte os nossos serviços para obter ajuda.";
-      } else  if ($rowUsers['USER_STATUS'] == 0) { // User account created but not verified
+      } else  if ($rowusers['USER_STATUS'] == 0) { // User account created but not verified
 
-        $errorMessagePassword =  $rowUsers['fNAME'] . ", ainda não ativou a sua conta. A mensagem com o código inicial de ativação de conta foi enviada para a sua caixa de correio. Caso não a encontre na sua caixa de entrada, verifique também o seu correio não solicitado ou envie-nos um email para ativarmos a sua conta. Obrigado.";
-      } else  if (password_verify($password, $rowUsers["PASSWORD"])) {
+        $errorMessagePassword =  $rowusers['fNAME'] . ", ainda não ativou a sua conta. A mensagem com o código inicial de ativação de conta foi enviada para a sua caixa de correio. Caso não a encontre na sua caixa de entrada, verifique também o seu correio não solicitado ou envie-nos um email para ativarmos a sua conta. Obrigado.";
+      } else  if (password_verify($password, $rowusers["PASSWORD"])) {
 
-        $_SESSION["USER"] = $rowUsers["USERNAME"];
-        $_SESSION["LEVEL_USER"] = $rowUsers["USER_STATUS"];
-        $_SESSION["FIRSTNAME_USER"] = $rowUsers["fNAME"];
-        $_SESSION["LASTNAME_USER"] = $rowUsers["lNAME"];
-        $_SESSION["EMAIL_USER"] = $rowUsers["EMAIL"];
+        $_SESSION["USER"] = $rowusers["USERNAME"];
+        $_SESSION["LEVEL_USER"] = $rowusers["USER_STATUS"];
+        $_SESSION["FIRSTNAME_USER"] = $rowusers["fNAME"];
+        $_SESSION["LASTNAME_USER"] = $rowusers["lNAME"];
+        $_SESSION["EMAIL_USER"] = $rowusers["EMAIL"];
 
-        if ($rowUsers["USER_LEVEL"] == 1) {
+        if ($rowusers["USER_LEVEL"] == 1) {
           header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
           header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
           header("Location: /account/profile-account");
@@ -55,12 +55,12 @@ if (isset($_POST['button-login'])) {
             header("Location: /checkout/checkout");
             unset($_SESSION["pageId"]);
           }
-          $_SESSION['ADMIN'] = $rowUsers["USER_LEVEL"];
+          $_SESSION['ADMIN'] = $rowusers["USER_LEVEL"];
         } else {
           header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
           header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
           header("Location: /admin/dashboard");
-          $_SESSION['ADMIN'] = $rowUsers["USER_LEVEL"];
+          $_SESSION['ADMIN'] = $rowusers["USER_LEVEL"];
         }
       } else {
         $errorMessagePassword = "password incorreta!";

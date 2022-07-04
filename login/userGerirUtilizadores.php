@@ -26,11 +26,11 @@ if ( isset($_POST["filtroSQL"]))  {
     $filtroSQL = $_POST["filtroSQL"];
     
     if ( trim($filtroSQL)=='') {
-        $filtroSQL = "SELECT * FROM USERS ORDER BY CODIGO ASC";
+        $filtroSQL = "SELECT * FROM users ORDER BY CODIGO ASC";
     }
     
 }  else {
-    $filtroSQL = "SELECT * FROM USERS ORDER BY CODIGO DESC";
+    $filtroSQL = "SELECT * FROM users ORDER BY CODIGO DESC";
 }
 
 
@@ -38,11 +38,11 @@ if ( isset($_POST["filtroSQL"]))  {
     
 //     if ( isset($_POST["botao-ordenar-users-nome-asc"])  ) {
         
-//         $filtroSQL = "SELECT * FROM USERS ORDER BY NOME ASC";
+//         $filtroSQL = "SELECT * FROM users ORDER BY NOME ASC";
 //     }
 //     if ( isset($_POST["botao-ordenar-users-nome-desc"])  ) {
         
-//         $filtroSQL = "SELECT * FROM USERS ORDER BY NOME DESC";
+//         $filtroSQL = "SELECT * FROM users ORDER BY NOME DESC";
 //     }
 // }
 
@@ -56,7 +56,7 @@ if ( isset($_POST['botao-pesquisar-lista-utilizadores'])) {
     
     if ( trim($campoPesquisa)!="") {
         
-        $filtroSQL = "SELECT * FROM USERS  WHERE (CODIGO LIKE '%$campoPesquisa%') OR (NOME LIKE '%$campoPesquisa%') OR (EMAIL LIKE '%$campoPesquisa%') OR (DATA_HORA LIKE '%$campoPesquisa%') ORDER BY CODIGO;";
+        $filtroSQL = "SELECT * FROM users  WHERE (CODIGO LIKE '%$campoPesquisa%') OR (NOME LIKE '%$campoPesquisa%') OR (EMAIL LIKE '%$campoPesquisa%') OR (DATA_HORA LIKE '%$campoPesquisa%') ORDER BY CODIGO;";
     }
     
 }
@@ -65,8 +65,8 @@ if ( isset($_POST['botao-pesquisar-lista-utilizadores'])) {
 
 if ( isset($_POST["botao-ativar-utilizador"])  ) {
     
-    // fazer update à tabela de USERS para atualizar o estado e limpar o token
-    $sql= "UPDATE  USERS SET USER_STATUS=1, TOKEN_CODE=? WHERE CODIGO=?";
+    // fazer update à tabela de users para atualizar o estado e limpar o token
+    $sql= "UPDATE  users SET USER_STATUS=1, TOKEN_CODE=? WHERE CODIGO=?";
     
     if ( $stmt = mysqli_prepare($_conn, $sql) ) {
         
@@ -91,8 +91,8 @@ if ( isset($_POST["botao-ativar-utilizador"])  ) {
 
 if ( isset($_POST["botao-bloquear-utilizador"])  ) {
     
-    // fazer update à tabela de USERS para atualizar o estado e limpar o token
-    $sql= "UPDATE  USERS SET USER_STATUS=2, TOKEN_CODE=? WHERE CODIGO=?";
+    // fazer update à tabela de users para atualizar o estado e limpar o token
+    $sql= "UPDATE  users SET USER_STATUS=2, TOKEN_CODE=? WHERE CODIGO=?";
     
     if ( $stmt = mysqli_prepare($_conn, $sql) ) {
         
@@ -116,8 +116,8 @@ if ( isset($_POST["botao-bloquear-utilizador"])  ) {
 
 if ( isset($_POST["botao-desbloquear-utilizador"])  ) {
     
-    // fazer update à tabela de USERS para atualizar o estado e limpar o token
-    $sql= "UPDATE  USERS SET USER_STATUS=1, TOKEN_CODE=? WHERE CODIGO=?";
+    // fazer update à tabela de users para atualizar o estado e limpar o token
+    $sql= "UPDATE  users SET USER_STATUS=1, TOKEN_CODE=? WHERE CODIGO=?";
     
     if ( $stmt = mysqli_prepare($_conn, $sql) ) {
         
@@ -172,13 +172,13 @@ if(isset($_POST["botao-importar-contactos"])){
                     
                     // Passo seguinte validar se já existe na BD 
                     
-                    $stmt = $_conn->prepare('SELECT * FROM USERS WHERE CODIGO = ?');
+                    $stmt = $_conn->prepare('SELECT * FROM users WHERE CODIGO = ?');
                     $stmt->bind_param('s', $importCodigo);
                     $stmt->execute();
                     
-                    $resultadoUsers = $stmt->get_result();
+                    $resultadousers = $stmt->get_result();
                     
-                    if ($resultadoUsers->num_rows > 0) {
+                    if ($resultadousers->num_rows > 0) {
                         
                         // já existe um utilizador com este código na BD
                         
@@ -188,7 +188,7 @@ if(isset($_POST["botao-importar-contactos"])){
                         
                         // ok, o utilizador pode ser inserido
       
-                        $sql= "INSERT INTO USERS (CODIGO, EMAIL, PASSWORD, NOME, NIVEL,USER_STATUS, MENSAGENS_MARKETING,DATA_HORA)
+                        $sql= "INSERT INTO users (CODIGO, EMAIL, PASSWORD, NOME, NIVEL,USER_STATUS, MENSAGENS_MARKETING,DATA_HORA)
                                     VALUES (?,?,?,?,?,?,?,?)";
                         
                         if ( $stmt = mysqli_prepare($_conn, $sql) ) {
@@ -277,7 +277,7 @@ if(isset($_POST["botao-exportar-contactos"])){
 
     
 // saber total de utilizadores
-$resultadoTotal = mysqli_query($_conn, "SELECT COUNT(CODIGO) AS TOTAL FROM USERS");           
+$resultadoTotal = mysqli_query($_conn, "SELECT COUNT(CODIGO) AS TOTAL FROM users");           
 
 $UTILIZADORES_TOTAL = 0;
 if (mysqli_num_rows($resultadoTotal) > 0) {

@@ -46,27 +46,27 @@ if (!isset($_SESSION["USER"])) {
   // ler informações de conta 
   $username = $_SESSION["USER"];
 
-  $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+  $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
   $stmt->bind_param('s', $username);
   $stmt->execute();
 
   $usersResult = $stmt->get_result();
 
   if ($usersResult->num_rows > 0) {
-    while ($rowUsers = $usersResult->fetch_assoc()) {
+    while ($rowusers = $usersResult->fetch_assoc()) {
 
       $password = "";
-      $encryptedPassword = $rowUsers['PASSWORD'];
-      $morada = $rowUsers['MORADA'];
-      $telemovel = $rowUsers['TELEMOVEL'];
-      $cidade = $rowUsers['CIDADE'];
-      $codPostal = $rowUsers['COD_POSTAL'];
-      $pais = $rowUsers['PAIS'];
+      $encryptedPassword = $rowusers['PASSWORD'];
+      $morada = $rowusers['MORADA'];
+      $telemovel = $rowusers['TELEMOVEL'];
+      $cidade = $rowusers['CIDADE'];
+      $codPostal = $rowusers['COD_POSTAL'];
+      $pais = $rowusers['PAIS'];
 
       if (!isset($_POST["fName"], $_POST["lName"])) {
-        $fName = $rowUsers['fNAME'];
-        $lName = $rowUsers['lNAME'];
-        $receberMsgs = $rowUsers['MSGS_MARKETING'];
+        $fName = $rowusers['fNAME'];
+        $lName = $rowusers['lNAME'];
+        $receberMsgs = $rowusers['MSGS_MARKETING'];
       } else {
         $podeRegistar = "Sim";
         $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
@@ -149,7 +149,7 @@ if (isset($_POST['btn-save-changes'])) {
     $fName = strip_tags($fName);
     $lName = strip_tags($lName);
 
-    $sql = "UPDATE USERS SET fNAME = ?, lNAME = ?, MORADA = ?, COD_POSTAL = ?, CIDADE = ?, PAIS = ?, TELEMOVEL = ?, MSGS_MARKETING = ? WHERE USERNAME = ?";
+    $sql = "UPDATE users SET fNAME = ?, lNAME = ?, MORADA = ?, COD_POSTAL = ?, CIDADE = ?, PAIS = ?, TELEMOVEL = ?, MSGS_MARKETING = ? WHERE USERNAME = ?";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
       mysqli_stmt_bind_param($stmt, "sssssssis", $fName, $lName, $morada, $codPostal, $cidade, $pais, $telemovel, $receberMsgs, $username);
@@ -171,8 +171,8 @@ if (isset($_POST['btn-save-changes'])) {
     }
 
     // Update user review ID
-    $sql = mysqli_query($_conn, "SELECT * FROM USERS");
-    $sql = "UPDATE USERS SET REVIEW_ID=? WHERE USERNAME=?";
+    $sql = mysqli_query($_conn, "SELECT * FROM users");
+    $sql = "UPDATE users SET REVIEW_ID=? WHERE USERNAME=?";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
 
@@ -222,7 +222,7 @@ if (isset($_POST['btn-save-changes'])) {
   <main>
     <div class="container-md py-3">
       <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>
-      <h5><a href="../login/userSair.php">Logout</a></h5>
+      <h5><a href="/login/userSair.php">Logout</a></h5>
     </div>
 
     <div class="container-md mb-3">
@@ -234,7 +234,7 @@ if (isset($_POST['btn-save-changes'])) {
             <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
             <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">EDITAR CONTA</a>
             <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-            <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">REVIEWS</a>
+            <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
           </div>
           <div class="container-fluid d-md-none p-0">
             <div class="accordion" id="menuPanel">
@@ -252,7 +252,7 @@ if (isset($_POST['btn-save-changes'])) {
                         <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                         <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">EDITAR CONTA</a>
                         <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">REVIEWS</a>
+                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
                       </div>
                     </div>
                   </div>

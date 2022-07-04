@@ -18,24 +18,24 @@ if (isset($_POST['botao-recuperar-senha'])) {
     $username = strtolower(trim($username));
 
 
-    $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+    $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
     $stmt->bind_param('s', $username);
     $stmt->execute();
 
-    $resultadoUsers = $stmt->get_result();
+    $resultadousers = $stmt->get_result();
 
-    if ($resultadoUsers->num_rows > 0) {
-        while ($rowUsers = $resultadoUsers->fetch_assoc()) {
+    if ($resultadousers->num_rows > 0) {
+        while ($rowusers = $resultadousers->fetch_assoc()) {
 
-            $fName = $rowUsers['fNAME'];
-            $lName = $rowUsers['lNAME'];
+            $fName = $rowusers['fNAME'];
+            $lName = $rowusers['lNAME'];
 
-            if ($rowUsers['USER_STATUS'] == 2) { // utilizador bloqueado
+            if ($rowusers['USER_STATUS'] == 2) { // utilizador bloqueado
 
                 $mensagemErroSenha = "Não foi enviada mensagem de recuperação de senha, contacte os nossos serviços para obter ajuda.";
-            } else  if ($rowUsers['USER_STATUS'] == 0) { // Utilizador criou a conta mas não ativou
+            } else  if ($rowusers['USER_STATUS'] == 0) { // Utilizador criou a conta mas não ativou
 
-                $mensagemErroSenha =  $rowUsers['fNAME'] . ", ainda não ativou a sua conta. A mensagem com o código inicial de ativação de conta foi enviada para a sua caixa de correio. Caso não a encontre na sua caixa de entrada, verifique também o seu correio não solicitado ou envie-nos um email para ativarmos a sua conta. Obrigado.";
+                $mensagemErroSenha =  $rowusers['fNAME'] . ", ainda não ativou a sua conta. A mensagem com o código inicial de ativação de conta foi enviada para a sua caixa de correio. Caso não a encontre na sua caixa de entrada, verifique também o seu correio não solicitado ou envie-nos um email para ativarmos a sua conta. Obrigado.";
             } else {
 
                 // Recuperar a senha 
@@ -43,7 +43,7 @@ if (isset($_POST['botao-recuperar-senha'])) {
 
                 $code = md5(uniqid(rand()));
 
-                $sql = "UPDATE USERS SET TOKEN_CODE=? WHERE USERNAME=?";
+                $sql = "UPDATE users SET TOKEN_CODE=? WHERE USERNAME=?";
 
                 if ($stmt = mysqli_prepare($_conn, $sql)) {
 

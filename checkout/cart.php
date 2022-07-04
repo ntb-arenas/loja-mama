@@ -83,7 +83,7 @@ if (isset($_POST['remove'])) {
 
               <?php
               foreach ($_SESSION['cart'] as $key => $value) {
-                $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP");
+                $result = mysqli_query($_conn, "SELECT * FROM option_group");
                 if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_array($result)) {
                     if ($row['CODE'] == $value['product_id1']) { ?>

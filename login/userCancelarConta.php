@@ -25,20 +25,20 @@ if ( !isset($_SESSION["UTILIZADOR"])) {
     
     $codigo = $_SESSION["UTILIZADOR"]; 
 
-    $stmt = $_conn->prepare('SELECT * FROM USERS WHERE CODIGO = ?');
+    $stmt = $_conn->prepare('SELECT * FROM users WHERE CODIGO = ?');
     $stmt->bind_param('s', $codigo); 
     $stmt->execute();
 
-    $resultadoUsers = $stmt->get_result();
+    $resultadousers = $stmt->get_result();
     
-    if ($resultadoUsers->num_rows > 0) {
-        while ($rowUsers = $resultadoUsers->fetch_assoc()) {
+    if ($resultadousers->num_rows > 0) {
+        while ($rowusers = $resultadousers->fetch_assoc()) {
          
             
             $senha ="";
-            $senhaEncriptada =$rowUsers['PASSWORD'];
+            $senhaEncriptada =$rowusers['PASSWORD'];
             
-            $nome = $rowUsers['NOME'];
+            $nome = $rowusers['NOME'];
             
             if ( !isset($_POST["motivo"])) {
                 
@@ -106,9 +106,9 @@ if ( isset($_POST['botao-apagar-conta']) ) {
                 // APAGAR
                 //////////////////////////////////
             
-                // Tabela USERS
+                // Tabela users
             
-                $sql= "DELETE FROM USERS WHERE CODIGO = ?";
+                $sql= "DELETE FROM users WHERE CODIGO = ?";
                 
                 if ( $stmt = mysqli_prepare($_conn, $sql) ) {
                 

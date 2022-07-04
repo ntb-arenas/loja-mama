@@ -15,22 +15,22 @@ if (!isset($_SESSION["USER"])) {
   // ler informações de conta 
   $username = $_SESSION["USER"];
 
-  $stmt = $_conn->prepare('SELECT * FROM USERS WHERE USERNAME = ?');
+  $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
   $stmt->bind_param('s', $username);
   $stmt->execute();
 
   $usersResult = $stmt->get_result();
 
   if ($usersResult->num_rows > 0) {
-    while ($rowUsers = $usersResult->fetch_assoc()) {
+    while ($rowusers = $usersResult->fetch_assoc()) {
 
       if (!isset($_POST["fName"], $_POST["lName"])) {
-        $fName = $rowUsers['fNAME'];
-        $lName = $rowUsers['lNAME'];
-        $email = $rowUsers['EMAIL'];
-        $telemovel = $rowUsers['TELEMOVEL'];
-        $address = $rowUsers['MORADA'] . ", " . $rowUsers['COD_POSTAL'] . ", " . $rowUsers['CIDADE'];
-        $reviewId = $rowUsers['ID'];
+        $fName = $rowusers['fNAME'];
+        $lName = $rowusers['lNAME'];
+        $email = $rowusers['EMAIL'];
+        $telemovel = $rowusers['TELEMOVEL'];
+        $address = $rowusers['MORADA'] . ", " . $rowusers['COD_POSTAL'] . ", " . $rowusers['CIDADE'];
+        $reviewId = $rowusers['ID'];
       } else {
         $podeRegistar = "Sim";
         $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
@@ -50,7 +50,7 @@ if (isset($_POST['place-order'])) {
   $subTotal = $_POST['total'];
 
   foreach ($_SESSION['cart'] as $key => $value) {
-    $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP");
+    $result = mysqli_query($_conn, "SELECT * FROM option_group");
     if (mysqli_num_rows($result) > 0) {
       while ($row = mysqli_fetch_array($result)) {
         if ($row['CODE'] == $value['product_id1']) {
@@ -77,39 +77,36 @@ if (isset($_POST['place-order'])) {
     }
 
     $invoiceId = "INV_" . $FourDigitRandomNumber;
-    $sql = mysqli_query($_conn, "SELECT * FROM PRODUCTS");
-    $sql = "INSERT INTO PRODUCTS (PRODUCT_ID, CODE, NAME, PRICE, TYPE) VALUES (?,?,?,?,?)";
+    $sql = mysqli_query($_conn, "SELECT * FROM products");
+    $sql = "INSERT INTO products (PRODUCT_ID, CODE, NAME, PRICE, TYPE) VALUES (?,?,?,?,?)";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-      mysqli_stmt_bind_param($stmt, "sssis", $invoiceId, $valueProductId, $nameIdProduct, $totalPrice, $typeProduct);
+      mysqli_stmt_bind_param($stmt, "sssis", $invoiceId, $valueProductId, $nameIdProduct, $priceProduct, $typeProduct);
 
       mysqli_stmt_execute($stmt);
 
       $temporaryMsg = "Sucesso!";
-
-      // encaminhar com timer 3 segundos
-      header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-      header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-      header("Refresh: 3; URL=checkout");
     } else {
       // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
       echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
     }
+    mysqli_stmt_close($stmt);
   }
   // Update user review ID
-  $sql = mysqli_query($_conn, "SELECT * FROM ORDERS");
-  $sql = "INSERT INTO ORDERS (INVOICE_ID, USER_ID, STATUS, PRICE, DATE) VALUES (?,?,?,?,?)";
+  $sql = mysqli_query($_conn, "SELECT * FROM orders");
+  $sql = "INSERT INTO orders (INVOICE_ID, USER_ID, STATUS, PRICE, DATE) VALUES (?,?,?,?,?)";
 
   if ($stmt = mysqli_prepare($_conn, $sql)) {
     $status = 2;
     $data_hora = date("Y-m-d H:i:s", time());
-    mysqli_stmt_bind_param($stmt, "ssids", $invoiceId, $username, $status, $subTotal, $data_hora);
+    mysqli_stmt_bind_param($stmt, "ssids", $invoiceId, $reviewId, $status, $_SESSION['subtotal'], $data_hora);
     mysqli_stmt_execute($stmt);
   } else {
     echo "STATUS ADMIN: " . mysqli_error($_conn);
   }
   mysqli_stmt_close($stmt);
+  unset($_SESSION['cart']);
 }
 
 ?>
@@ -210,7 +207,7 @@ if (isset($_POST['place-order'])) {
               $total = 0;
               if (!empty($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $key => $value) {
-                  $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP");
+                  $result = mysqli_query($_conn, "SELECT * FROM option_group");
                   if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_array($result)) {
                       if ($row['CODE'] == $value['product_id1']) { ?>
@@ -223,8 +220,7 @@ if (isset($_POST['place-order'])) {
                           <?php
                           $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
                           $total = $total + $totalQuantity;
-                        }
-                        if ($row['CODE'] == $value['product_id2']) { ?>
+                        } else if ($row['CODE'] == $value['product_id2']) { ?>
                             <div class="col-4 text-center">
                               <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                               <h5 class='pt-2 checkout-description'>(Verso): <?php echo $row['NAME'] ?></h5>
@@ -238,16 +234,16 @@ if (isset($_POST['place-order'])) {
                               <h5 class='pt-2'>€<?php echo $totalQuantity ?></h5>
                             </div>
                           </div>
-                        </div> <?php
-                              }
-                              if ($row['CODE'] == $value['product_id']) {
-                                $_POST['nameIdProduct'] = $row['NAME'];
-                                $_POST['priceProduct'] = $row['PRICE'];
-                                $_POST['typeProduct'] = $row['DESCRIPTION']; ?>
+                        </div>
+                      <?php
+                        } else if ($row['CODE'] == $value['product_id']) {
+                          $_POST['nameIdProduct'] = $row['NAME'];
+                          $_POST['priceProduct'] = $row['PRICE'];
+                          $_POST['typeProduct'] = $row['DESCRIPTION']; ?>
                         <div class="container-fluid mb-3 gx-0">
                           <?php
-                                $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
-                                $total = $total + $totalQuantity;
+                          $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
+                          $total = $total + $totalQuantity;
                           ?>
                           <div class="row border-bottom gx-0">
                             <div class="col-2 text-center">
@@ -264,11 +260,11 @@ if (isset($_POST['place-order'])) {
                             </div>
                           </div>
                         </div><?php
-                              }
                             }
                           }
                         }
-                      } ?>
+                      }
+                    } ?>
             </div>
             <div class="container-fluid pt-4 px-2">
               <div class="col-12 d-flex justify-content-between">
@@ -283,7 +279,8 @@ if (isset($_POST['place-order'])) {
                 <p class="m-0" style="font-weight: 500;"><strong>Sub Total</strong></p>
                 <p class="m-0" style="font-weight: 500;"><strong>
                     <?php
-                    echo $total; ?>€</strong>
+                    echo $total;
+                    $_SESSION['subtotal'] = $total; ?>€</strong>
                 </p>
               </div>
               <div class="container-fluid p-0 text-center">
