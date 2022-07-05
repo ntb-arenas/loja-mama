@@ -129,12 +129,14 @@ if (isset($_POST['place-order'])) {
     $telemovel = strip_tags($telemovel);
 
     $sql = mysqli_query($_conn, "SELECT * FROM orders");
-    $sql = "INSERT INTO orders (INVOICE_ID, USER_ID, EMAIL, NIF, TELEMOVEL, STATUS, PRICE, DATE) VALUES (?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO orders (INVOICE_ID, USER_ID, EMAIL, NIF, TELEMOVEL, STATUS, PRICE, TIME, DATE) VALUES (?,?,?,?,?,?,?,?,?)";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
       $status = 2;
-      $data_hora = date("Y-m-d H:i:s", time());
-      mysqli_stmt_bind_param($stmt, "sssssids", $invoiceId, $reviewId, $email, $nif, $telemovel, $status, $_SESSION['subtotal'], $data_hora);
+      $hora = date("H:i:s", time());
+      $date = date("Y-m-d", time());
+
+      mysqli_stmt_bind_param($stmt, "sssssidss", $invoiceId, $reviewId, $email, $nif, $telemovel, $status, $_SESSION['subtotal'], $hora, $date);
       mysqli_stmt_execute($stmt);
 
       // encaminhar com timer 3 segundos
