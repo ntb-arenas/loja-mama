@@ -40,8 +40,7 @@ include_once  './login/connect_DB.php';
     <!-- Page cover -->
 
     <div class="container-fluid p-0 border-bottom">
-      <h3 class="text-center m-3 cover-message-fs" style="color: rgb(93, 93, 93);">Com a Ma-Ma, a vida da mãe e do seu
-        bebé nunca foi tão fácil. Descubra os nossos produtos!</h3>
+      <h3 class="text-center m-3 cover-message-fs" style="color: rgb(93, 93, 93);">Com a Ma-Ma, a vida da mãe e do seu bebé nunca foi tão fácil. Descubra os nossos produtos!</h3>
     </div>
 
     <!-- Product Page -->

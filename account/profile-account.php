@@ -70,7 +70,7 @@ if ($usersResult->num_rows > 0) {
                         <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                         <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
                         <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
+                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">TESTEMUNHO</a>
                     </div>
                     <div class="container-fluid d-md-none p-0">
                         <div class="accordion" id="menuPanel">
@@ -88,7 +88,7 @@ if ($usersResult->num_rows > 0) {
                                                 <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                                                 <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0">EDITAR CONTA</a>
                                                 <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                                                <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
+                                                <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">TESTEMUNHO</a>
                                             </div>
                                         </div>
                                     </div>

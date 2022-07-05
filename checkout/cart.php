@@ -188,9 +188,9 @@ if (isset($_POST['remove'])) {
             </div>
             <div class="col-5">
               <h6>
-                <?php 
+                <?php
                 $totalNoIva = $total - $totalIva;
-                echo $totalNoIva; 
+                echo $totalNoIva;
                 ?>€
               </h6>
             </div>

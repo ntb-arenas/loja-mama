@@ -5,12 +5,17 @@ include_once  '../login/connect_DB.php';
 
 $temporaryMsg = "";
 $errorMessageMessage = "";
+$errorMessageTelemovel = "";
+$errorMessageNif = "";
 $message = "";
-
 if (!isset($_SESSION["USER"])) {
   header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
   header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
   header("Location: /login/login");
+} else if (!isset($_SESSION["cart"])) {
+  header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+  header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
+  header("Location: /checkout/cart");
 } else {
   // ler informações de conta 
   $username = $_SESSION["USER"];
@@ -23,21 +28,12 @@ if (!isset($_SESSION["USER"])) {
 
   if ($usersResult->num_rows > 0) {
     while ($rowusers = $usersResult->fetch_assoc()) {
-
-      if (!isset($_POST["fName"], $_POST["lName"])) {
-        $fName = $rowusers['fNAME'];
-        $lName = $rowusers['lNAME'];
-        $email = $rowusers['EMAIL'];
-        $telemovel = $rowusers['TELEMOVEL'];
-        $address = $rowusers['MORADA'] . ", " . $rowusers['COD_POSTAL'] . ", " . $rowusers['CIDADE'];
-        $reviewId = $rowusers['ID'];
-      } else {
-        $podeRegistar = "Sim";
-        $fName = mysqli_real_escape_string($_conn, $_POST['fName']);
-        $fName = trim($fName);
-        $lName = mysqli_real_escape_string($_conn, $_POST['lName']);
-        $lName = trim($lName);
-      }
+      $email = $rowusers['EMAIL'];
+      $telemovel = $rowusers['TELEMOVEL'];
+      $address = $rowusers['MORADA'] . ", " . $rowusers['COD_POSTAL'] . ", " . $rowusers['CIDADE'];
+      $reviewId = $rowusers['ID'];
+      $fName = $rowusers['fNAME'];
+      $lName = $rowusers['lNAME'];
     }
   } else {
     echo "STATUS ADMIN (Editar conta): " . mysqli_error($_conn);
@@ -45,68 +41,113 @@ if (!isset($_SESSION["USER"])) {
   mysqli_stmt_close($stmt);
 }
 
-if (isset($_POST['place-order'])) {
-  $FourDigitRandomNumber = mt_rand(1111, 9999);
-  $subTotal = $_POST['total'];
 
-  foreach ($_SESSION['cart'] as $key => $value) {
-    $result = mysqli_query($_conn, "SELECT * FROM option_group");
-    if (mysqli_num_rows($result) > 0) {
-      while ($row = mysqli_fetch_array($result)) {
-        if ($row['CODE'] == $value['product_id1']) {
-          $nameIdProduct1 = $row['NAME'];
-          $priceProduct = $row['PRICE'];
-          $typeProduct = $row['DESCRIPTION'];
-        } else if ($row['CODE'] == $value['product_id2']) {
-          $nameIdProduct2 = $row['NAME'];
-          $priceProduct = $row['PRICE'];
-          $typeProduct = $row['DESCRIPTION'];
-        } else if ($row['CODE'] == $value['product_id']) {
-          $nameIdProduct = $row['NAME'];
-          $priceProduct = $row['PRICE'];
-          $typeProduct = $row['DESCRIPTION'];
+
+if (isset($_POST['place-order'])) {
+  $podeRegistar = "Sim";
+
+  $telemovel = mysqli_real_escape_string($_conn, $_POST['formTelemovel']);
+  $nif = mysqli_real_escape_string($_conn, $_POST['formNIF']);
+  $email = mysqli_real_escape_string($_conn, $_POST['formEmail']);
+  $email = strtolower(trim($email));
+
+  // retirar possíveis tags html do código
+  $telemovel = strip_tags($telemovel);
+  $nif = strip_tags($nif);
+  $email = strip_tags($email);
+
+  $telemovel = str_replace(' ', '', $telemovel);
+  $nif = str_replace(' ', '', $nif);
+
+  if (strlen(trim($telemovel)) < 9) {
+    $errorMessageTelemovel = "O número telemóvel é invalido!";
+    $podeRegistar = "Nao";
+  }
+  if (strlen(trim($nif)) < 9) {
+    $errorMessageNif = "O número NIF é invalido!";
+    $podeRegistar = "Nao";
+  }
+
+  if ($podeRegistar == 'Sim') {
+
+    $FourDigitRandomNumber = mt_rand(1111, 9999);
+    $subTotal = $_POST['total'];
+
+    if ($email !== $_POST['formEmail']) {
+      $email = $_POST['formEmail'];
+    }
+
+    foreach ($_SESSION['cart'] as $key => $value) {
+      $result = mysqli_query($_conn, "SELECT * FROM option_group");
+      if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+          if ($row['CODE'] == $value['product_id1']) {
+            $nameIdProduct1 = $row['NAME'];
+            $priceProduct = $row['PRICE'];
+            $typeProduct = $row['DESCRIPTION'];
+          } else if ($row['CODE'] == $value['product_id2']) {
+            $nameIdProduct2 = $row['NAME'];
+            $priceProduct = $row['PRICE'];
+            $typeProduct = $row['DESCRIPTION'];
+          } else if ($row['CODE'] == $value['product_id']) {
+            $nameIdProduct = $row['NAME'];
+            $priceProduct = $row['PRICE'];
+            $typeProduct = $row['DESCRIPTION'];
+          }
         }
       }
-    }
-    if (isset($value['product_id1']) && $value['product_id2']) {
-      $valueProductId = $value['product_id1'] . $value['product_id2'];
-      $nameIdProduct = $nameIdProduct1 . "+" . $nameIdProduct2;
-    } else if (isset($value['product_id'])) {
-      $valueProductId = $value['product_id'];
-      $nameIdProduct = $nameIdProduct;
+      if (isset($value['product_id1']) && $value['product_id2']) {
+        $valueProductId = $value['product_id1'] . $value['product_id2'];
+        $nameIdProduct = $nameIdProduct1 . "+" . $nameIdProduct2;
+      } else if (isset($value['product_id'])) {
+        $valueProductId = $value['product_id'];
+        $nameIdProduct = $nameIdProduct;
+      }
+
+      $invoiceId = "INV_" . $FourDigitRandomNumber;
+
+      $sql = mysqli_query($_conn, "SELECT * FROM products");
+      $sql = "INSERT INTO products (PRODUCT_ID, CODE, NAME, PRICE, TYPE) VALUES (?,?,?,?,?)";
+
+      if ($stmt = mysqli_prepare($_conn, $sql)) {
+
+        mysqli_stmt_bind_param($stmt, "sssis", $invoiceId, $valueProductId, $nameIdProduct, $priceProduct, $typeProduct);
+
+        mysqli_stmt_execute($stmt);
+
+        $temporaryMsg = "Sucesso!";
+      } else {
+        // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
+        echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
+      }
+      mysqli_stmt_close($stmt);
     }
 
-    $invoiceId = "INV_" . $FourDigitRandomNumber;
-    $sql = mysqli_query($_conn, "SELECT * FROM products");
-    $sql = "INSERT INTO products (PRODUCT_ID, CODE, NAME, PRICE, TYPE) VALUES (?,?,?,?,?)";
+    // Update user review ID
+    $email = strip_tags($email);
+    $nif = strip_tags($nif);
+    $telemovel = strip_tags($telemovel);
+
+    $sql = mysqli_query($_conn, "SELECT * FROM orders");
+    $sql = "INSERT INTO orders (INVOICE_ID, USER_ID, EMAIL, NIF, TELEMOVEL, STATUS, PRICE, DATE) VALUES (?,?,?,?,?,?,?,?)";
 
     if ($stmt = mysqli_prepare($_conn, $sql)) {
-
-      mysqli_stmt_bind_param($stmt, "sssis", $invoiceId, $valueProductId, $nameIdProduct, $priceProduct, $typeProduct);
-
+      $status = 2;
+      $data_hora = date("Y-m-d H:i:s", time());
+      mysqli_stmt_bind_param($stmt, "sssssids", $invoiceId, $reviewId, $email, $nif, $telemovel, $status, $_SESSION['subtotal'], $data_hora);
       mysqli_stmt_execute($stmt);
 
-      $temporaryMsg = "Sucesso!";
+      // encaminhar com timer 3 segundos
+      header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+      header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
+      header("Refresh: 1; URL=/home");
+
     } else {
-      // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
-      echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
+      echo "STATUS ADMIN: " . mysqli_error($_conn);
     }
     mysqli_stmt_close($stmt);
+    unset($_SESSION['cart']);
   }
-  // Update user review ID
-  $sql = mysqli_query($_conn, "SELECT * FROM orders");
-  $sql = "INSERT INTO orders (INVOICE_ID, USER_ID, STATUS, PRICE, DATE) VALUES (?,?,?,?,?)";
-
-  if ($stmt = mysqli_prepare($_conn, $sql)) {
-    $status = 2;
-    $data_hora = date("Y-m-d H:i:s", time());
-    mysqli_stmt_bind_param($stmt, "ssids", $invoiceId, $reviewId, $status, $_SESSION['subtotal'], $data_hora);
-    mysqli_stmt_execute($stmt);
-  } else {
-    echo "STATUS ADMIN: " . mysqli_error($_conn);
-  }
-  mysqli_stmt_close($stmt);
-  unset($_SESSION['cart']);
 }
 
 ?>
@@ -173,21 +214,23 @@ if (isset($_POST['place-order'])) {
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input class="form-control" id="formControlReadonly" type="email" value="<?php echo $email; ?>" />
+                <input class="form-control" id="formControlReadonly" type="email" name="formEmail" value="<?php echo $email; ?>" />
                 <label class="form-label" for="formControlReadonly">E-mail</label>
               </div>
 
               <!-- Number input -->
               <div class="form-outline mb-4">
-                <input class="form-control" id="formControlReadonly" type="text" value="<?php echo $telemovel; ?>" />
-                <label class="form-label" for="formControlReadonly">Telemovel</label>
+                <input type="text" class="form-control" id="formControlReadonly" name="formTelemovel" value="<?php echo $telemovel; ?>">
+                <label class="form-label" for="formControlReadonly">Número de telemóvel</label>
               </div>
+              <p><?php echo $errorMessageTelemovel; ?></p>
 
               <!-- NIF -->
               <div class="form-outline mb-4">
                 <input class="form-control" id="formControlReadonly" type="text" name="formNIF" />
                 <label class="form-label" for="formControlReadonly">NIF</label>
               </div>
+              <p><?php echo $errorMessageNif; ?></p>
 
               <!-- Message input -->
               <div class="form-outline mb-4">

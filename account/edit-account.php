@@ -1,10 +1,7 @@
 <?php
-
 session_start();
 error_reporting(E_ERROR | E_PARSE);
-
 include_once  '../login/connect_DB.php';
-
 
 if (isset($_POST['btn-cancel-changes'])) {
   header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -20,9 +17,6 @@ if (isset($_POST['btn-forgot-pass'])) {
   header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
   header("Location: ../recover-password");
 }
-
-
-
 
 $temporaryMsg = "";
 
@@ -234,7 +228,7 @@ if (isset($_POST['btn-save-changes'])) {
             <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
             <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">EDITAR CONTA</a>
             <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-            <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
+            <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">TESTEMUNHO</a>
           </div>
           <div class="container-fluid d-md-none p-0">
             <div class="accordion" id="menuPanel">
@@ -252,7 +246,7 @@ if (isset($_POST['btn-save-changes'])) {
                         <a href="./encomendas" class="list-group-item list-group-item-action px-3 border-0">AS MINHAS ENCOMENDAS</a>
                         <a href="./edit-account" class="list-group-item list-group-item-action px-3 border-0  active" id="account-style" aria-current="true">EDITAR CONTA</a>
                         <a href="./favorite" class="list-group-item list-group-item-action px-3 border-0">LISTA DE DESEJOS</a>
-                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">reviews</a>
+                        <a href="./reviews" class="list-group-item list-group-item-action px-3 border-0">TESTEMUNHO</a>
                       </div>
                     </div>
                   </div>

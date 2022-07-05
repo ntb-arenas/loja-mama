@@ -32,7 +32,7 @@ if (isset($_POST['button-cancel-account'])) {
 
   header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
   header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
-  header("Location: ../home");
+  header("Location: /home");
 }
 
 
@@ -173,13 +173,13 @@ if (isset($_POST['submit-create-account'])) {
         // Update efetuado com sucesso, preparar e enviar mensagem 
         $id = base64_encode($username);
 
-        $urlPagina = "ma-ma.ml";
+        $urlPagina = "ma-ma.tech";
 
         $mensagem  = "<table width=100% border=0><tr>";
         $mensagem .= '<td class="flex-out">
                                 <div style="display: block; text-align: center; margin: 0 auto">
                                 <a
-                                href="https://ma-ma.ml/index"
+                                href="https://ma-ma.tech/home"
                                 style="display: block; border: none"
                                 ><img src="https://i.ibb.co/8751HZh/AMMHeader.png" alt="Ma-Ma Header" border="0"></a>
                             </div>
@@ -374,9 +374,7 @@ if (isset($_POST['submit-create-account'])) {
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="formAceito" value="aceito_marketing" id="flexCheckDefault" <?php if ($aceitoMarketing == 1) {
-                                                                                                                                  echo "checked";
-                                                                                                                                } ?>>
+              <input class="form-check-input" type="checkbox" name="formAceito" value="aceito_marketing" id="flexCheckDefault" <?php if ($aceitoMarketing == 1) { echo "checked"; } ?>>
               <label class="form-check-label" for="flexCheckDefault">
                 Aceito que os meus dados sejam utilizados para efeitos de marketing
               </label>
