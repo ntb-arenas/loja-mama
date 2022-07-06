@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2022 at 04:01 PM
+-- Generation Time: Jul 06, 2022 at 04:26 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- PHP Version: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -102,10 +102,27 @@ INSERT INTO `option_group` (`PACK`, `CODE`, `NAME`, `DESCRIPTION`, `PRICE`, `IMA
 CREATE TABLE `orders` (
   `INVOICE_ID` varchar(10) NOT NULL,
   `USER_ID` int(5) NOT NULL,
+  `EMAIL` varchar(100) NOT NULL,
+  `NIF` varchar(9) DEFAULT NULL,
+  `TELEMOVEL` varchar(9) DEFAULT NULL,
   `STATUS` int(3) NOT NULL,
   `PRICE` double NOT NULL,
+  `TIME` varchar(50) NOT NULL DEFAULT current_timestamp(),
   `DATE` varchar(50) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`INVOICE_ID`, `USER_ID`, `EMAIL`, `NIF`, `TELEMOVEL`, `STATUS`, `PRICE`, `TIME`, `DATE`) VALUES
+('INV_1720', 110, 'mafaldat@gmail.com', '999999999', '999999999', 1, 103, '18:27:17', '2022-07-05'),
+('INV_2291', 111, 'sandrag@gmail.com', '999999999', '456231675', 3, 72, '16:28:02', '2022-07-06'),
+('INV_3707', 111, 'sandrag@gmail.com', '999999999', '456231675', 2, 165, '18:32:15', '2022-07-05'),
+('INV_3771', 110, 'mafaldat@gmail.com', '999999999', '999999999', 1, 99, '17:05:30', '2022-07-05'),
+('INV_4135', 111, 'sandrag@gmail.com', '999999999', '456231675', 4, 132, '18:32:44', '2022-07-05'),
+('INV_4142', 110, 'mafaldat@gmail.com', '999999999', '456231675', 3, 45, '18:26:17', '2022-07-05'),
+('INV_8741', 105, 'carolina@gmail.com', '999999999', '999888777', 1, 78, '17:05:47', '2022-05-05');
 
 -- --------------------------------------------------------
 
@@ -115,7 +132,6 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `products` (
   `PRODUCT_ID` varchar(10) NOT NULL,
-  `id` int(11) NOT NULL,
   `CODE` varchar(11) NOT NULL,
   `TYPE` varchar(50) DEFAULT NULL,
   `NAME` varchar(50) DEFAULT NULL,
@@ -126,9 +142,34 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`PRODUCT_ID`, `id`, `CODE`, `TYPE`, `NAME`, `PRICE`) VALUES
-('INV_4378', 47, 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', NULL),
-('INV_4378', 48, 'AC4', 'Almofadas Anti-cólicas', 'ELEFANTE', NULL);
+INSERT INTO `products` (`PRODUCT_ID`, `CODE`, `TYPE`, `NAME`, `PRICE`) VALUES
+('INV_1720', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
+('INV_1720', 'AC4', 'Almofadas Anti-cólicas', 'ELEFANTE', 9),
+('INV_1720', 'C1', 'Cunhas', 'AZUL', 45),
+('INV_1720', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15),
+('INV_1720', 'S1', 'Slings', 'AZUL PIQUE', 25),
+('INV_2291', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
+('INV_2291', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
+('INV_2291', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
+('INV_3707', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
+('INV_3707', 'C1', 'Cunhas', 'AZUL', 45),
+('INV_3707', 'F3V1', 'Almofadas de Amamentação', 'AZUL+BALÕES', 45),
+('INV_3707', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
+('INV_3707', 'KM4', 'Kit Maternidade', 'ROSA CLARO', 18),
+('INV_3707', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15),
+('INV_3707', 'MF2', 'Muda Fraldas', 'AZUL PIQUÉ', 15),
+('INV_3771', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
+('INV_3771', 'C1', 'Cunhas', 'AZUL', 45),
+('INV_3771', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
+('INV_4135', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
+('INV_4135', 'C1', 'Cunhas', 'AZUL', 45),
+('INV_4135', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
+('INV_4135', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
+('INV_4135', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15),
+('INV_4142', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
+('INV_8741', 'C1', 'Cunhas', 'AZUL', 45),
+('INV_8741', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
+('INV_8741', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15);
 
 -- --------------------------------------------------------
 
@@ -173,6 +214,7 @@ CREATE TABLE `users` (
   `USER_LEVEL` int(11) NOT NULL DEFAULT 0,
   `USER_STATUS` int(11) NOT NULL DEFAULT 0,
   `TOKEN_CODE` varchar(200) DEFAULT NULL,
+  `IMAGE_URL` varchar(50) NOT NULL,
   `MSGS_MARKETING` int(11) NOT NULL DEFAULT 0,
   `REVIEW_ID` varchar(50) DEFAULT NULL,
   `DATE_HOUR` varchar(100) NOT NULL DEFAULT '2022-05-20 01:10:38'
@@ -182,11 +224,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `USERNAME`, `EMAIL`, `PASSWORD`, `fNAME`, `lNAME`, `MORADA`, `COD_POSTAL`, `CIDADE`, `PAIS`, `TELEMOVEL`, `USER_LEVEL`, `USER_STATUS`, `TOKEN_CODE`, `MSGS_MARKETING`, `REVIEW_ID`, `DATE_HOUR`) VALUES
-(105, 'carolinap', 'carolina@gmail.com', '$2y$10$No5b.JlzYh6R3X.5ncdI.u2A82RQNlcAkWR/4dxxHeBF.iNB0joQC', 'Carolina', 'Patrocínio', 'Praça José Fontana Nº1, 1RP - Cv/Dta', '1653-589', 'Lisboa', 'Portugal', '999888777', 1, 1, NULL, 1, '105-review', '2022-05-29 15:34:15'),
-(107, 'ninoarenas', 'ntbarenas@gmail.com', '$2y$10$PWewh3JBMeZlHXR5R1KOu.uFoFmUJ5xBLyT4G/NY.cPT7tySlhJKe', 'Niño', 'Arenas', NULL, NULL, NULL, 'Portugal', NULL, 2, 1, NULL, 1, NULL, '2022-06-02 22:37:02'),
-(110, 'mafaldat', 'mafaldat@gmail.com', '$2y$10$1yntICJ6ObsnWISzKPrk8uX0QsZuFpWnNzPHHYyLWurL/28veAaS2', 'Mafalda', 'Teixeira', NULL, NULL, NULL, 'Portugal', NULL, 1, 1, NULL, 1, '110-review', '2022-06-03 17:00:19'),
-(111, 'sandrag', 'sandrag@gmail.com', '$2y$10$uAUNyVPt6Gs5R9ERtGRLE.xRr2y31LrbnH78wslOu1LerQ7weAwfy', 'Sandra', 'Gabriel', '', '1111-111', '', 'Portugal', '999999999', 1, 1, NULL, 1, '111-review', '2022-06-03 20:18:36');
+INSERT INTO `users` (`ID`, `USERNAME`, `EMAIL`, `PASSWORD`, `fNAME`, `lNAME`, `MORADA`, `COD_POSTAL`, `CIDADE`, `PAIS`, `TELEMOVEL`, `USER_LEVEL`, `USER_STATUS`, `TOKEN_CODE`, `IMAGE_URL`, `MSGS_MARKETING`, `REVIEW_ID`, `DATE_HOUR`) VALUES
+(105, 'carolinap', 'carolina@gmail.com', '$2y$10$No5b.JlzYh6R3X.5ncdI.u2A82RQNlcAkWR/4dxxHeBF.iNB0joQC', 'Carolina', 'Patrocínio', 'Praça José Fontana Nº1, 1RP - Cv/Dta', '1653-589', 'Lisboa', 'Portugal', '999888777', 1, 1, NULL, '', 1, '105-review', '2022-05-29 15:34:15'),
+(107, 'ninoarenas', 'ntbarenas@gmail.com', '$2y$10$PWewh3JBMeZlHXR5R1KOu.uFoFmUJ5xBLyT4G/NY.cPT7tySlhJKe', 'Niño', 'Arenas', NULL, NULL, NULL, 'Portugal', '123456789', 2, 1, NULL, '/gallery/admin/me.png', 1, NULL, '2022-06-02 22:37:02'),
+(110, 'mafaldat', 'mafaldat@gmail.com', '$2y$10$1yntICJ6ObsnWISzKPrk8uX0QsZuFpWnNzPHHYyLWurL/28veAaS2', 'Mafalda', 'Teixeira', 'R. Cova do Grão 340A, São Domingos de Rana', '2785-216', 'Lisboa', '', '456231675', 1, 2, NULL, '', 1, '110-review', '2022-06-03 17:00:19'),
+(111, 'sandrag', 'sandrag@gmail.com', '$2y$10$uAUNyVPt6Gs5R9ERtGRLE.xRr2y31LrbnH78wslOu1LerQ7weAwfy', 'Sandra', 'Gabriel', 'Praça José Fontana Nº1, 1RP - Cv/Dta', '1070-273', 'Lisboa', '', '456231675', 1, 1, NULL, '', 1, '111-review', '2022-06-03 20:18:36'),
+(112, 'mafaldac', 'mafaldamartinscamilo@gmail.com', '$2y$10$AQU8.gl1roZxn7rmQO4lNeaN3fD9oR2e3TKaYwSOWWngoRnAREpTu', 'Mafalda', 'Camilo', NULL, NULL, NULL, 'Portugal', '123456789', 2, 1, NULL, '/gallery/admin/mafs.png', 1, NULL, '2022-07-05 17:34:39');
 
 --
 -- Indexes for dumped tables
@@ -215,8 +258,7 @@ ALTER TABLE `orders`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `PRODUCT_ID` (`PRODUCT_ID`);
+  ADD PRIMARY KEY (`PRODUCT_ID`,`CODE`);
 
 --
 -- Indexes for table `reviews`
@@ -237,12 +279,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
---
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
@@ -252,7 +288,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- Constraints for dumped tables

@@ -34,9 +34,6 @@ if (!isset($_SESSION["USER"])) {
   mysqli_stmt_close($stmt);
 }
 
-if (!isset($_SESSION["USER"])) {
-}
-
 
 // Total of today's orders
 $totalResult = mysqli_query($_conn, "SELECT PRICE FROM orders WHERE DATE = CURDATE()");
@@ -147,8 +144,17 @@ mysqli_free_result($totalResult);
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-dark">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color" aria-current="true" style>
-            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
+          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5" aria-current="true" style>
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
+          </a>
+          <a href="user-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+            <i class="fas fa-users-cog fa-fw me-3"></i><span>Users</span>
+          </a>
+          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+            <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
+          </a>
+          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+            <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
         </div>
       </div>
@@ -175,8 +181,6 @@ mysqli_free_result($totalResult);
               <img src="<?php echo $image_url; ?>" class="rounded-circle" height="35" width="35" alt="" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">My profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="../login/usersair.php">Logout</a></li>
             </ul>
           </li>
@@ -327,16 +331,16 @@ mysqli_free_result($totalResult);
                     <td class="text-white">€<?php echo $data['PRICE']; ?></td>
                     <td class="text-white">
                       <?php
-                      if ($data['STATUS'] == '1') { ?>
+                      if ($data['STATUS'] == 1) { ?>
                         <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
                       <?php
-                      } elseif ($data['STATUS'] == '2') { ?>
+                      } elseif ($data['STATUS'] == 2) { ?>
                         <span class="rounded-5 px-2" style="background-color: #1e429f;">Pending</span>
                       <?php
-                      } elseif ($data['STATUS'] == '3') { ?>
+                      } elseif ($data['STATUS'] == 3) { ?>
                         <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
                       <?php
-                      } elseif ($data['STATUS'] == '4') { ?>
+                      } elseif ($data['STATUS'] == 4) { ?>
                         <span class="rounded-5 px-2" style="background-color: #9b1c1c;">Cancelado</span>
                       <?php
                       }

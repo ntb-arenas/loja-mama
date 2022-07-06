@@ -294,7 +294,6 @@ mysqli_free_result($resultadoTotal);
         <button class="w3-button w3-black" type="submit" name="botao-exportar-contactos"> <i class="material-icons" style="font-size:24px;vertical-align:middle;">file_download</i> EXPORTAR CSV</button>
         <button class="w3-button w3-black" type="submit" name="botao-importar-contactos"> <i class="material-icons" style="font-size:24px;vertical-align:middle;">file_upload</i> IMPORTAR CSV</button>
       <p class="w3-center w3-large"><b><?php echo $mensagemImportarCSV; ?></b></p>
-
       </p>
       <input id="filtroSQL" name="filtroSQL" type="hidden" value="<?php echo $filtroSQL; ?>">
     </form>
