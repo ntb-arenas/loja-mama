@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 04:26 AM
+-- Generation Time: Jul 07, 2022 at 03:48 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -116,13 +116,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`INVOICE_ID`, `USER_ID`, `EMAIL`, `NIF`, `TELEMOVEL`, `STATUS`, `PRICE`, `TIME`, `DATE`) VALUES
-('INV_1720', 110, 'mafaldat@gmail.com', '999999999', '999999999', 1, 103, '18:27:17', '2022-07-05'),
-('INV_2291', 111, 'sandrag@gmail.com', '999999999', '456231675', 3, 72, '16:28:02', '2022-07-06'),
-('INV_3707', 111, 'sandrag@gmail.com', '999999999', '456231675', 2, 165, '18:32:15', '2022-07-05'),
-('INV_3771', 110, 'mafaldat@gmail.com', '999999999', '999999999', 1, 99, '17:05:30', '2022-07-05'),
-('INV_4135', 111, 'sandrag@gmail.com', '999999999', '456231675', 4, 132, '18:32:44', '2022-07-05'),
-('INV_4142', 110, 'mafaldat@gmail.com', '999999999', '456231675', 3, 45, '18:26:17', '2022-07-05'),
-('INV_8741', 105, 'carolina@gmail.com', '999999999', '999888777', 1, 78, '17:05:47', '2022-05-05');
+('INV_3304', 105, 'carolina@gmail.com', '213456789', '945623548', 2, 72, '14:32:52', '2022-07-07'),
+('INV_5630', 105, 'carolina@gmail.com', '245123456', '978645123', 3, 277, '14:33:36', '2022-07-07'),
+('INV_9920', 111, 'sandrag@gmail.com', '234589764', '956234895', 4, 90, '15:07:50', '2022-07-07');
 
 -- --------------------------------------------------------
 
@@ -135,6 +131,7 @@ CREATE TABLE `products` (
   `CODE` varchar(11) NOT NULL,
   `TYPE` varchar(50) DEFAULT NULL,
   `NAME` varchar(50) DEFAULT NULL,
+  `QUANTITY` int(5) NOT NULL,
   `PRICE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -142,34 +139,14 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`PRODUCT_ID`, `CODE`, `TYPE`, `NAME`, `PRICE`) VALUES
-('INV_1720', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
-('INV_1720', 'AC4', 'Almofadas Anti-cólicas', 'ELEFANTE', 9),
-('INV_1720', 'C1', 'Cunhas', 'AZUL', 45),
-('INV_1720', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15),
-('INV_1720', 'S1', 'Slings', 'AZUL PIQUE', 25),
-('INV_2291', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
-('INV_2291', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
-('INV_2291', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
-('INV_3707', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
-('INV_3707', 'C1', 'Cunhas', 'AZUL', 45),
-('INV_3707', 'F3V1', 'Almofadas de Amamentação', 'AZUL+BALÕES', 45),
-('INV_3707', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
-('INV_3707', 'KM4', 'Kit Maternidade', 'ROSA CLARO', 18),
-('INV_3707', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15),
-('INV_3707', 'MF2', 'Muda Fraldas', 'AZUL PIQUÉ', 15),
-('INV_3771', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
-('INV_3771', 'C1', 'Cunhas', 'AZUL', 45),
-('INV_3771', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
-('INV_4135', 'AC1', 'Almofadas Anti-cólicas', 'PINTINHAS', 9),
-('INV_4135', 'C1', 'Cunhas', 'AZUL', 45),
-('INV_4135', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
-('INV_4135', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
-('INV_4135', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15),
-('INV_4142', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 45),
-('INV_8741', 'C1', 'Cunhas', 'AZUL', 45),
-('INV_8741', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 18),
-('INV_8741', 'MF1', 'Muda Fraldas', 'ROSA PIQUÉ', 15);
+INSERT INTO `products` (`PRODUCT_ID`, `CODE`, `TYPE`, `NAME`, `QUANTITY`, `PRICE`) VALUES
+('INV_3304', 'KM1', 'Kit Maternidade', 'AZUL CLARO', 1, 18),
+('INV_3304', 'KM4', 'Kit Maternidade', 'ROSA CLARO', 3, 18),
+('INV_5630', 'AC3', 'Almofadas Anti-cólicas', 'FANTASIA BONECOS', 3, 9),
+('INV_5630', 'F1V1', 'Almofadas de Amamentação', 'LARANJA+BALÕES', 3, 45),
+('INV_5630', 'F3V1', 'Almofadas de Amamentação', 'AZUL+BALÕES', 2, 45),
+('INV_5630', 'S1', 'Slings', 'AZUL PIQUE', 1, 25),
+('INV_9920', 'C4', 'Cunhas', 'VERDE', 2, 45);
 
 -- --------------------------------------------------------
 

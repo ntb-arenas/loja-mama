@@ -99,19 +99,21 @@ if (isset($_POST['place-order'])) {
       if (isset($value['product_id1']) && $value['product_id2']) {
         $valueProductId = $value['product_id1'] . $value['product_id2'];
         $nameIdProduct = $nameIdProduct1 . "+" . $nameIdProduct2;
+        $quantityProduct = $value['quantityInput'];
       } else if (isset($value['product_id'])) {
         $valueProductId = $value['product_id'];
         $nameIdProduct = $nameIdProduct;
+        $quantityProduct = $value['quantityInput'];
       }
 
       $invoiceId = "INV_" . $FourDigitRandomNumber;
 
       $sql = mysqli_query($_conn, "SELECT * FROM products");
-      $sql = "INSERT INTO products (PRODUCT_ID, CODE, NAME, PRICE, TYPE) VALUES (?,?,?,?,?)";
+      $sql = "INSERT INTO products (PRODUCT_ID, CODE, NAME, QUANTITY, PRICE, TYPE) VALUES (?,?,?,?,?,?)";
 
       if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-        mysqli_stmt_bind_param($stmt, "sssis", $invoiceId, $valueProductId, $nameIdProduct, $priceProduct, $typeProduct);
+        mysqli_stmt_bind_param($stmt, "sssiis", $invoiceId, $valueProductId, $nameIdProduct, $quantityProduct, $priceProduct, $typeProduct);
 
         mysqli_stmt_execute($stmt);
 
@@ -139,7 +141,6 @@ if (isset($_POST['place-order'])) {
       mysqli_stmt_bind_param($stmt, "sssssidss", $invoiceId, $reviewId, $email, $nif, $telemovel, $status, $_SESSION['subtotal'], $hora, $date);
       mysqli_stmt_execute($stmt);
 
-      // encaminhar com timer 3 segundos
       header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
       header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
       header("Refresh: 1; URL=/home");

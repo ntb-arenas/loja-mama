@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 include_once  '../login/connect_DB.php';
 
@@ -37,7 +38,7 @@ if (!isset($_SESSION["USER"])) {
   mysqli_stmt_close($stmt);
 }
 
-// Total of today's orders
+// GET IMAGE
 $usernameImage = $_SESSION["USER"];
 $result = mysqli_query($_conn, "SELECT IMAGE_URL FROM users WHERE (USERNAME LIKE '%$usernameImage%')");
 
@@ -48,29 +49,40 @@ if (mysqli_num_rows($result) > 0) {
 }
 mysqli_free_result($result);
 
+
+
 if (isset($_POST["apply-edit"])) {
   if ($_POST["userStatusOptions"]  == 1) {
     $userLevel = 1;
+    $userStatus = 1;
   } else if ($_POST["userStatusOptions"]  == 2) {
     $userLevel = 2;
   } else if ($_POST["userStatusOptions"]  == 3) {
     $userStatus = 2;
+    $userLevel = 1;
   }
 
-  $sql = "UPDATE users SET USER_LEVEL = ?, USER_STATUS = ? WHERE ID = ?";
+  if ($_POST["msgsMarketingOptions"]  == 1) {
+    $msgsMarketing = 1;
+  } else if ($_POST["msgsMarketingOptions"]  == 2) {
+    $msgsMarketing = 2;
+  }
+
+  $sql = "UPDATE users SET USER_LEVEL = ?, USER_STATUS = ?, MSGS_MARKETING = ? WHERE ID = ?";
 
   if ($stmt = mysqli_prepare($_conn, $sql)) {
 
-    mysqli_stmt_bind_param($stmt, "iii", $userLevel, $userStatus, $ID);
+    mysqli_stmt_bind_param($stmt, "iiii", $userLevel, $userStatus, $msgsMarketing, $ID);
 
     mysqli_stmt_execute($stmt);
-
-    $temporaryMsg = "Sucesso!";
+    $temporaryMsg = "<script>alert('Sucesso!');</script>";
+    header("Location: user-management");
   } else {
     // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
     echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
   }
   mysqli_stmt_close($stmt);
+  unset($_SESSION["USER_ID"]);
 }
 
 ?>
@@ -111,11 +123,12 @@ if (isset($_POST["apply-edit"])) {
           <a href="user-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" aria-current="true" style>
             <i class="fas fa-users-cog fa-fw me-3"></i><span>Users</span>
           </a>
+          <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+            <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
+          </a>
           <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
           </a>
-          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
-            <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
         </div>
       </div>
@@ -142,7 +155,7 @@ if (isset($_POST["apply-edit"])) {
               <img src="<?php echo $image_url; ?>" class="rounded-circle" height="35" width="35" alt="" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="../login/usersair.php">Logout</a></li>
+              <li><a class="dropdown-item" href="/login/userSair">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -200,42 +213,57 @@ if (isset($_POST["apply-edit"])) {
                       <?php
                       if ($userLevel == 1) {
                         if ($userStatus == 2) {
-                          $blocked = '<span class="rounded-5 px-2" style="background-color: #9b1c1c;">Blocked</span>';
+                          $blocked = '--Blocked--';
                           echo $blocked;
                         } elseif ($userStatus == 1) {
-                          $active = '<span class="rounded-5 px-2" style="background-color: #03543f;">Active</span>';
+                          $active = '--Active--';
                           echo $active;
                         } elseif ($userStatus == 0) {
-                          $notVerified = '<span class="rounded-5 px-2" style="background-color: #ff7b46;">Not Verified</span>';
+                          $notVerified = '--Not Verified--';
                           echo $notVerified;
                         }
                       } else if ($userLevel == 2) { ?>
-                        <span class="rounded-5 px-2" style="background-color: #1e429f;">Admin</span>
+                        --Admin--
                       <?php
                       } ?>
                     </option>
-                    <option value="1">Customer</option>
+                    <option value="1">Active</option>
                     <option value="2">Admin</option>
                     <option value="3">Blocked</option>
                   </select>
               </td>
               <td class="text-white text-center">
-                <?php
-                if ($msgsMarketing == 1) {
-                  echo "YES";
-                } else {
-                  echo "NO";
-                }
-                ?>
+                <select name="msgsMarketingOptions" id="msgsMarketingOptions">
+                  <option value='
+                  <?php
+                  if ($msgsMarketing == 1) {
+                    echo 1;
+                  } elseif ($msgsMarketing == 2) {
+                    echo 2;
+                  }
+                  ?>
+                  '>
+                    <?php
+                    if ($msgsMarketing == 1) {
+                      echo "--Yes--";
+                    } elseif ($msgsMarketing == 2) {
+                      echo "--No--";
+                    } ?>
+                  </option>
+                  <option value="1">Yes</option>
+                  <option value="2">No</option>
+                </select>
 
               </td>
               <td class="text-white text-center">
                 <button type="submit" name="apply-edit" class="btn" id="btn-customized">
                   <i class="far fa-edit text-white">Apply</i>
                 </button>
+                <?php
+                echo $temporaryMsg;
+                ?>
                 </form>
               </td>
-              </form>
             </tr>
           </tbody>
         </table>

@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 session_start();
 include_once  '../login/connect_DB.php';
 
@@ -41,27 +40,27 @@ if (isset($_POST["filtroSQL"])) {
   $filtroSQL = $_POST["filtroSQL"];
 
   if (trim($filtroSQL) == '') {
-    $filtroSQL = "SELECT ID, USERNAME, EMAIL, fNAME, lNAME, USER_LEVEL, USER_STATUS, MSGS_MARKETING, DATE_HOUR FROM users ORDER BY ID DESC";
+    $filtroSQL = "SELECT INVOICE_ID, USER_ID, EMAIL, NIF, TELEMOVEL, STATUS, PRICE, TIME, DATE FROM orders ORDER BY DATE DESC";
   }
 } else {
-  $filtroSQL = "SELECT ID, USERNAME, EMAIL, fNAME, lNAME, USER_LEVEL, USER_STATUS, MSGS_MARKETING, DATE_HOUR FROM users ORDER BY ID DESC";
+  $filtroSQL = "SELECT INVOICE_ID, USER_ID, EMAIL, NIF, TELEMOVEL, STATUS, PRICE, TIME, DATE FROM orders ORDER BY DATE DESC";
 }
 
 $campoPesquisa = "";
-if (isset($_POST['search-users'])) {
+if (isset($_POST['search-invoiceId'])) {
 
   $campoPesquisa = trim(mysqli_real_escape_string($_conn, $_POST['campoPesquisa']));
 
   if (trim($campoPesquisa) != "") {
 
-    $filtroSQL = "SELECT ID, USERNAME, EMAIL, fNAME, lNAME, USER_LEVEL, USER_STATUS, MSGS_MARKETING, DATE_HOUR FROM users  WHERE (ID LIKE '%$campoPesquisa%') OR (USERNAME LIKE '%$campoPesquisa%') OR (EMAIL LIKE '%$campoPesquisa%') ORDER BY ID DESC;";
+    $filtroSQL = "SELECT INVOICE_ID, USER_ID, EMAIL, NIF, TELEMOVEL, STATUS, PRICE, TIME, DATE FROM orders  WHERE (INVOICE_ID LIKE '%$campoPesquisa%') OR (USER_ID LIKE '%$campoPesquisa%') OR (EMAIL LIKE '%$campoPesquisa%') OR (NIF LIKE '%$campoPesquisa%') OR (TELEMOVEL LIKE '%$campoPesquisa%') ORDER BY USER_ID ASC;";
   }
 }
 
 
-if (isset($_POST["edit-user"])) {
-  $_SESSION["USER_ID"] = $_GET['id'];
-  header("Location: user-management-edit");
+if (isset($_POST["edit-orders"])) {
+  $_SESSION["INVOICE_ID"] = $_GET['id'];
+  header("Location: invoice-management-edit");
 }
 
 ?>
@@ -99,15 +98,14 @@ if (isset($_POST["edit-user"])) {
           <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5" style>
             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
           </a>
-          <a href="user-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" aria-current="true" style>
+          <a href="user-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-users-cog fa-fw me-3"></i><span>Users</span>
           </a>
-          <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+          <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" aria-current="true" style>
             <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
           <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
-          </a>
           </a>
         </div>
       </div>
@@ -146,14 +144,14 @@ if (isset($_POST["edit-user"])) {
 
   <main class="main-admin" style="margin-top: 58px">
     <div class="container-fluid p-3">
-      <h3 class="">User Management</h3>
+      <h3 class="">Orders management</h3>
       <i id="topAnchor"></i>
       <input id="filtroSQL" name="filtroSQL" type="hidden" value="<?php echo $filtroSQL; ?>">
 
-      <form action="./user-management#topAnchor" method="POST">
+      <form action="invoice-management#topAnchor" method="POST">
         <div class="input-group p-3 rounded-5" style="background-color: #262626;">
-          <input type="search" class="form-control rounded" placeholder="Pesquisar ID/Username/Email" name="campoPesquisa" value="<?php echo $campoPesquisa; ?>" aria-label="Search" aria-describedby="search-addon" />
-          <button type="submit" name="search-users" class="btn" id="btn-customized">Pesquisar</button>
+          <input type="search" class="form-control rounded" placeholder="Pesquisar Invoice Id/User Id/Email/NIF/Telemovel" name="campoPesquisa" value="<?php echo $campoPesquisa; ?>" aria-label="Search" aria-describedby="search-addon" />
+          <button type="submit" name="search-invoiceId" class="btn" id="btn-customized">Pesquisar</button>
         </div>
       </form>
 
@@ -164,13 +162,14 @@ if (isset($_POST["edit-user"])) {
         <table class="table rounded-5" style="background-color: #262626; border-color: gray;">
           <thead>
             <tr>
-              <th class="text-white" scope="col">ID</th>
-              <th class="text-white" scope="col">USERNAME</th>
-              <th class="text-white" scope="col">NAME</th>
+              <th class="text-white" scope="col">INVOICE_ID</th>
+              <th class="text-white" scope="col">USER_ID</th>
               <th class="text-white" scope="col">EMAIL</th>
+              <th class="text-white" scope="col">NIF</th>
+              <th class="text-white" scope="col">TELEMOVEL</th>
               <th class="text-white" scope="col">STATUS</th>
+              <th class="text-white" scope="col">PRICE</th>
               <th class="text-white" scope="col">DATE</th>
-              <th class="text-white" scope="col">ACTIONS</th>
             </tr>
           </thead>
           <tbody>
@@ -178,36 +177,36 @@ if (isset($_POST["edit-user"])) {
             if (mysqli_num_rows($result) > 0) {
               while ($data = mysqli_fetch_assoc($result)) { ?>
                 <tr>
-                  <td class="text-white"><?php echo $data['ID']; ?></th>
-                  <td class="text-white"><?php echo $data['USERNAME']; ?></td>
-                  <td class="text-white"><?php echo $data['fNAME'] . ' ' . $data['lNAME']; ?></td>
-                  <td class="text-white"><?php echo $data['EMAIL']; ?></td>
                   <td class="text-white">
-                    <?php
-                    if ($data['USER_LEVEL'] == 1) {
-                      if ($data['USER_STATUS'] == 2) {
-                        $blocked = '<span class="rounded-5 px-2" style="background-color: #9b1c1c;">Blocked</span>';
-                        echo $blocked;
-                      } elseif ($data['USER_STATUS'] == 1) {
-                        $active = '<span class="rounded-5 px-2" style="background-color: #03543f;">Active</span>';
-                        echo $active;
-                      } elseif ($data['USER_STATUS'] == 0) {
-                        $notVerified = '<span class="rounded-5 px-2" style="background-color: #ff7b46;">Not Verified</span>';
-                        echo $notVerified;
-                      }
-                    } else if ($data['USER_LEVEL'] == 2) { ?>
-                      <span class="rounded-5 px-2" style="background-color: #1e429f;">Admin</span>
-                    <?php
-                    } ?>
-                  </td>
-                  <td class="text-white"><?php echo $data['DATE_HOUR']; ?></td>
-                  <td class="text-white text-center">
-                    <form action="user-management?id=<?php echo $data['ID']; ?>" method="POST">
-                      <button type="submit" name="edit-user" class="btn-custom-1">
-                        <i class="far fa-edit text-white"></i>
+                    <form action="invoice-management?id=<?php echo $data['INVOICE_ID']; ?>" method="POST">
+                      <button type="submit" name="edit-orders" class="btn-custom-1 text-decoration-underline" id="invoiceBtn" style="color: #ff7b46;">
+                        <?php echo $data['INVOICE_ID']; ?>
                       </button>
                     </form>
                   </td>
+                  <td class="text-white"><?php echo $data['USER_ID']; ?></td>
+                  <td class="text-white"><?php echo $data['EMAIL']; ?></td>
+                  <td class="text-white"><?php echo $data['NIF']; ?></td>
+                  <td class="text-white"><?php echo $data['TELEMOVEL']; ?></td>
+                  <td class="text-white">
+                    <?php
+                    if ($data['STATUS'] == 1) { ?>
+                      <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
+                    <?php
+                    } elseif ($data['STATUS'] == 2) { ?>
+                      <span class="rounded-5 px-2" style="background-color: #9f580a;">Pending</span>
+                    <?php
+                    } elseif ($data['STATUS'] == 3) { ?>
+                      <span class="rounded-5 px-2" style="background-color: #1e429f;">Processo</span>
+                    <?php
+                    } elseif ($data['STATUS'] == 4) { ?>
+                      <span class="rounded-5 px-2" style="background-color: #9b1c1c;">Cancelado</span>
+                    <?php
+                    }
+                    ?>
+                  </td>
+                  <td class="text-white">€<?php echo $data['PRICE']; ?></td>
+                  <td class="text-white">€<?php echo $data['DATE']; ?></td>
                 </tr>
               <?php
               }

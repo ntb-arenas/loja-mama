@@ -53,6 +53,11 @@ body {
   border-color: #ff7b46;
 }
 
+#invoiceBtn:hover {
+  color: blue!important;
+  transition: 0.2s;
+}
+
 #icon-hover {
   color: #f35518;
   transition: 0.2s;
@@ -89,17 +94,13 @@ body {
 }
 
 .btn-custom-1 {
-  border: none!important;
-  background-color: transparent!important;
+  border: none !important;
+  background-color: transparent !important;
 }
 
 .btn-custom-1:focus {
-  border: none!important;
-  outline: none!important;
-}
-
-.btn-custom-1:focus{
-  outline:none !important;
+  border: none !important;
+  outline: none !important;
 }
 
 @media only screen and (max-width: 425px) {

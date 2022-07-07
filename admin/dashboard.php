@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 include_once  '../login/connect_DB.php';
 
@@ -150,11 +151,11 @@ mysqli_free_result($totalResult);
           <a href="user-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-users-cog fa-fw me-3"></i><span>Users</span>
           </a>
-          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
-            <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
+          <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+            <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
           <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
-            <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
+            <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
           </a>
         </div>
       </div>
@@ -181,7 +182,7 @@ mysqli_free_result($totalResult);
               <img src="<?php echo $image_url; ?>" class="rounded-circle" height="35" width="35" alt="" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="../login/usersair.php">Logout</a></li>
+              <li><a class="dropdown-item" href="/login/userSair">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -201,7 +202,7 @@ mysqli_free_result($totalResult);
               <img src="<?php echo $image_url; ?>" class="rounded-circle img-fluid" width="200" alt="">
             </div>
             <div class="container-fluid text-center pt-3 border-bottom">
-              <h3 class="m-0"><?php echo $fName. ' '. $lName?></h3>
+              <h3 class="m-0"><?php echo $fName . ' ' . $lName ?></h3>
               <p>Admin</p>
             </div>
             <div class="container-fluid pt-3 px-0 px-xl-3">
@@ -304,7 +305,7 @@ mysqli_free_result($totalResult);
         </div>
 
         <h5 class="mt-5">Encomendas Recentes</h5>
-        <div class="col-12 table-responsive-md">
+        <div class="col-12 table-responsive-lg">
           <?php
           $result = mysqli_query($_conn, "SELECT users.MORADA, orders.EMAIL, orders.TELEMOVEL, orders.STATUS, orders.PRICE, orders.DATE FROM orders JOIN users ON orders.USER_ID = users.ID ORDER BY orders.DATE DESC;");
           ?>
@@ -335,10 +336,10 @@ mysqli_free_result($totalResult);
                         <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
                       <?php
                       } elseif ($data['STATUS'] == 2) { ?>
-                        <span class="rounded-5 px-2" style="background-color: #1e429f;">Pending</span>
+                        <span class="rounded-5 px-2" style="background-color: #9f580a;">Pending</span>
                       <?php
                       } elseif ($data['STATUS'] == 3) { ?>
-                        <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
+                        <span class="rounded-5 px-2" style="background-color: #1e429f;">Processo</span>
                       <?php
                       } elseif ($data['STATUS'] == 4) { ?>
                         <span class="rounded-5 px-2" style="background-color: #9b1c1c;">Cancelado</span>

@@ -200,7 +200,7 @@ if (isset($_POST['btn-save-changes'])) {
   <main>
     <div class="container-md py-3">
       <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>
-      <h5><a href="../login/usersair.php">Logout</a></h5>
+      <h5><a href="/login/userSair">Logout</a></h5>
     </div>
 
     <div class="container-md mb-3">
