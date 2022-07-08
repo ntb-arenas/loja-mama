@@ -126,7 +126,7 @@ if (isset($_POST["apply-edit"])) {
           <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
-          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+          <a href="product-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
           </a>
           </a>

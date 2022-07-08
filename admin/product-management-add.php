@@ -13,21 +13,24 @@ if (!isset($_SESSION["USER"])) {
   header("Location: /error-pages/403-proibido");
 } else {
   // ler informações de conta 
-  $username = $_SESSION["USER"];
+  $ID = $_SESSION["USER_ID"];
 
-  $stmt = $_conn->prepare('SELECT * FROM users WHERE USERNAME = ?');
-  $stmt->bind_param('s', $username);
+  $stmt = $_conn->prepare('SELECT * FROM users WHERE ID = ?');
+  $stmt->bind_param('i', $ID);
   $stmt->execute();
 
   $usersResult = $stmt->get_result();
 
   if ($usersResult->num_rows > 0) {
     while ($rowusers = $usersResult->fetch_assoc()) {
+      $username = $rowusers['USERNAME'];
       $fName = $rowusers['fNAME'];
       $lName = $rowusers['lNAME'];
       $telemovel = $rowusers['TELEMOVEL'];
       $email = $rowusers['EMAIL'];
-      $image_url = $rowusers['IMAGE_URL'];
+      $userLevel = $rowusers['USER_LEVEL'];
+      $userStatus = $rowusers['USER_STATUS'];
+      $msgsMarketing = $rowusers['MSGS_MARKETING'];
     }
   } else {
     echo "STATUS ADMIN (Editar conta): " . mysqli_error($_conn);
@@ -35,33 +38,51 @@ if (!isset($_SESSION["USER"])) {
   mysqli_stmt_close($stmt);
 }
 
-// Keep the search criteria
-if (isset($_POST["filtroSQL"])) {
+// GET IMAGE
+$usernameImage = $_SESSION["USER"];
+$result = mysqli_query($_conn, "SELECT IMAGE_URL FROM users WHERE (USERNAME LIKE '%$usernameImage%')");
 
-  $filtroSQL = $_POST["filtroSQL"];
-
-  if (trim($filtroSQL) == '') {
-    $filtroSQL = "SELECT ID, USERNAME, EMAIL, fNAME, lNAME, USER_LEVEL, USER_STATUS, MSGS_MARKETING, DATE_HOUR FROM users ORDER BY ID DESC";
-  }
-} else {
-  $filtroSQL = "SELECT ID, USERNAME, EMAIL, fNAME, lNAME, USER_LEVEL, USER_STATUS, MSGS_MARKETING, DATE_HOUR FROM users ORDER BY ID DESC";
-}
-
-$campoPesquisa = "";
-if (isset($_POST['search-users'])) {
-
-  $campoPesquisa = trim(mysqli_real_escape_string($_conn, $_POST['campoPesquisa']));
-
-  if (trim($campoPesquisa) != "") {
-
-    $filtroSQL = "SELECT ID, USERNAME, EMAIL, fNAME, lNAME, USER_LEVEL, USER_STATUS, MSGS_MARKETING, DATE_HOUR FROM users  WHERE (ID LIKE '%$campoPesquisa%') OR (USERNAME LIKE '%$campoPesquisa%') OR (EMAIL LIKE '%$campoPesquisa%') ORDER BY ID DESC;";
+if (mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $image_url = $row["IMAGE_URL"];
   }
 }
+mysqli_free_result($result);
 
 
-if (isset($_POST["edit-user"])) {
-  $_SESSION["USER_ID"] = $_GET['id'];
-  header("Location: user-management-edit");
+
+if (isset($_POST["apply-edit"])) {
+  if ($_POST["userStatusOptions"]  == 1) {
+    $userLevel = 1;
+    $userStatus = 1;
+  } else if ($_POST["userStatusOptions"]  == 2) {
+    $userLevel = 2;
+  } else if ($_POST["userStatusOptions"]  == 3) {
+    $userStatus = 2;
+    $userLevel = 1;
+  }
+
+  if ($_POST["msgsMarketingOptions"]  == 1) {
+    $msgsMarketing = 1;
+  } else if ($_POST["msgsMarketingOptions"]  == 2) {
+    $msgsMarketing = 2;
+  }
+
+  $sql = "UPDATE users SET USER_LEVEL = ?, USER_STATUS = ?, MSGS_MARKETING = ? WHERE ID = ?";
+
+  if ($stmt = mysqli_prepare($_conn, $sql)) {
+
+    mysqli_stmt_bind_param($stmt, "iiii", $userLevel, $userStatus, $msgsMarketing, $ID);
+
+    mysqli_stmt_execute($stmt);
+    $temporaryMsg = "<script>alert('Sucesso!');</script>";
+    header("Location: user-management");
+  } else {
+    // echo "ERROR: Could not prepare query: $sql. " . mysqli_error($_conn);
+    echo "STATUS ADMIN (alterar definições): " . mysqli_error($_conn);
+  }
+  mysqli_stmt_close($stmt);
+  unset($_SESSION["USER_ID"]);
 }
 
 ?>
@@ -146,79 +167,10 @@ if (isset($_POST["edit-user"])) {
 
   <main class="main-admin" style="margin-top: 58px">
     <div class="container-fluid p-3">
-      <h3 class="">User Management</h3>
-      <i id="topAnchor"></i>
-      <input id="filtroSQL" name="filtroSQL" type="hidden" value="<?php echo $filtroSQL; ?>">
+      <h3 class="">Add Products</h3>
 
-      <form action="user-management#topAnchor" method="POST">
-        <div class="input-group p-3 rounded-5" style="background-color: #262626;">
-          <input type="search" class="form-control rounded" placeholder="Pesquisar ID/Username/Email" name="campoPesquisa" value="<?php echo $campoPesquisa; ?>" aria-label="Search" aria-describedby="search-addon" />
-          <button type="submit" name="search-users" class="btn" id="btn-customized">Pesquisar</button>
-        </div>
-      </form>
+      
 
-      <div class="table-responsive-lg mt-3">
-        <?php
-        $result = mysqli_query($_conn, $filtroSQL);
-        ?>
-        <table class="table rounded-5" style="background-color: #262626; border-color: gray;">
-          <thead>
-            <tr>
-              <th class="text-white" scope="col">ID</th>
-              <th class="text-white" scope="col">USERNAME</th>
-              <th class="text-white" scope="col">NAME</th>
-              <th class="text-white" scope="col">EMAIL</th>
-              <th class="text-white" scope="col">STATUS</th>
-              <th class="text-white" scope="col">DATE</th>
-              <th class="text-white" scope="col">ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            if (mysqli_num_rows($result) > 0) {
-              while ($data = mysqli_fetch_assoc($result)) { ?>
-                <tr>
-                  <td class="text-white"><?php echo $data['ID']; ?></th>
-                  <td class="text-white"><?php echo $data['USERNAME']; ?></td>
-                  <td class="text-white"><?php echo $data['fNAME'] . ' ' . $data['lNAME']; ?></td>
-                  <td class="text-white"><?php echo $data['EMAIL']; ?></td>
-                  <td class="text-white">
-                    <?php
-                    if ($data['USER_LEVEL'] == 1) {
-                      if ($data['USER_STATUS'] == 2) {
-                        $blocked = '<span class="rounded-5 px-2" style="background-color: #9b1c1c;">Blocked</span>';
-                        echo $blocked;
-                      } elseif ($data['USER_STATUS'] == 1) {
-                        $active = '<span class="rounded-5 px-2" style="background-color: #03543f;">Active</span>';
-                        echo $active;
-                      } elseif ($data['USER_STATUS'] == 0) {
-                        $notVerified = '<span class="rounded-5 px-2" style="background-color: #ff7b46;">Not Verified</span>';
-                        echo $notVerified;
-                      }
-                    } else if ($data['USER_LEVEL'] == 2) { ?>
-                      <span class="rounded-5 px-2" style="background-color: #1e429f;">Admin</span>
-                    <?php
-                    } ?>
-                  </td>
-                  <td class="text-white"><?php echo $data['DATE_HOUR']; ?></td>
-                  <td class="text-white text-center">
-                    <form action="user-management?id=<?php echo $data['ID']; ?>" method="POST">
-                      <button type="submit" name="edit-user" class="btn-custom-1" id="invoiceBtn" style="color: #ff7b46;">
-                        <i class="far fa-edit"></i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-              <?php
-              }
-            } else { ?>
-              <tr>
-                <td class="text-white" colspan="8">No data found</td>
-              </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-      </div>
     </div>
   </main>
 </body>

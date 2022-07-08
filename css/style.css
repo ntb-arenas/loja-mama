@@ -58,6 +58,11 @@ body {
   transition: 0.2s;
 }
 
+#invoiceBtn:hover {
+  color: blue!important;
+  transition: 0.2s;
+}
+
 #icon-hover {
   color: #f35518;
   transition: 0.2s;

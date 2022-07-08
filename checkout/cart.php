@@ -83,7 +83,7 @@ if (isset($_POST['remove'])) {
 
               <?php
               foreach ($_SESSION['cart'] as $key => $value) {
-                $result = mysqli_query($_conn, "SELECT * FROM option_group");
+                $result = mysqli_query($_conn, "SELECT * FROM products");
                 if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_array($result)) {
                     if ($row['CODE'] == $value['product_id1']) { ?>
@@ -91,7 +91,7 @@ if (isset($_POST['remove'])) {
                         <div class="row gx-0">
                           <div class="col-3 text-center">
                             <form action='cart?action=remove&id=<?php echo $value['product_id1'] . $value['product_id2'] ?>' method='post' class='cart-items'>
-                              <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
+                              <img src="<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                               <h5 class='pt-2 checkout-description'>(Frente): <?php echo $row['NAME'] ?></h5>
                           </div>
                         <?php
@@ -100,7 +100,7 @@ if (isset($_POST['remove'])) {
                       }
                       if ($row['CODE'] == $value['product_id2']) { ?>
                           <div class="col-3 text-center">
-                            <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
+                            <img src="<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                             <h5 class='pt-2 checkout-description'>(Verso): <?php echo $row['NAME'] ?></h5>
                           </div>
                           <div class="col-2 text-center">
@@ -129,7 +129,7 @@ if (isset($_POST['remove'])) {
                           ?>
                           <div class="row gx-0">
                             <div class="col-3 text-center">
-                              <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
+                              <img src="<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                               <h5 class='pt-2 checkout-description'><?php echo $row['DESCRIPTION'] . '/' . $row['NAME'] ?></h5>
                             </div>
                             <div class="col-3">

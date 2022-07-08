@@ -63,7 +63,7 @@ if (isset($_POST['place-order'])) {
     $errorMessageTelemovel = "O número telemóvel é invalido!";
     $podeRegistar = "Nao";
   }
-  if (strlen(trim($nif)) < 9) {
+  if (strlen(trim($nif)) != 9 && strlen(trim($nif)) != 0) {
     $errorMessageNif = "O número NIF é invalido!";
     $podeRegistar = "Nao";
   }
@@ -78,7 +78,7 @@ if (isset($_POST['place-order'])) {
     }
 
     foreach ($_SESSION['cart'] as $key => $value) {
-      $result = mysqli_query($_conn, "SELECT * FROM option_group");
+      $result = mysqli_query($_conn, "SELECT * FROM products");
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
           if ($row['CODE'] == $value['product_id1']) {
@@ -108,8 +108,8 @@ if (isset($_POST['place-order'])) {
 
       $invoiceId = "INV_" . $FourDigitRandomNumber;
 
-      $sql = mysqli_query($_conn, "SELECT * FROM products");
-      $sql = "INSERT INTO products (PRODUCT_ID, CODE, NAME, QUANTITY, PRICE, TYPE) VALUES (?,?,?,?,?,?)";
+      $sql = mysqli_query($_conn, "SELECT * FROM invoice_products");
+      $sql = "INSERT INTO invoice_products (PRODUCT_ID, CODE, NAME, QUANTITY, PRICE, TYPE) VALUES (?,?,?,?,?,?)";
 
       if ($stmt = mysqli_prepare($_conn, $sql)) {
 
@@ -150,6 +150,7 @@ if (isset($_POST['place-order'])) {
     }
     mysqli_stmt_close($stmt);
     unset($_SESSION['cart']);
+    header("Location: /account/encomendas");
   }
 }
 
@@ -253,14 +254,14 @@ if (isset($_POST['place-order'])) {
               $total = 0;
               if (!empty($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $key => $value) {
-                  $result = mysqli_query($_conn, "SELECT * FROM option_group");
+                  $result = mysqli_query($_conn, "SELECT * FROM products");
                   if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_array($result)) {
                       if ($row['CODE'] == $value['product_id1']) { ?>
                         <div class='container-fluid mb-3 gx-0'>
                           <div class="row border-bottom gx-0">
                             <div class="col-4 text-center">
-                              <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
+                              <img src="<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                               <h5 class='pt-2 checkout-description'>(Frente): <?php echo $row['NAME'] ?></h5>
                             </div>
                           <?php
@@ -268,7 +269,7 @@ if (isset($_POST['place-order'])) {
                           $total = $total + $totalQuantity;
                         } else if ($row['CODE'] == $value['product_id2']) { ?>
                             <div class="col-4 text-center">
-                              <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
+                              <img src="<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                               <h5 class='pt-2 checkout-description'>(Verso): <?php echo $row['NAME'] ?></h5>
                             </div>
                             <div class="col-1 text-center">
@@ -293,7 +294,7 @@ if (isset($_POST['place-order'])) {
                           ?>
                           <div class="row border-bottom gx-0">
                             <div class="col-2 text-center">
-                              <img src=".<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
+                              <img src="<?php echo $row['IMAGE_URL'] ?>" alt='Image1' class='img-fluid'>
                             </div>
                             <div class="col-7">
                               <h5 class='pt-2 checkout-description'><?php echo $row['DESCRIPTION'] . '/' . $row['NAME'] ?></h5>

@@ -154,7 +154,7 @@ mysqli_free_result($totalResult);
           <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
-          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+          <a href="product-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
           </a>
         </div>
@@ -292,7 +292,7 @@ mysqli_free_result($totalResult);
                   <i class="fas fa-check fa-2x" style="color: #0e9f6e;"></i>
                 </div>
                 <div class="container-fluid p-2">
-                  <p class="m-0 font-gray" style="font-size: .875rem;">Encomendas entregues</p>
+                  <p class="m-0 font-gray" style="font-size: .875rem;">Encomendas Concluídos</p>
                 </div>
                 <div class="container-fluid p-2">
                   <p class="m-0 text-white" style="font-size: 1.5rem;"><?php echo $totalDelivered; ?></p>
@@ -333,7 +333,7 @@ mysqli_free_result($totalResult);
                     <td class="text-white">
                       <?php
                       if ($data['STATUS'] == 1) { ?>
-                        <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
+                        <span class="rounded-5 px-2" style="background-color: #03543f;">Concluído</span>
                       <?php
                       } elseif ($data['STATUS'] == 2) { ?>
                         <span class="rounded-5 px-2" style="background-color: #9f580a;">Pending</span>

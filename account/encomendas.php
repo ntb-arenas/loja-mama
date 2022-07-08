@@ -24,6 +24,7 @@ if (!isset($_SESSION["USER"])) {
       $cidade = $rowusers['CIDADE'];
       $codPostal = $rowusers['COD_POSTAL'];
       $pais = $rowusers['PAIS'];
+      $id = $rowusers['ID'];
     }
   } else {
     echo "STATUS ADMIN (Editar conta): " . mysqli_error($_conn);
@@ -108,7 +109,61 @@ if (!isset($_SESSION["USER"])) {
           </div>
         </div>
         <div class="col-12 col-md-9 mt-3 border-start">
-          Encomendas
+          <h3>Encomendas</h3>
+          <div class="row">
+
+            <?php
+            $result = mysqli_query($_conn, "SELECT * FROM orders WHERE USER_ID = $id");
+            while ($row = mysqli_fetch_array($result)) { ?>
+              <div class="col-12 my-2">
+                <div class="border">
+                  <div class="container-fluid px-3 pt-2 d-flex justify-content-between flex-column flex-sm-row">
+                    <div>
+                      <span style="font-size: 1.2rem; font-weight: 500;">#<?php echo $row['INVOICE_ID']; ?></span>
+                      <?php
+                      if ($row['STATUS'] == 1) { ?>
+                        <span class="rounded-5 text-white p-1" style="background-color: #03543f; font-size: .8rem;">Concluído</span>
+                      <?php
+                      } elseif ($row['STATUS'] == 2) { ?>
+                        <span class="rounded-5 text-white p-1" style="background-color: #9f580a; font-size: .8rem;">Pending</span>
+                      <?php
+                      } elseif ($row['STATUS'] == 3) { ?>
+                        <span class="rounded-5 text-white p-1" style="background-color: #1e429f; font-size: .8rem;">Em Processo</span>
+                      <?php
+                      } elseif ($row['STATUS'] == 4) { ?>
+                        <span class="rounded-5 text-white p-1" style="background-color: #9b1c1c; font-size: .8rem;">Cancelado</span>
+                      <?php
+                      }
+                      ?>
+                    </div>
+                    <div>
+                      <form action="#" method="POST">
+                        <button type="submit" name="edit-user" class="btn-custom-1 text-decoration-underline" id="invoiceBtn" style="color: #ff7b46;">
+                          Consultar
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="container-fluid px-3 d-flex justify-content-between flex-column flex-sm-row">
+                    <div>
+                      <span style="font-size: .8rem; font-weight: 500;">Data: </span>
+                      <span>
+                        2022-07-06
+                      </span>
+                    </div>
+                  </div>
+                  <div class="container-fluid px-3 pb-2 d-flex justify-content-between flex-column flex-sm-row">
+                    <div>
+                      <span style="font-size: 1rem; font-weight: 500;">Total: €<?php echo $row['PRICE']; ?></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php
+            }
+            ?>
+
+          </div>
         </div>
       </div>
     </div>

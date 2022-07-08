@@ -122,7 +122,7 @@ if (isset($_POST["apply-edit"])) {
           <a href="invoice-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-basket fa-fw me-3"></i><span>Orders</span>
           </a>
-          <a href="dashboard" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
+          <a href="product-management" class="list-group-item list-group-item-action py-2 ripple active theme-background-color theme-border-color rounded-5 mt-3" style>
             <i class="fas fa-shopping-bag fa-fw me-3"></i><span>Products</span>
           </a>
           </a>
@@ -184,7 +184,7 @@ if (isset($_POST["apply-edit"])) {
                   '>
               <?php
               if ($status == 1) {
-                echo '--Entregue--';
+                echo '--Concluído--';
               } elseif ($status == 2) {
                 echo '--Pending--';
               } elseif ($status == 3) {
@@ -193,7 +193,7 @@ if (isset($_POST["apply-edit"])) {
                 echo '--Cancelado--';
               } ?>
             </option>
-            <option value="1">Entregue</option>
+            <option value="1">Concluído</option>
             <option value="3">Processo</option>
             <option value="4">Cancelado</option>
           </select>
@@ -221,7 +221,7 @@ if (isset($_POST["apply-edit"])) {
                 <span class="text-white" style="font-size: .8rem;">STATUS:
                   <?php
                   if ($status == 1) { ?>
-                    <span class="rounded-5 px-2" style="background-color: #03543f;">Entregue</span>
+                    <span class="rounded-5 px-2" style="background-color: #03543f;">Concluído</span>
                   <?php
                   } elseif ($status == 2) { ?>
                     <span class="rounded-5 px-2" style="background-color: #9f580a;">Pending</span>
@@ -280,7 +280,7 @@ if (isset($_POST["apply-edit"])) {
               </thead>
               <tbody>
                 <?php
-                $result = mysqli_query($_conn, "SELECT * FROM products WHERE PRODUCT_ID = '$invoiceId'");
+                $result = mysqli_query($_conn, "SELECT * FROM invoice_products WHERE PRODUCT_ID = '$invoiceId'");
                 while ($row = mysqli_fetch_array($result)) { ?>
                   <tr>
                     <td class="text-center"><?php echo $row['CODE']; ?></td>
