@@ -52,8 +52,8 @@ if (isset($_POST['remove'])) {
 
 <body>
   <main>
-    <?php include_once '../components/header.php'; ?>
-    <?php include_once '../components/navbar.php'; ?>
+  <?php include_once '/components/header.php'; ?>
+  <?php include_once '/components/navbar.php'; ?>
 
     <div class="container-fluid mt-3">
       <div class="row px-md-5">

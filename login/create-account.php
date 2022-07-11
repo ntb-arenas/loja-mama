@@ -323,8 +323,8 @@ if (isset($_POST['submit-create-account'])) {
 </head>
 
 <body>
-  <?php include_once '../components/header.php'; ?>
-  <?php include_once '../components/navbar.php'; ?>
+  <?php include_once '/components/header.php'; ?>
+  <?php include_once '/components/navbar.php'; ?>
   <main>
 
     <nav class="mx-3 mt-3" aria-label="breadcrumb">

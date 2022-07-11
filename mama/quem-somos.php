@@ -30,8 +30,8 @@ include_once  '../login/connect_DB.php';
 
 <body>
 
-    <?php include_once '../components/header.php'; ?>
-    <?php include_once '../components/navbar.php'; ?>
+  <?php include_once '/components/header.php'; ?>
+  <?php include_once '/components/navbar.php'; ?>
     <main>
         <div class="bg-image d-none d-sm-block">
             <img src="../gallery/family.png" class="img-fluid" alt="">

@@ -65,8 +65,8 @@ if (!isset($_SESSION["USER"])) {
 
 <body>
 
-  <?php include_once '../components/header.php'; ?>
-  <?php include_once '../components/navbar.php'; ?>
+  <?php include_once '/components/header.php'; ?>
+  <?php include_once '/components/navbar.php'; ?>
   <main>
     <div class="container py-3">
       <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>

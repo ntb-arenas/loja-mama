@@ -184,8 +184,8 @@ if (isset($_POST['btn-save-changes'])) {
 </head>
 
 <body>
-    <?php include_once '../components/header.php'; ?>
-    <?php include_once '../components/navbar.php'; ?>
+  <?php include_once '/components/header.php'; ?>
+  <?php include_once '/components/navbar.php'; ?>
     <main>
 
         <div class="information-container">

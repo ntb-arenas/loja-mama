@@ -211,8 +211,8 @@ if (isset($_POST['btn-save-changes'])) {
 </head>
 
 <body>
-  <?php include_once '../components/header.php'; ?>
-  <?php include_once '../components/navbar.php'; ?>
+  <?php include_once '/components/header.php'; ?>
+  <?php include_once '/components/navbar.php'; ?>
   <main>
     <div class="container-md py-3">
       <h2>Olá <?php echo $_SESSION["FIRSTNAME_USER"] . " " . $_SESSION["LASTNAME_USER"] ?>, </h2>
