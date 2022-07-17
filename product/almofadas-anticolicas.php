@@ -57,8 +57,8 @@ if (isset($_POST['add'])) {
 </head>
 
 <body>
-  <?php include_once '/components/header.php'; ?>
-  <?php include_once '/components/navbar.php'; ?>
+  <?php include_once '../components/header.php'; ?>
+  <?php include_once '../components/navbar.php'; ?>
   <main>
     <!--Product page starts here-->
 

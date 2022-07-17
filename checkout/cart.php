@@ -24,6 +24,14 @@ if (isset($_POST['remove'])) {
     }
   }
 }
+
+if (isset($_POST["finalizar-btn"])) {
+  $_SESSION["pageId"] = 1;
+  header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+  header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+  header("Location: checkout");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,17 +51,12 @@ if (isset($_POST['remove'])) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <style>
-    .disclaimer {
-      display: none;
-    }
-  </style>
 </head>
 
 <body>
   <main>
-  <?php include_once '/components/header.php'; ?>
-  <?php include_once '/components/navbar.php'; ?>
+    <?php include_once '../components/header.php'; ?>
+    <?php include_once '../components/navbar.php'; ?>
 
     <div class="container-fluid mt-3">
       <div class="row px-md-5">
@@ -205,10 +208,9 @@ if (isset($_POST['remove'])) {
               <h6><strong><?php echo $total; ?>€</strong></h6>
             </div>
             <div class="col-12 mt-3 text-center">
-              <a href="checkout">
-                <button class="btn" id="btn-customized" type="submit">FINALIZAR</button>
-                <?php $_SESSION["pageId"] = 1 ?>
-              </a>
+              <form action="#" method="POST">
+                <button class="btn" id="btn-customized" name="finalizar-btn" type="submit">FINALIZAR</button>
+              </form>
             </div>
           </div>
         </div>

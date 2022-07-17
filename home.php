@@ -26,8 +26,8 @@ include_once  './login/connect_DB.php';
 
 <body>
   <main>
-    <?php include_once '/components/header.php'; ?>
-    <?php include_once '/components/navbar.php'; ?>
+    <?php include_once './components/header.php'; ?>
+    <?php include_once './components/navbar.php'; ?>
 
     <!-- Page cover -->
     <img class="img-fluid mx-auto d-none d-md-block" src="./gallery/maincover.jpg" alt="">
@@ -112,6 +112,7 @@ include_once  './login/connect_DB.php';
       </div>
     </div>
     <!-- Carousel wrapper -->
+
     <?php include_once './components/footer.php'; ?>
   </main>
 </body>

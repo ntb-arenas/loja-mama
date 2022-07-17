@@ -29,7 +29,6 @@ $aceitoMarketing = 0;
 $geraFormulario = "Sim";
 
 if (isset($_POST['button-cancel-account'])) {
-
   header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
   header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // past date to encourage expiring immediately
   header("Location: /home");
@@ -37,7 +36,6 @@ if (isset($_POST['button-cancel-account'])) {
 
 
 if (isset($_POST['submit-create-account'])) {
-
 
   $podeCriarRegisto = "Sim";
 
@@ -74,7 +72,6 @@ if (isset($_POST['submit-create-account'])) {
   $username = str_replace(' ', '', $username);
 
   // validar parametros recebidos
-
   if (strlen(trim($username)) < 4) {
     $errorMessageUsername = "O código de utilizador é demasiado curto!";
     $podeCriarRegisto = "Nao";
@@ -323,8 +320,8 @@ if (isset($_POST['submit-create-account'])) {
 </head>
 
 <body>
-  <?php include_once '/components/header.php'; ?>
-  <?php include_once '/components/navbar.php'; ?>
+  <?php include_once '../components/header.php'; ?>
+  <?php include_once '../components/navbar.php'; ?>
   <main>
 
     <nav class="mx-3 mt-3" aria-label="breadcrumb">

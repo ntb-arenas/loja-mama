@@ -62,8 +62,8 @@ if (!isset($_SESSION["USER"])) {
 
 <body>
 
-  <?php include_once '/components/header.php'; ?>
-  <?php include_once '/components/navbar.php'; ?>
+  <?php include_once '../components/header.php'; ?>
+  <?php include_once '../components/navbar.php'; ?>
   <main>
 
     <div class="container-md py-3">
