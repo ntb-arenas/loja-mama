@@ -1,0 +1,26 @@
+.w3-container.w3-center{
+    background-image: url("./img/photo-1556388275-bb5585725aca.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+img {
+    width: 70%;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+select{
+    width: 40%;
+}
+
+p.smallText{
+font-size: medium;
+}
+
+footer{
+    margin-top: 10rem;
+}

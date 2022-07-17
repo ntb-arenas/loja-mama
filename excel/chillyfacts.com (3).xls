@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Order Status - PHP Shopping Cart</title>
+<meta charset="utf-8">
+
+<!-- Bootstrap core 
+<link href="css/bootstrap.min.css" rel="stylesheet">CSS -->
+
+<!-- Custom style 
+<link href="css/style.css" rel="stylesheet">-->
+</head>
+<body>
+
+
+
+<div class="container">
+    <h1>ORDEM DO PEDIDO</h1>
+    <div class="col-12">
+                    <div class="col-md-12">
+                <div class="alert alert-success">Seu pedido foi feito com sucesso.</div>
+            </div>
+			
+            <!-- Order status & shipping info -->
+            <div class="row col-lg-12 ord-addr-info">
+                <div class="hdr">Order Info</div>
+                <p><b>Reference ID:</b> #7</p>
+                <p><b>Total:</b> R$60.00 BRL</p>
+                <p><b>Placed On:</b> 2022-05-06 10:58:32</p>
+                <p><b>Buyer Name:</b> Diogo Sardinha</p>
+                <p><b>Email:</b> zzdarkshadow@gmail.com</p>
+                <p><b>Telefone:</b> 351 925733737</p>
+            </div>
+			
+            <!-- Order items -->
+            <div class="row col-lg-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Produtos</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Sub Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                                <tr>
+                            <td>Balmy 1000</td>
+                            <td>R$60.00BRL</td>
+                            <td>1</td>
+                            <td>R$60BRL</td>
+                        </tr>
+                                            </tbody>
+                </table>
+            </div>
+        
+        </div>
+            </div>
+</div>
+</body>
+</html>

@@ -1,211 +1,202 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 session_start();
-include_once  './login/connect_DB.php';
+require "dbConfig.php";
 
-// if (!isset($_SESSION['USER'])) {
-//     header("Location: ./home");
-//     exit;
-// }
-
-if (isset($_POST['remove'])) {
-    if ($_GET['action'] == 'remove') {
-        foreach ($_SESSION['cart'] as $key => $value) {
-            if ($value["product_id1"] == $_GET['id']) {
-                unset($_SESSION['cart'][$key]);
-                echo "<script>window.location = 'cart'</script>";
-            }
-            if ($value["product_id"] == $_GET['id']) {
-                unset($_SESSION['cart'][$key]);
-                echo "<script>window.location = 'cart'</script>";
-            }
+  if (isset($_GET['action']))
+  {
+    if($_GET["action"] == "remove")
+  	{
+  		foreach($_SESSION["shopping_cart"] as $keys => $values)
+  		{
+  			if($values["id_produto"] == $_GET["id_produto"])
+  			{
+  				unset($_SESSION["shopping_cart"][$keys]);
         }
+      }
     }
-}
+    if($_GET["action"] == "clear")
+    {
+      unset($_SESSION["shopping_cart"]);
+      
+    }
+  }
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ma-Ma</title>
-    <!-- stylesheet ---------------------------->
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-    <!-- page icon --------------------------------->
-    <link rel="shortcut icon" href="gallery/logo.png">
-    <!-- fonts ------------------------------------------>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        .disclaimer {
-            display: none;
-        }
-    </style>
-</head>
-
-<body>
-    <main>
-        <?php include_once './components/header.php'; ?>
-        <?php include_once './components/navbar.php'; ?>
-
-        <div class="container-fluid mt-5">
-            <div class="row px-md-5">
-                <div class="col-md-7">
-                    <div class="shopping-cart">
-                        <h3><strong>Carrinho de compras</strong></h3>
-                        <hr>
-
-                        <?php
-                        $total = 0;
-                        if (!empty($_SESSION['cart'])) { ?>
-                            <div class="container d-none d-lg-block">
-                                <div class="row">
-                                    <div class="col-3 text-center">
-                                        <h4><strong>Item</strong></h4>
-                                    </div>
-                                    <div class="col-3">
-
-                                    </div>
-                                    <div class="col-2 text-center">
-                                        <h4><strong>Qty</strong></h4>
-                                    </div>
-                                    <div class="col-2 text-center">
-                                        <h4><strong>Preço</strong></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <?php
-                            foreach ($_SESSION['cart'] as $key => $value) {
-                                $result = mysqli_query($_conn, "SELECT * FROM OPTION_GROUP");
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_array($result)) {
-                                        if ($row['CODE'] == $value['product_id1']) {
-                            ?>
-                                            <div class='container mb-3 gx-0'>
-                                                <div class="row gx-0">
-                                                    <div class="col-3 text-center">
-                                                        <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
-                                                            <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
-                                                            <h5 class='pt-2 cover-message-fs'>(Frente): <?php echo $row['NAME'] ?></h5>
-                                                    </div>
-                                                <?php
-                                                $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
-                                                $total = $total + $totalQuantity;
-                                            }
-                                            if ($row['CODE'] == $value['product_id2']) {
-                                                ?>
-                                                    <div class="col-3 text-center">
-                                                        <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
-                                                        <h5 class='pt-2 cover-message-fs'>(Verso): <?php echo $row['NAME'] ?></h5>
-                                                    </div>
-                                                    <div class="col-2 text-center">
-                                                        <h5 class='pt-2'><?php echo $value['quantityInput'] ?></h5>
-                                                    </div>
-                                                    <div class="col-2 text-center">
-                                                        <h5 class='pt-2'>€<?php echo $totalQuantity ?></h5>
-                                                    </div>
-                                                    <div class="col-2 d-none d-sm-block">
-                                                        <button type='submit' class='btn btn-danger m-2' name='remove'>Remover</button>
-                                                    </div>
-                                                    <div class="col-2 d-sm-none text-center">
-                                                        <button type='submit' class='btn btn-danger p-0 fs-5' name='remove'>×</button>
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        <?php
-                                            }
-                                            if ($row['CODE'] == $value['product_id']) {
-                                        ?>
-                                            <div class="container mb-3 gx-0">
-                                                <form action='cart?action=remove&id=<?php echo $row['CODE'] ?>' method='post' class='cart-items'>
-                                                    <?php
-                                                    $totalQuantity = (int)$row['PRICE'] * $value['quantityInput'];
-                                                    $total = $total + $totalQuantity;
-                                                    ?>
-                                                    <div class="row gx-0">
-                                                        <div class="col-3 text-center">
-                                                            <img src=<?php echo $row['IMAGE_URL'] ?> alt='Image1' class='img-fluid'>
-                                                            <h5 class='pt-2 cover-message-fs'><?php echo $row['DESCRIPTION'] . '/' . $row['NAME'] ?></h5>
-                                                        </div>
-                                                        <div class="col-3">
-
-                                                        </div>
-                                                        <div class="col-2 text-center">
-                                                            <h5 class='pt-2'><?php echo $value['quantityInput'] ?></h5>
-                                                        </div>
-                                                        <div class="col-2 text-center">
-                                                            <h5 class='pt-2'>€<?php echo $totalQuantity ?></h5>
-                                                        </div>
-                                                        <div class="col-2 d-none d-sm-block">
-                                                            <button type='submit' class='btn btn-danger m-2' name='remove'>Remover</button>
-                                                        </div>
-                                                        <div class="col-2 d-sm-none text-center">
-                                                            <button type='submit' class='btn btn-danger p-0 fs-5' name='remove'>×</button>
-                                                        </div>
-                                                    </div>
-
-                                                </form>
-                                            </div>
-                        <?php
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                echo "<h6><strong>Carrinho está vazío!</strong></h6>";
-                            }
-                        ?>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
-                    <h5 class="mt-3"><strong>Resumo</strong></h5>
-                    <hr class="mt-1">
-                    <div class="row my-3">
-                        <div class="col-7">
-                            <?php
-                            if (isset($_SESSION['cart'])) {
-                                $count  = count($_SESSION['cart']);
-                                echo "<h6>Preço ($count Produtos)</h6>";
-                            } else {
-                                echo "<h6>Preço (0 Produto)</h6>";
-                            }
-                            ?>
-                        </div>
-                        <div class="col-5">
-                            <h6><?php echo $total; ?>€</h6>
-                        </div>
-                        <div class="col-7">
-                            <h6>Custo de envio</h6>
-                        </div>
-                        <div class="col-5">
-                            <h6 class="text-success">Envio gratis</h6>
-                        </div>
-                        <div class="container">
-                            <hr>
-                        </div>
-                        <div class="col-7"><h6>Total da encomenda</h6></div>
-                        <div class="col-5">
-                            <h6><?php echo $total; ?>€</h6>
-                        </div>
-                    </div>
-                </div>
-
+  <?php
+  if(!empty($_SESSION["shopping_cart"]))
+  { ?>
+              <?php
+            }
+            ?>
+            
+          </table>
+          <a href="index.php" class="btn btn-outline-secondary" style="width:13em;"><i class="fas fa-arrow-left"></i> Keep buying</a>
+          <span style="float:right;">
+              <form method='GET' action=''>
+                <input type='hidden' name='id_produto' value="<?= $product["id_produto"]; ?>" />
+                <input type='hidden' name='action' value="clear"/>
+                <button class="btn btn-outline-secondary" value="" ><i class="far fa-trash-alt"></i> Clear cart</button>
+              </form>
+      </div>
+      <div class="col-sm-4 col-md-4 col-xs-4">
+        <h4>Resume</h4>
+          <div class="row">
+            <div class="col-md-4">
+              <p>Subtotal:</p>
+              <p> Iva:</p>
+              <p> Shipping:</p>
+              <p> <h5>Total:</h5></p>
             </div>
-        </div>
+           
+      </div>
+      <div class="row">
+        <?php
+          $idu = $_SESSION["id_utilizador"];
+          $info = "SELECT * FROM utilizador_info WHERE id_utilizador = $idu";
+          $result6 = $conn->query($info);
+          if($result6->num_rows > 0)
+          {
+            ?>
+            <a href="checkout.php" class="btn btn-success" name="prod_submit" type ="submit" style="width:13em;">Checkout <span><i class="fas fa-play"></i></span></a>
+            <?php
+          }
+          else
+          {?>
+          <a href="account.php" class="btn btn-danger" style="width:13em;">Delivery information <span><i class="fas fa-play"></i></span></a>
+          <?php
+        }
+         ?>
 
-        <?php include_once './components/footer.php'; ?>
-    </main>
-</body>
-<!-- <script src="./bootstrap/js/bootstrap.bundle.min.js"></script> -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+      </div>
+    </div>
+<?
+?>
+</div>
+</div>
+</section>
+  <section id="also liked">
+  <div class="container">
+    <div class="hr"></div>
+    <h4 style="text-align:left;">Also may like</h4>
+    <div class="row">
+      <?php
 
-</html>
+      if(!empty($_SESSION["shopping_cart"]))
+      
+        /*Pesquisa com tags similares */
+        /*Fim Tags Similares
+
+        /*Produto não existe no carrinho */
+        $query_carrinho = [];
+        foreach ($_SESSION["shopping_cart"] as $code => $produto)
+        {
+          $query_carrinho[] = "id_produto != $code";
+        }
+        if (count($query_carrinho) > 0)
+        {
+          $query_carrinho = "WHERE " . implode(" AND ", $query_carrinho);
+        }
+        else
+        {
+          $query_carrinho = "";
+        }
+    
+    /*Fim Produto não existe no carrinho */
+        $result = $conn->query($sql);
+        if($result->num_rows > 0)
+        {
+          while($row = $result -> fetch_assoc())
+          {
+                $nome= $row["nome"];
+                $ep = $row["episodios"];
+                $estudio = $row["estudio"];
+                $exibi = $row["exibido"];
+                $nota = $row["nota"];
+                $image = $row["image"];
+                $sin = $row["sinopse"];
+                $id = $row["id_produto"];
+ ?>
+ <div class="col-sm-2 col-xs-2 col-md-2">
+   <div class="card">
+         <a href="product.php?id_produto=<?= $id ?>" title="<?= $nome; ?>" data-toggle="popover" data-trigger="hover" data-html="true" data-content='
+         <div style="width:400px;">
+             <span> <i class="fas fa-tv"></i> <?= $ep; ?> Episodes</span> |
+             <span> <?= $estudio; ?> </span> |
+             <span> <i class="far fa-calendar-alt"></i> <?= $exibi; ?></span> |
+             <span> <i class="far fa-star"></i> <?= $nota; ?></span>
+         </div>
+           <div class="clearfix" style="margin:8px 0;width:400px;">
+             <p><?= $sin; ?></p>
+           </div>'>
+         <img class="card-img" src="images/anime/<?= $image; ?>" alt="image">
+
+       <div class="card-footer">
+         <h6 class="show_name"><?= $nome; ?></h6></a>
+         <a href="cart_veri.php?id_produto=<?= $id; ?>" class="btn btn-outline-success btn-sm btn-block" style="display:inline-block;margin-bottom:1em;">
+           <i class="fas fa-plus"></i> Add to cart!
+         </a>
+       </div>
+    </div>
+  </div>
+<?php
+      }
+    }
+?>
+    </div>
+  </div>
+  </section>
+</section>
+</br>
+<?php include("footer.php");?>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+<script>
+$(document).ready(function () {
+    $(document).on('mouseenter', '.divbutton', function () {
+        $(this).find(":button").show();
+    }).on('mouseleave', '.divbutton', function () {
+        $(this).find(":button").hide();
+    });
+});
+</script>
+<script>
+var precototal = document.querySelector("#preco_total");
+var subtotal = document.querySelector("#subtotal");
+var ivatotal = document.querySelector("#ivatotal");
+function updateTotal()
+{
+  var total = 0;
+  for (var element of document.querySelectorAll("#qnt"))
+  {
+    if (Number(element.value) > element.dataset.maxstock)
+    {
+      element.value = element.dataset.maxstock;
+    } else if (Number(element.value) < 0) {
+      element.value = 1;
+    }
+
+    var preco = Number(element.dataset.preco) * Number(element.value);
+    element.parentElement.parentElement.querySelector("#preco").innerText = preco.toFixed(2);
+    total += preco;
+  }
+  subtotal.innerText = "€ " + total.toFixed(2);
+  ivatotal.innerText = "€ " + (total * 0.23).toFixed(2);
+  precototal.innerText = "€ " + (total * 1.23 + 5).toFixed(2);
+}
+function updateQnt(element,id_produto)
+{
+  var qnt = element.value;
+  $.post(
+    "cart_veri.php",
+    { updateQnt: 'updateQnt', id_produto: id_produto, qnt: qnt },
+    function (response)
+    {
+      console.log(response);
+    });
+}
+updateQnt();
+updateTotal();
+</script>
